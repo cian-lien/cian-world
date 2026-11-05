@@ -1,0 +1,3704 @@
+{
+  "version": 2,
+  "stage": 3,
+  "blender": "5.2.3 LTS",
+  "status": "awaiting layout approval",
+  "object_count": 124,
+  "triangles_total": 41334,
+  "all_objects": [
+    {
+      "name": "Bookshelf",
+      "type": "MESH",
+      "collection": [
+        "Interactive"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -2.15,
+        1.1,
+        0.0
+      ],
+      "triangles": 6392,
+      "min": [
+        -2.3500001430511475,
+        0.5,
+        0.0
+      ],
+      "max": [
+        -1.9500000476837158,
+        1.7000000476837158,
+        2.0
+      ],
+      "dimensions": [
+        0.4,
+        1.2,
+        2.0
+      ]
+    },
+    {
+      "name": "Cam_Diary",
+      "type": "EMPTY",
+      "collection": [
+        "Markers"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.4,
+        0.9,
+        2.0
+      ],
+      "triangles": 0,
+      "min": null,
+      "max": null,
+      "dimensions": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Cam_Diary_Target",
+      "type": "EMPTY",
+      "collection": [
+        "Markers"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.4,
+        1.535,
+        0.8
+      ],
+      "triangles": 0,
+      "min": null,
+      "max": null,
+      "dimensions": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Cam_Room",
+      "type": "EMPTY",
+      "collection": [
+        "Markers"
+      ],
+      "parent": null,
+      "origin_blender": [
+        6.3,
+        -6.5,
+        5.6
+      ],
+      "triangles": 0,
+      "min": null,
+      "max": null,
+      "dimensions": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Cam_Room_Target",
+      "type": "EMPTY",
+      "collection": [
+        "Markers"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.0,
+        0.15,
+        0.8
+      ],
+      "triangles": 0,
+      "min": null,
+      "max": null,
+      "dimensions": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Cam_Shelf",
+      "type": "EMPTY",
+      "collection": [
+        "Markers"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.18,
+        1.1,
+        1.2
+      ],
+      "triangles": 0,
+      "min": null,
+      "max": null,
+      "dimensions": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Cam_Shelf_Target",
+      "type": "EMPTY",
+      "collection": [
+        "Markers"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -2.15,
+        1.1,
+        1.0
+      ],
+      "triangles": 0,
+      "min": null,
+      "max": null,
+      "dimensions": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Cat",
+      "type": "MESH",
+      "collection": [
+        "Interactive"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.92,
+        -1.3,
+        0.03
+      ],
+      "triangles": 4604,
+      "min": [
+        0.7383689284324646,
+        -1.4816310405731201,
+        0.029999999329447746
+      ],
+      "max": [
+        1.2454822063446045,
+        -1.1183687448501587,
+        0.3199999928474426
+      ],
+      "dimensions": [
+        0.507113,
+        0.363262,
+        0.29
+      ]
+    },
+    {
+      "name": "Computer",
+      "type": "MESH",
+      "collection": [
+        "Interactive"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.5,
+        1.88,
+        0.8
+      ],
+      "triangles": 1280,
+      "min": [
+        0.0,
+        1.3350000381469727,
+        0.800000011920929
+      ],
+      "max": [
+        1.024999976158142,
+        1.9800001382827759,
+        1.7200000286102295
+      ],
+      "dimensions": [
+        1.025,
+        0.645,
+        0.92
+      ]
+    },
+    {
+      "name": "Computer_Screen",
+      "type": "MESH",
+      "collection": [
+        "Interactive"
+      ],
+      "parent": "Computer",
+      "origin_blender": [
+        0.5,
+        1.852,
+        1.4
+      ],
+      "triangles": 2,
+      "min": [
+        0.030000001192092896,
+        1.8519999980926514,
+        1.1200000047683716
+      ],
+      "max": [
+        0.9700000286102295,
+        1.8519999980926514,
+        1.6799999475479126
+      ],
+      "dimensions": [
+        0.94,
+        0.0,
+        0.56
+      ]
+    },
+    {
+      "name": "Diary",
+      "type": "MESH",
+      "collection": [
+        "Interactive"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.4,
+        1.535,
+        0.8
+      ],
+      "triangles": 188,
+      "min": [
+        -0.6366389989852905,
+        1.2651644945144653,
+        0.800000011920929
+      ],
+      "max": [
+        -0.16336099803447723,
+        1.8048356771469116,
+        0.875
+      ],
+      "dimensions": [
+        0.473278,
+        0.539671,
+        0.075
+      ]
+    },
+    {
+      "name": "Frame_1",
+      "type": "MESH",
+      "collection": [
+        "Interactive"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -2.38,
+        -0.8,
+        1.44
+      ],
+      "triangles": 940,
+      "min": [
+        -2.4000000953674316,
+        -1.0499999523162842,
+        1.440000057220459
+      ],
+      "max": [
+        -2.3600001335144043,
+        -0.5499999523162842,
+        1.8600001335144043
+      ],
+      "dimensions": [
+        0.04,
+        0.5,
+        0.42
+      ]
+    },
+    {
+      "name": "Frame_2",
+      "type": "MESH",
+      "collection": [
+        "Interactive"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -2.38,
+        -1.45,
+        1.59
+      ],
+      "triangles": 940,
+      "min": [
+        -2.4000000953674316,
+        -1.649999976158142,
+        1.590000033378601
+      ],
+      "max": [
+        -2.3600001335144043,
+        -1.2499998807907104,
+        2.1100001335144043
+      ],
+      "dimensions": [
+        0.04,
+        0.4,
+        0.52
+      ]
+    },
+    {
+      "name": "L_Blockout_Back",
+      "type": "LIGHT",
+      "collection": [
+        "Lights"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -3.0,
+        4.0,
+        6.0
+      ],
+      "triangles": 0,
+      "min": null,
+      "max": null,
+      "dimensions": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "L_Blockout_Fill",
+      "type": "LIGHT",
+      "collection": [
+        "Lights"
+      ],
+      "parent": null,
+      "origin_blender": [
+        5.0,
+        0.0,
+        5.0
+      ],
+      "triangles": 0,
+      "min": null,
+      "max": null,
+      "dimensions": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "L_Blockout_Key",
+      "type": "LIGHT",
+      "collection": [
+        "Lights"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.0,
+        -3.0,
+        7.0
+      ],
+      "triangles": 0,
+      "min": null,
+      "max": null,
+      "dimensions": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Lamp",
+      "type": "MESH",
+      "collection": [
+        "Interactive"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.77,
+        1.92,
+        0.8
+      ],
+      "triangles": 760,
+      "min": [
+        -0.8650000095367432,
+        1.8250000476837158,
+        0.800000011920929
+      ],
+      "max": [
+        -0.6749999523162842,
+        2.015000104904175,
+        1.1600000858306885
+      ],
+      "dimensions": [
+        0.19,
+        0.19,
+        0.36
+      ]
+    },
+    {
+      "name": "Lamp_Light",
+      "type": "EMPTY",
+      "collection": [
+        "Interactive"
+      ],
+      "parent": "Lamp",
+      "origin_blender": [
+        -0.77,
+        1.92,
+        1.06
+      ],
+      "triangles": 0,
+      "min": null,
+      "max": null,
+      "dimensions": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Lamp_Shade",
+      "type": "MESH",
+      "collection": [
+        "Interactive"
+      ],
+      "parent": "Lamp",
+      "origin_blender": [
+        -0.77,
+        1.92,
+        1.14
+      ],
+      "triangles": 380,
+      "min": [
+        -0.9122921228408813,
+        1.7777079343795776,
+        1.1399999856948853
+      ],
+      "max": [
+        -0.627707839012146,
+        2.0622920989990234,
+        1.3200000524520874
+      ],
+      "dimensions": [
+        0.284584,
+        0.284584,
+        0.18
+      ]
+    },
+    {
+      "name": "PreviewCam",
+      "type": "CAMERA",
+      "collection": [
+        "Scene Collection"
+      ],
+      "parent": null,
+      "origin_blender": [
+        6.3,
+        -6.5,
+        5.6
+      ],
+      "triangles": 0,
+      "min": null,
+      "max": null,
+      "dimensions": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "V2_Block_AccentPillow",
+      "type": "MESH",
+      "collection": [
+        "Static_Furniture"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -1.75,
+        -0.51,
+        0.82
+      ],
+      "triangles": 188,
+      "min": [
+        -1.929999828338623,
+        -0.6000000238418579,
+        0.6699999570846558
+      ],
+      "max": [
+        -1.5699999332427979,
+        -0.41999998688697815,
+        0.9700000286102295
+      ],
+      "dimensions": [
+        0.36,
+        0.18,
+        0.3
+      ]
+    },
+    {
+      "name": "V2_Block_AlarmClock",
+      "type": "MESH",
+      "collection": [
+        "Static_Props"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.57,
+        0.23,
+        0.6
+      ],
+      "triangles": 188,
+      "min": [
+        -0.6299999952316284,
+        0.19749999046325684,
+        0.550000011920929
+      ],
+      "max": [
+        -0.5099999904632568,
+        0.26249998807907104,
+        0.6500000357627869
+      ],
+      "dimensions": [
+        0.12,
+        0.065,
+        0.1
+      ]
+    },
+    {
+      "name": "V2_Block_Beanbag",
+      "type": "MESH",
+      "collection": [
+        "Static_Furniture"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.05,
+        -1.2,
+        0.33
+      ],
+      "triangles": 528,
+      "min": [
+        -0.48999977111816406,
+        -1.6299998760223389,
+        0.02000001072883606
+      ],
+      "max": [
+        0.3899998962879181,
+        -0.7700000405311584,
+        0.6399999856948853
+      ],
+      "dimensions": [
+        0.88,
+        0.86,
+        0.62
+      ]
+    },
+    {
+      "name": "V2_Block_BedFoot",
+      "type": "MESH",
+      "collection": [
+        "Static_Furniture"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -2.31,
+        -1.83,
+        0.07
+      ],
+      "triangles": 188,
+      "min": [
+        -2.3550000190734863,
+        -1.875,
+        0.0
+      ],
+      "max": [
+        -2.2649998664855957,
+        -1.7850000858306885,
+        0.14000000059604645
+      ],
+      "dimensions": [
+        0.09,
+        0.09,
+        0.14
+      ]
+    },
+    {
+      "name": "V2_Block_BedFoot.001",
+      "type": "MESH",
+      "collection": [
+        "Static_Furniture"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -2.31,
+        -0.07,
+        0.07
+      ],
+      "triangles": 188,
+      "min": [
+        -2.3550000190734863,
+        -0.11499999463558197,
+        0.0
+      ],
+      "max": [
+        -2.2649998664855957,
+        -0.024999991059303284,
+        0.14000000059604645
+      ],
+      "dimensions": [
+        0.09,
+        0.09,
+        0.14
+      ]
+    },
+    {
+      "name": "V2_Block_BedFoot.002",
+      "type": "MESH",
+      "collection": [
+        "Static_Furniture"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -1.19,
+        -1.83,
+        0.07
+      ],
+      "triangles": 188,
+      "min": [
+        -1.2349998950958252,
+        -1.875,
+        0.0
+      ],
+      "max": [
+        -1.1449999809265137,
+        -1.7850000858306885,
+        0.14000000059604645
+      ],
+      "dimensions": [
+        0.09,
+        0.09,
+        0.14
+      ]
+    },
+    {
+      "name": "V2_Block_BedFoot.003",
+      "type": "MESH",
+      "collection": [
+        "Static_Furniture"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -1.19,
+        -0.07,
+        0.07
+      ],
+      "triangles": 188,
+      "min": [
+        -1.2349998950958252,
+        -0.11499999463558197,
+        0.0
+      ],
+      "max": [
+        -1.1449999809265137,
+        -0.024999991059303284,
+        0.14000000059604645
+      ],
+      "dimensions": [
+        0.09,
+        0.09,
+        0.14
+      ]
+    },
+    {
+      "name": "V2_Block_BedFrame",
+      "type": "MESH",
+      "collection": [
+        "Static_Furniture"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -1.75,
+        -0.95,
+        0.23
+      ],
+      "triangles": 188,
+      "min": [
+        -2.3999998569488525,
+        -1.9499999284744263,
+        0.14000000059604645
+      ],
+      "max": [
+        -1.0999999046325684,
+        0.05000007152557373,
+        0.3199999928474426
+      ],
+      "dimensions": [
+        1.3,
+        2.0,
+        0.18
+      ]
+    },
+    {
+      "name": "V2_Block_BedHeadboard",
+      "type": "MESH",
+      "collection": [
+        "Static_Furniture"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -1.75,
+        0.035,
+        0.57
+      ],
+      "triangles": 188,
+      "min": [
+        -2.3999998569488525,
+        -0.002500005066394806,
+        0.13999998569488525
+      ],
+      "max": [
+        -1.0999999046325684,
+        0.07249999791383743,
+        1.0
+      ],
+      "dimensions": [
+        1.3,
+        0.075,
+        0.86
+      ]
+    },
+    {
+      "name": "V2_Block_BedsideBook",
+      "type": "MESH",
+      "collection": [
+        "Static_Props"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.75,
+        -0.05,
+        0.565
+      ],
+      "triangles": 188,
+      "min": [
+        -0.9099999666213989,
+        -0.15000000596046448,
+        0.550000011920929
+      ],
+      "max": [
+        -0.5899999141693115,
+        0.049999989569187164,
+        0.5799999833106995
+      ],
+      "dimensions": [
+        0.32,
+        0.2,
+        0.03
+      ]
+    },
+    {
+      "name": "V2_Block_BedsideLampBase",
+      "type": "MESH",
+      "collection": [
+        "Static_Props"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.75,
+        0.25,
+        0.57
+      ],
+      "triangles": 380,
+      "min": [
+        -0.8199999332427979,
+        0.18000000715255737,
+        0.550000011920929
+      ],
+      "max": [
+        -0.6799999475479126,
+        0.3199999928474426,
+        0.5899999737739563
+      ],
+      "dimensions": [
+        0.14,
+        0.14,
+        0.04
+      ]
+    },
+    {
+      "name": "V2_Block_BedsideLampShade",
+      "type": "MESH",
+      "collection": [
+        "Static_Props"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.75,
+        0.25,
+        0.82
+      ],
+      "triangles": 380,
+      "min": [
+        -0.8527894616127014,
+        0.1472104787826538,
+        0.7350000143051147
+      ],
+      "max": [
+        -0.647210419178009,
+        0.3527895212173462,
+        0.9049999713897705
+      ],
+      "dimensions": [
+        0.205579,
+        0.205579,
+        0.17
+      ]
+    },
+    {
+      "name": "V2_Block_BedsideLampStand",
+      "type": "MESH",
+      "collection": [
+        "Static_Props"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.75,
+        0.25,
+        0.68
+      ],
+      "triangles": 380,
+      "min": [
+        -0.7619999647140503,
+        0.23800000548362732,
+        0.5799999833106995
+      ],
+      "max": [
+        -0.7379999160766602,
+        0.2619999945163727,
+        0.7800000309944153
+      ],
+      "dimensions": [
+        0.024,
+        0.024,
+        0.2
+      ]
+    },
+    {
+      "name": "V2_Block_CatBed",
+      "type": "MESH",
+      "collection": [
+        "Static_Furniture"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.92,
+        -1.3,
+        0.025
+      ],
+      "triangles": 380,
+      "min": [
+        0.6499999761581421,
+        -1.5699999332427979,
+        0.019999999552965164
+      ],
+      "max": [
+        1.190000057220459,
+        -1.0299999713897705,
+        0.030000001192092896
+      ],
+      "dimensions": [
+        0.54,
+        0.54,
+        0.01
+      ]
+    },
+    {
+      "name": "V2_Block_Chair",
+      "type": "MESH",
+      "collection": [
+        "Static_Furniture"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.6,
+        0.6,
+        0.0
+      ],
+      "triangles": 2076,
+      "min": [
+        0.16686783730983734,
+        0.21653486788272858,
+        0.0
+      ],
+      "max": [
+        1.0279557704925537,
+        0.9399999976158142,
+        1.3950001001358032
+      ],
+      "dimensions": [
+        0.861088,
+        0.723465,
+        1.395
+      ]
+    },
+    {
+      "name": "V2_Block_Curtain",
+      "type": "MESH",
+      "collection": [
+        "Static_Furniture"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.08,
+        2.1,
+        1.75
+      ],
+      "triangles": 188,
+      "min": [
+        0.9799998998641968,
+        2.06000018119812,
+        0.9750000238418579
+      ],
+      "max": [
+        1.1799999475479126,
+        2.140000104904175,
+        2.5250000953674316
+      ],
+      "dimensions": [
+        0.2,
+        0.08,
+        1.55
+      ]
+    },
+    {
+      "name": "V2_Block_Curtain.001",
+      "type": "MESH",
+      "collection": [
+        "Static_Furniture"
+      ],
+      "parent": null,
+      "origin_blender": [
+        2.02,
+        2.1,
+        1.75
+      ],
+      "triangles": 188,
+      "min": [
+        1.9199999570846558,
+        2.06000018119812,
+        0.9750000238418579
+      ],
+      "max": [
+        2.119999885559082,
+        2.140000104904175,
+        2.5250000953674316
+      ],
+      "dimensions": [
+        0.2,
+        0.08,
+        1.55
+      ]
+    },
+    {
+      "name": "V2_Block_DeskCabinet",
+      "type": "MESH",
+      "collection": [
+        "Static_Furniture"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.95,
+        1.65,
+        0.375
+      ],
+      "triangles": 188,
+      "min": [
+        0.6399999260902405,
+        1.3000000715255737,
+        0.0
+      ],
+      "max": [
+        1.2599999904632568,
+        2.0,
+        0.75
+      ],
+      "dimensions": [
+        0.62,
+        0.7,
+        0.75
+      ]
+    },
+    {
+      "name": "V2_Block_DeskMat",
+      "type": "MESH",
+      "collection": [
+        "Static_Furniture"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.63,
+        1.6,
+        0.8001
+      ],
+      "triangles": 12,
+      "min": [
+        0.004999995231628418,
+        1.3350001573562622,
+        0.800000011920929
+      ],
+      "max": [
+        1.2549999952316284,
+        1.8650001287460327,
+        0.8002000451087952
+      ],
+      "dimensions": [
+        1.25,
+        0.53,
+        0.0002
+      ]
+    },
+    {
+      "name": "V2_Block_DeskMetalLeg",
+      "type": "MESH",
+      "collection": [
+        "Static_Furniture"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.89,
+        1.33,
+        0.375
+      ],
+      "triangles": 188,
+      "min": [
+        -0.9124999642372131,
+        1.3075001239776611,
+        0.0
+      ],
+      "max": [
+        -0.8675000071525574,
+        1.3525002002716064,
+        0.75
+      ],
+      "dimensions": [
+        0.045,
+        0.045,
+        0.75
+      ]
+    },
+    {
+      "name": "V2_Block_DeskMetalLeg.001",
+      "type": "MESH",
+      "collection": [
+        "Static_Furniture"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.89,
+        1.97,
+        0.375
+      ],
+      "triangles": 188,
+      "min": [
+        -0.9124999642372131,
+        1.9474999904632568,
+        0.0
+      ],
+      "max": [
+        -0.8675000071525574,
+        1.9925000667572021,
+        0.75
+      ],
+      "dimensions": [
+        0.045,
+        0.045,
+        0.75
+      ]
+    },
+    {
+      "name": "V2_Block_DeskTop",
+      "type": "MESH",
+      "collection": [
+        "Static_Furniture"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.15,
+        1.65,
+        0.775
+      ],
+      "triangles": 188,
+      "min": [
+        -1.0,
+        1.2500001192092896,
+        0.75
+      ],
+      "max": [
+        1.2999999523162842,
+        2.0500001907348633,
+        0.7999999523162842
+      ],
+      "dimensions": [
+        2.3,
+        0.8,
+        0.05
+      ]
+    },
+    {
+      "name": "V2_Block_FanBase",
+      "type": "MESH",
+      "collection": [
+        "Static_Props"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.9,
+        -0.9,
+        0.035
+      ],
+      "triangles": 380,
+      "min": [
+        1.6600000858306885,
+        -1.1399999856948853,
+        0.0
+      ],
+      "max": [
+        2.140000104904175,
+        -0.6599999666213989,
+        0.07000000029802322
+      ],
+      "dimensions": [
+        0.48,
+        0.48,
+        0.07
+      ]
+    },
+    {
+      "name": "V2_Block_FanHead",
+      "type": "MESH",
+      "collection": [
+        "Static_Props"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.9,
+        -0.9,
+        1.13
+      ],
+      "triangles": 380,
+      "min": [
+        1.6400001049041748,
+        -0.9599999785423279,
+        0.8700000047683716
+      ],
+      "max": [
+        2.1600000858306885,
+        -0.8399999737739563,
+        1.3899999856948853
+      ],
+      "dimensions": [
+        0.52,
+        0.12,
+        0.52
+      ]
+    },
+    {
+      "name": "V2_Block_FanPole",
+      "type": "MESH",
+      "collection": [
+        "Static_Props"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.9,
+        -0.9,
+        0.58
+      ],
+      "triangles": 380,
+      "min": [
+        1.8750001192092896,
+        -0.9249999523162842,
+        0.059999942779541016
+      ],
+      "max": [
+        1.9250000715255737,
+        -0.875,
+        1.100000023841858
+      ],
+      "dimensions": [
+        0.05,
+        0.05,
+        1.04
+      ]
+    },
+    {
+      "name": "V2_Block_FloatingShelf",
+      "type": "MESH",
+      "collection": [
+        "Static_Furniture"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.2,
+        2.06,
+        2.32
+      ],
+      "triangles": 188,
+      "min": [
+        -1.25,
+        1.9199999570846558,
+        2.294999837875366
+      ],
+      "max": [
+        0.8499999642372131,
+        2.200000047683716,
+        2.3450000286102295
+      ],
+      "dimensions": [
+        2.1,
+        0.28,
+        0.05
+      ]
+    },
+    {
+      "name": "V2_Block_FloatingShelf.001",
+      "type": "MESH",
+      "collection": [
+        "Static_Furniture"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.2,
+        2.06,
+        2.88
+      ],
+      "triangles": 188,
+      "min": [
+        -1.25,
+        1.9199999570846558,
+        2.8550000190734863
+      ],
+      "max": [
+        0.8499999642372131,
+        2.200000047683716,
+        2.9050002098083496
+      ],
+      "dimensions": [
+        2.1,
+        0.28,
+        0.05
+      ]
+    },
+    {
+      "name": "V2_Block_HeadphoneStand",
+      "type": "MESH",
+      "collection": [
+        "Static_Props"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.78,
+        1.4,
+        1.0
+      ],
+      "triangles": 188,
+      "min": [
+        -0.8449999690055847,
+        1.3350000381469727,
+        0.800000011920929
+      ],
+      "max": [
+        -0.7149999737739563,
+        1.4650001525878906,
+        1.2000000476837158
+      ],
+      "dimensions": [
+        0.13,
+        0.13,
+        0.4
+      ]
+    },
+    {
+      "name": "V2_Block_LargePlantMass",
+      "type": "MESH",
+      "collection": [
+        "Static_Props"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.87,
+        1.8,
+        1.05
+      ],
+      "triangles": 528,
+      "min": [
+        1.6405003070831299,
+        1.6055999994277954,
+        0.7799999713897705
+      ],
+      "max": [
+        2.0995001792907715,
+        1.994399905204773,
+        1.3199999332427979
+      ],
+      "dimensions": [
+        0.459,
+        0.3888,
+        0.54
+      ]
+    },
+    {
+      "name": "V2_Block_LargePlantMass.001",
+      "type": "MESH",
+      "collection": [
+        "Static_Props"
+      ],
+      "parent": null,
+      "origin_blender": [
+        2.14,
+        1.84,
+        1.3
+      ],
+      "triangles": 528,
+      "min": [
+        1.8935002088546753,
+        1.6311999559402466,
+        1.0099999904632568
+      ],
+      "max": [
+        2.386500120162964,
+        2.048799991607666,
+        1.5899999141693115
+      ],
+      "dimensions": [
+        0.493,
+        0.4176,
+        0.58
+      ]
+    },
+    {
+      "name": "V2_Block_LargePlantMass.002",
+      "type": "MESH",
+      "collection": [
+        "Static_Props"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.89,
+        1.76,
+        1.49
+      ],
+      "triangles": 528,
+      "min": [
+        1.694500207901001,
+        1.5944000482559204,
+        1.2599999904632568
+      ],
+      "max": [
+        2.0855000019073486,
+        1.9256000518798828,
+        1.7200000286102295
+      ],
+      "dimensions": [
+        0.391,
+        0.3312,
+        0.46
+      ]
+    },
+    {
+      "name": "V2_Block_LargePlantPot",
+      "type": "MESH",
+      "collection": [
+        "Static_Props"
+      ],
+      "parent": null,
+      "origin_blender": [
+        2.0,
+        1.8,
+        0.23
+      ],
+      "triangles": 380,
+      "min": [
+        1.7210348844528198,
+        1.521034836769104,
+        0.0
+      ],
+      "max": [
+        2.2789652347564697,
+        2.078965187072754,
+        0.46000000834465027
+      ],
+      "dimensions": [
+        0.55793,
+        0.55793,
+        0.46
+      ]
+    },
+    {
+      "name": "V2_Block_LargePlantStem",
+      "type": "MESH",
+      "collection": [
+        "Static_Props"
+      ],
+      "parent": null,
+      "origin_blender": [
+        2.0,
+        1.8,
+        0.745
+      ],
+      "triangles": 380,
+      "min": [
+        1.968000054359436,
+        1.7680000066757202,
+        0.46000003814697266
+      ],
+      "max": [
+        2.0320000648498535,
+        1.8319998979568481,
+        1.0299999713897705
+      ],
+      "dimensions": [
+        0.064,
+        0.064,
+        0.57
+      ]
+    },
+    {
+      "name": "V2_Block_Mattress",
+      "type": "MESH",
+      "collection": [
+        "Static_Furniture"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -1.75,
+        -0.95,
+        0.435
+      ],
+      "triangles": 188,
+      "min": [
+        -2.369999885559082,
+        -1.9199999570846558,
+        0.3199999928474426
+      ],
+      "max": [
+        -1.1299998760223389,
+        0.020000100135803223,
+        0.550000011920929
+      ],
+      "dimensions": [
+        1.24,
+        1.94,
+        0.23
+      ]
+    },
+    {
+      "name": "V2_Block_Mug",
+      "type": "MESH",
+      "collection": [
+        "Static_Props"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.8,
+        1.67,
+        0.88
+      ],
+      "triangles": 380,
+      "min": [
+        -0.85999995470047,
+        1.6100001335144043,
+        0.800000011920929
+      ],
+      "max": [
+        -0.7399999499320984,
+        1.7300000190734863,
+        0.9599999785423279
+      ],
+      "dimensions": [
+        0.12,
+        0.12,
+        0.16
+      ]
+    },
+    {
+      "name": "V2_Block_Nightstand",
+      "type": "MESH",
+      "collection": [
+        "Static_Furniture"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.75,
+        0.05,
+        0.275
+      ],
+      "triangles": 188,
+      "min": [
+        -1.0199999809265137,
+        -0.22999998927116394,
+        0.0
+      ],
+      "max": [
+        -0.47999992966651917,
+        0.33000001311302185,
+        0.550000011920929
+      ],
+      "dimensions": [
+        0.54,
+        0.56,
+        0.55
+      ]
+    },
+    {
+      "name": "V2_Block_Pegboard",
+      "type": "MESH",
+      "collection": [
+        "Static_Furniture"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.05,
+        2.183,
+        1.75
+      ],
+      "triangles": 188,
+      "min": [
+        -0.8499999642372131,
+        2.1679999828338623,
+        1.2699999809265137
+      ],
+      "max": [
+        0.949999988079071,
+        2.198000192642212,
+        2.2300000190734863
+      ],
+      "dimensions": [
+        1.8,
+        0.03,
+        0.96
+      ]
+    },
+    {
+      "name": "V2_Block_Pillow",
+      "type": "MESH",
+      "collection": [
+        "Static_Furniture"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -2.07,
+        -0.27,
+        0.64
+      ],
+      "triangles": 188,
+      "min": [
+        -2.3500001430511475,
+        -0.4449999928474426,
+        0.5499999523162842
+      ],
+      "max": [
+        -1.7900002002716064,
+        -0.0950000137090683,
+        0.7300000190734863
+      ],
+      "dimensions": [
+        0.56,
+        0.35,
+        0.18
+      ]
+    },
+    {
+      "name": "V2_Block_Pillow.001",
+      "type": "MESH",
+      "collection": [
+        "Static_Furniture"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -1.43,
+        -0.27,
+        0.64
+      ],
+      "triangles": 188,
+      "min": [
+        -1.709999918937683,
+        -0.4449999928474426,
+        0.5499999523162842
+      ],
+      "max": [
+        -1.149999976158142,
+        -0.0950000137090683,
+        0.7300000190734863
+      ],
+      "dimensions": [
+        0.56,
+        0.35,
+        0.18
+      ]
+    },
+    {
+      "name": "V2_Block_Quilt",
+      "type": "MESH",
+      "collection": [
+        "Static_Furniture"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -1.75,
+        -1.2,
+        0.61
+      ],
+      "triangles": 188,
+      "min": [
+        -2.3849997520446777,
+        -1.9099998474121094,
+        0.550000011920929
+      ],
+      "max": [
+        -1.1149998903274536,
+        -0.4899999499320984,
+        0.6700000166893005
+      ],
+      "dimensions": [
+        1.27,
+        1.42,
+        0.12
+      ]
+    },
+    {
+      "name": "V2_Block_Rug",
+      "type": "MESH",
+      "collection": [
+        "Static_Furniture"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.35,
+        -0.85,
+        0.01
+      ],
+      "triangles": 380,
+      "min": [
+        -0.6499999761581421,
+        -1.8499999046325684,
+        0.0
+      ],
+      "max": [
+        1.3499999046325684,
+        0.14999991655349731,
+        0.019999999552965164
+      ],
+      "dimensions": [
+        2.0,
+        2.0,
+        0.02
+      ]
+    },
+    {
+      "name": "V2_Block_Speaker",
+      "type": "MESH",
+      "collection": [
+        "Static_Props"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.15,
+        1.93,
+        0.91
+      ],
+      "triangles": 188,
+      "min": [
+        -0.2149999886751175,
+        1.8650000095367432,
+        0.800000011920929
+      ],
+      "max": [
+        -0.08499999344348907,
+        1.9950001239776611,
+        1.0199999809265137
+      ],
+      "dimensions": [
+        0.13,
+        0.13,
+        0.22
+      ]
+    },
+    {
+      "name": "V2_Block_StickyNotes",
+      "type": "MESH",
+      "collection": [
+        "Static_Props"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.05,
+        1.45,
+        0.81
+      ],
+      "triangles": 188,
+      "min": [
+        -0.09999997913837433,
+        1.4000000953674316,
+        0.800000011920929
+      ],
+      "max": [
+        1.862645149230957e-08,
+        1.5,
+        0.8199999928474426
+      ],
+      "dimensions": [
+        0.1,
+        0.1,
+        0.02
+      ]
+    },
+    {
+      "name": "V2_Block_SucculentMass",
+      "type": "MESH",
+      "collection": [
+        "Static_Props"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.13,
+        1.4,
+        0.97
+      ],
+      "triangles": 528,
+      "min": [
+        1.062000036239624,
+        1.3320001363754272,
+        0.9050000309944153
+      ],
+      "max": [
+        1.1979999542236328,
+        1.468000054359436,
+        1.0350000858306885
+      ],
+      "dimensions": [
+        0.136,
+        0.136,
+        0.13
+      ]
+    },
+    {
+      "name": "V2_Block_SucculentPot",
+      "type": "MESH",
+      "collection": [
+        "Static_Props"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.13,
+        1.4,
+        0.86
+      ],
+      "triangles": 380,
+      "min": [
+        1.0750000476837158,
+        1.345000147819519,
+        0.800000011920929
+      ],
+      "max": [
+        1.184999942779541,
+        1.4550000429153442,
+        0.9200000166893005
+      ],
+      "dimensions": [
+        0.11,
+        0.11,
+        0.12
+      ]
+    },
+    {
+      "name": "V2_Room_Board_00_00",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -1.6,
+        -2.0,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        -2.3949999809265137,
+        -2.194999933242798,
+        -0.03500000014901161
+      ],
+      "max": [
+        -0.8050000071525574,
+        -1.8050000667572021,
+        0.0
+      ],
+      "dimensions": [
+        1.59,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_00_01",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.0,
+        -2.0,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        -0.7950000166893005,
+        -2.194999933242798,
+        -0.03500000014901161
+      ],
+      "max": [
+        0.7950000166893005,
+        -1.8050000667572021,
+        0.0
+      ],
+      "dimensions": [
+        1.59,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_00_02",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.6,
+        -2.0,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        0.8050000071525574,
+        -2.194999933242798,
+        -0.03500000014901161
+      ],
+      "max": [
+        2.3949999809265137,
+        -1.8050000667572021,
+        0.0
+      ],
+      "dimensions": [
+        1.59,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_01_00",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -2.0,
+        -1.6,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        -2.3949999809265137,
+        -1.7950000762939453,
+        -0.03500000014901161
+      ],
+      "max": [
+        -1.6050000190734863,
+        -1.4049999713897705,
+        0.0
+      ],
+      "dimensions": [
+        0.79,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_01_01",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.8,
+        -1.6,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        -1.5950000286102295,
+        -1.7950000762939453,
+        -0.03500000014901161
+      ],
+      "max": [
+        -0.004999995231628418,
+        -1.4049999713897705,
+        0.0
+      ],
+      "dimensions": [
+        1.59,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_01_02",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.8,
+        -1.6,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        0.004999995231628418,
+        -1.7950000762939453,
+        -0.03500000014901161
+      ],
+      "max": [
+        1.5950000286102295,
+        -1.4049999713897705,
+        0.0
+      ],
+      "dimensions": [
+        1.59,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_01_03",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        2.0,
+        -1.6,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        1.6050000190734863,
+        -1.7950000762939453,
+        -0.03500000014901161
+      ],
+      "max": [
+        2.3949999809265137,
+        -1.4049999713897705,
+        0.0
+      ],
+      "dimensions": [
+        0.79,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_02_00",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -1.6,
+        -1.2,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        -2.3949999809265137,
+        -1.3949999809265137,
+        -0.03500000014901161
+      ],
+      "max": [
+        -0.8050000071525574,
+        -1.005000114440918,
+        0.0
+      ],
+      "dimensions": [
+        1.59,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_02_01",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.0,
+        -1.2,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        -0.7950000166893005,
+        -1.3949999809265137,
+        -0.03500000014901161
+      ],
+      "max": [
+        0.7950000166893005,
+        -1.005000114440918,
+        0.0
+      ],
+      "dimensions": [
+        1.59,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_02_02",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.6,
+        -1.2,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        0.8050000071525574,
+        -1.3949999809265137,
+        -0.03500000014901161
+      ],
+      "max": [
+        2.3949999809265137,
+        -1.005000114440918,
+        0.0
+      ],
+      "dimensions": [
+        1.59,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_03_00",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -2.0,
+        -0.8,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        -2.3949999809265137,
+        -0.9950000047683716,
+        -0.03500000014901161
+      ],
+      "max": [
+        -1.6050000190734863,
+        -0.6050000190734863,
+        0.0
+      ],
+      "dimensions": [
+        0.79,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_03_01",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.8,
+        -0.8,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        -1.5950000286102295,
+        -0.9950000047683716,
+        -0.03500000014901161
+      ],
+      "max": [
+        -0.004999995231628418,
+        -0.6050000190734863,
+        0.0
+      ],
+      "dimensions": [
+        1.59,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_03_02",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.8,
+        -0.8,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        0.004999995231628418,
+        -0.9950000047683716,
+        -0.03500000014901161
+      ],
+      "max": [
+        1.5950000286102295,
+        -0.6050000190734863,
+        0.0
+      ],
+      "dimensions": [
+        1.59,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_03_03",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        2.0,
+        -0.8,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        1.6050000190734863,
+        -0.9950000047683716,
+        -0.03500000014901161
+      ],
+      "max": [
+        2.3949999809265137,
+        -0.6050000190734863,
+        0.0
+      ],
+      "dimensions": [
+        0.79,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_04_00",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -1.6,
+        -0.4,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        -2.3949999809265137,
+        -0.5950000286102295,
+        -0.03500000014901161
+      ],
+      "max": [
+        -0.8050000071525574,
+        -0.20500001311302185,
+        0.0
+      ],
+      "dimensions": [
+        1.59,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_04_01",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.0,
+        -0.4,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        -0.7950000166893005,
+        -0.5950000286102295,
+        -0.03500000014901161
+      ],
+      "max": [
+        0.7950000166893005,
+        -0.20500001311302185,
+        0.0
+      ],
+      "dimensions": [
+        1.59,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_04_02",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.6,
+        -0.4,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        0.8050000071525574,
+        -0.5950000286102295,
+        -0.03500000014901161
+      ],
+      "max": [
+        2.3949999809265137,
+        -0.20500001311302185,
+        0.0
+      ],
+      "dimensions": [
+        1.59,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_05_00",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -2.0,
+        0.0,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        -2.3949999809265137,
+        -0.19499999284744263,
+        -0.03500000014901161
+      ],
+      "max": [
+        -1.6050000190734863,
+        0.19499999284744263,
+        0.0
+      ],
+      "dimensions": [
+        0.79,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_05_01",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.8,
+        0.0,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        -1.5950000286102295,
+        -0.19499999284744263,
+        -0.03500000014901161
+      ],
+      "max": [
+        -0.004999995231628418,
+        0.19499999284744263,
+        0.0
+      ],
+      "dimensions": [
+        1.59,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_05_02",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.8,
+        0.0,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        0.004999995231628418,
+        -0.19499999284744263,
+        -0.03500000014901161
+      ],
+      "max": [
+        1.5950000286102295,
+        0.19499999284744263,
+        0.0
+      ],
+      "dimensions": [
+        1.59,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_05_03",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        2.0,
+        0.0,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        1.6050000190734863,
+        -0.19499999284744263,
+        -0.03500000014901161
+      ],
+      "max": [
+        2.3949999809265137,
+        0.19499999284744263,
+        0.0
+      ],
+      "dimensions": [
+        0.79,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_06_00",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -1.6,
+        0.4,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        -2.3949999809265137,
+        0.20500001311302185,
+        -0.03500000014901161
+      ],
+      "max": [
+        -0.8050000071525574,
+        0.5950000286102295,
+        0.0
+      ],
+      "dimensions": [
+        1.59,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_06_01",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.0,
+        0.4,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        -0.7950000166893005,
+        0.20500001311302185,
+        -0.03500000014901161
+      ],
+      "max": [
+        0.7950000166893005,
+        0.5950000286102295,
+        0.0
+      ],
+      "dimensions": [
+        1.59,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_06_02",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.6,
+        0.4,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        0.8050000071525574,
+        0.20500001311302185,
+        -0.03500000014901161
+      ],
+      "max": [
+        2.3949999809265137,
+        0.5950000286102295,
+        0.0
+      ],
+      "dimensions": [
+        1.59,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_07_00",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -2.0,
+        0.8,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        -2.3949999809265137,
+        0.6050000190734863,
+        -0.03500000014901161
+      ],
+      "max": [
+        -1.6050000190734863,
+        0.9950000047683716,
+        0.0
+      ],
+      "dimensions": [
+        0.79,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_07_01",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.8,
+        0.8,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        -1.5950000286102295,
+        0.6050000190734863,
+        -0.03500000014901161
+      ],
+      "max": [
+        -0.004999995231628418,
+        0.9950000047683716,
+        0.0
+      ],
+      "dimensions": [
+        1.59,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_07_02",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.8,
+        0.8,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        0.004999995231628418,
+        0.6050000190734863,
+        -0.03500000014901161
+      ],
+      "max": [
+        1.5950000286102295,
+        0.9950000047683716,
+        0.0
+      ],
+      "dimensions": [
+        1.59,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_07_03",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        2.0,
+        0.8,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        1.6050000190734863,
+        0.6050000190734863,
+        -0.03500000014901161
+      ],
+      "max": [
+        2.3949999809265137,
+        0.9950000047683716,
+        0.0
+      ],
+      "dimensions": [
+        0.79,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_08_00",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -1.6,
+        1.2,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        -2.3949999809265137,
+        1.005000114440918,
+        -0.03500000014901161
+      ],
+      "max": [
+        -0.8050000071525574,
+        1.3949999809265137,
+        0.0
+      ],
+      "dimensions": [
+        1.59,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_08_01",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.0,
+        1.2,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        -0.7950000166893005,
+        1.005000114440918,
+        -0.03500000014901161
+      ],
+      "max": [
+        0.7950000166893005,
+        1.3949999809265137,
+        0.0
+      ],
+      "dimensions": [
+        1.59,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_08_02",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.6,
+        1.2,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        0.8050000071525574,
+        1.005000114440918,
+        -0.03500000014901161
+      ],
+      "max": [
+        2.3949999809265137,
+        1.3949999809265137,
+        0.0
+      ],
+      "dimensions": [
+        1.59,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_09_00",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -2.0,
+        1.6,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        -2.3949999809265137,
+        1.4049999713897705,
+        -0.03500000014901161
+      ],
+      "max": [
+        -1.6050000190734863,
+        1.7950000762939453,
+        0.0
+      ],
+      "dimensions": [
+        0.79,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_09_01",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.8,
+        1.6,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        -1.5950000286102295,
+        1.4049999713897705,
+        -0.03500000014901161
+      ],
+      "max": [
+        -0.004999995231628418,
+        1.7950000762939453,
+        0.0
+      ],
+      "dimensions": [
+        1.59,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_09_02",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.8,
+        1.6,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        0.004999995231628418,
+        1.4049999713897705,
+        -0.03500000014901161
+      ],
+      "max": [
+        1.5950000286102295,
+        1.7950000762939453,
+        0.0
+      ],
+      "dimensions": [
+        1.59,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_09_03",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        2.0,
+        1.6,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        1.6050000190734863,
+        1.4049999713897705,
+        -0.03500000014901161
+      ],
+      "max": [
+        2.3949999809265137,
+        1.7950000762939453,
+        0.0
+      ],
+      "dimensions": [
+        0.79,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_10_00",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -1.6,
+        2.0,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        -2.3949999809265137,
+        1.8050000667572021,
+        -0.03500000014901161
+      ],
+      "max": [
+        -0.8050000071525574,
+        2.194999933242798,
+        0.0
+      ],
+      "dimensions": [
+        1.59,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_10_01",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.0,
+        2.0,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        -0.7950000166893005,
+        1.8050000667572021,
+        -0.03500000014901161
+      ],
+      "max": [
+        0.7950000166893005,
+        2.194999933242798,
+        0.0
+      ],
+      "dimensions": [
+        1.59,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_Board_10_02",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.6,
+        2.0,
+        -0.0175
+      ],
+      "triangles": 188,
+      "min": [
+        0.8050000071525574,
+        1.8050000667572021,
+        -0.03500000014901161
+      ],
+      "max": [
+        2.3949999809265137,
+        2.194999933242798,
+        0.0
+      ],
+      "dimensions": [
+        1.59,
+        0.39,
+        0.035
+      ]
+    },
+    {
+      "name": "V2_Room_CityLight_0",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.18,
+        2.424,
+        1.21
+      ],
+      "triangles": 188,
+      "min": [
+        1.1710000038146973,
+        2.4200000762939453,
+        1.1980000734329224
+      ],
+      "max": [
+        1.188999891281128,
+        2.427999973297119,
+        1.222000002861023
+      ],
+      "dimensions": [
+        0.018,
+        0.008,
+        0.024
+      ]
+    },
+    {
+      "name": "V2_Room_CityLight_1",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.29,
+        2.424,
+        1.16
+      ],
+      "triangles": 188,
+      "min": [
+        1.281000018119812,
+        2.4200000762939453,
+        1.1480000019073486
+      ],
+      "max": [
+        1.2989999055862427,
+        2.427999973297119,
+        1.1719999313354492
+      ],
+      "dimensions": [
+        0.018,
+        0.008,
+        0.024
+      ]
+    },
+    {
+      "name": "V2_Room_CityLight_2",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.42,
+        2.424,
+        1.24
+      ],
+      "triangles": 188,
+      "min": [
+        1.4110000133514404,
+        2.4200000762939453,
+        1.2280000448226929
+      ],
+      "max": [
+        1.428999900817871,
+        2.427999973297119,
+        1.2519999742507935
+      ],
+      "dimensions": [
+        0.018,
+        0.008,
+        0.024
+      ]
+    },
+    {
+      "name": "V2_Room_CityLight_3",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.62,
+        2.424,
+        1.19
+      ],
+      "triangles": 188,
+      "min": [
+        1.6110000610351562,
+        2.4200000762939453,
+        1.1780000925064087
+      ],
+      "max": [
+        1.628999948501587,
+        2.427999973297119,
+        1.2020000219345093
+      ],
+      "dimensions": [
+        0.018,
+        0.008,
+        0.024
+      ]
+    },
+    {
+      "name": "V2_Room_CityLight_4",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.79,
+        2.424,
+        1.27
+      ],
+      "triangles": 188,
+      "min": [
+        1.781000018119812,
+        2.4200000762939453,
+        1.2580000162124634
+      ],
+      "max": [
+        1.7989999055862427,
+        2.427999973297119,
+        1.281999945640564
+      ],
+      "dimensions": [
+        0.018,
+        0.008,
+        0.024
+      ]
+    },
+    {
+      "name": "V2_Room_CityLight_5",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.91,
+        2.424,
+        1.18
+      ],
+      "triangles": 188,
+      "min": [
+        1.9010000228881836,
+        2.4200000762939453,
+        1.1679999828338623
+      ],
+      "max": [
+        1.9189999103546143,
+        2.427999973297119,
+        1.191999912261963
+      ],
+      "dimensions": [
+        0.018,
+        0.008,
+        0.024
+      ]
+    },
+    {
+      "name": "V2_Room_Glass",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.55,
+        2.3,
+        1.75
+      ],
+      "triangles": 188,
+      "min": [
+        1.0799999237060547,
+        2.2939999103546143,
+        1.0799999237060547
+      ],
+      "max": [
+        2.0199999809265137,
+        2.305999994277954,
+        2.4200000762939453
+      ],
+      "dimensions": [
+        0.94,
+        0.012,
+        1.34
+      ]
+    },
+    {
+      "name": "V2_Room_LeftSkirting",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -2.384,
+        0.0,
+        0.06
+      ],
+      "triangles": 188,
+      "min": [
+        -2.4000000953674316,
+        -2.200000047683716,
+        0.0
+      ],
+      "max": [
+        -2.368000030517578,
+        2.200000047683716,
+        0.11999999731779099
+      ],
+      "dimensions": [
+        0.032,
+        4.4,
+        0.12
+      ]
+    },
+    {
+      "name": "V2_Room_LeftWall",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -2.5,
+        0.0,
+        1.6
+      ],
+      "triangles": 188,
+      "min": [
+        -2.5999999046325684,
+        -2.4000000953674316,
+        0.0
+      ],
+      "max": [
+        -2.4000000953674316,
+        2.4000000953674316,
+        3.200000047683716
+      ],
+      "dimensions": [
+        0.2,
+        4.8,
+        3.2
+      ]
+    },
+    {
+      "name": "V2_Room_Moon",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.75,
+        2.424,
+        2.12
+      ],
+      "triangles": 380,
+      "min": [
+        1.6200000047683716,
+        2.4200000762939453,
+        1.9899998903274536
+      ],
+      "max": [
+        1.8799999952316284,
+        2.427999973297119,
+        2.25
+      ],
+      "dimensions": [
+        0.26,
+        0.008,
+        0.26
+      ]
+    },
+    {
+      "name": "V2_Room_NightPanel",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.55,
+        2.445,
+        1.75
+      ],
+      "triangles": 188,
+      "min": [
+        1.0549999475479126,
+        2.432499885559082,
+        1.0550000667572021
+      ],
+      "max": [
+        2.0450000762939453,
+        2.4574999809265137,
+        2.444999933242798
+      ],
+      "dimensions": [
+        0.99,
+        0.025,
+        1.39
+      ]
+    },
+    {
+      "name": "V2_Room_Plinth",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.0,
+        0.0,
+        -0.15
+      ],
+      "triangles": 380,
+      "min": [
+        -2.5999999046325684,
+        -2.4000000953674316,
+        -0.30000001192092896
+      ],
+      "max": [
+        2.5999999046325684,
+        2.4000000953674316,
+        0.0
+      ],
+      "dimensions": [
+        5.2,
+        4.8,
+        0.3
+      ]
+    },
+    {
+      "name": "V2_Room_RearSkirting",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.0,
+        2.184,
+        0.06
+      ],
+      "triangles": 188,
+      "min": [
+        -2.4000000953674316,
+        2.1679999828338623,
+        0.0
+      ],
+      "max": [
+        2.4000000953674316,
+        2.200000047683716,
+        0.11999999731779099
+      ],
+      "dimensions": [
+        4.8,
+        0.032,
+        0.12
+      ]
+    },
+    {
+      "name": "V2_Room_RearWall",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.0,
+        2.3,
+        1.6
+      ],
+      "triangles": 384,
+      "min": [
+        -2.5999999046325684,
+        2.200000047683716,
+        0.0
+      ],
+      "max": [
+        2.5999999046325684,
+        2.3999998569488525,
+        3.200000047683716
+      ],
+      "dimensions": [
+        5.2,
+        0.2,
+        3.2
+      ]
+    },
+    {
+      "name": "V2_Room_WindowMullion",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.55,
+        2.165,
+        1.75
+      ],
+      "triangles": 188,
+      "min": [
+        1.53249990940094,
+        2.134999990463257,
+        1.0799999237060547
+      ],
+      "max": [
+        1.5674999952316284,
+        2.194999933242798,
+        2.4200000762939453
+      ],
+      "dimensions": [
+        0.035,
+        0.06,
+        1.34
+      ]
+    },
+    {
+      "name": "V2_Room_WindowRail",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.55,
+        2.179,
+        1.08
+      ],
+      "triangles": 188,
+      "min": [
+        1.0499999523162842,
+        2.133999824523926,
+        1.0500000715255737
+      ],
+      "max": [
+        2.049999952316284,
+        2.2239999771118164,
+        1.1100000143051147
+      ],
+      "dimensions": [
+        1.0,
+        0.09,
+        0.06
+      ]
+    },
+    {
+      "name": "V2_Room_WindowRail.001",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.55,
+        2.179,
+        2.42
+      ],
+      "triangles": 188,
+      "min": [
+        1.0499999523162842,
+        2.133999824523926,
+        2.390000104904175
+      ],
+      "max": [
+        2.049999952316284,
+        2.2239999771118164,
+        2.450000047683716
+      ],
+      "dimensions": [
+        1.0,
+        0.09,
+        0.06
+      ]
+    },
+    {
+      "name": "V2_Room_WindowSill",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.55,
+        2.08,
+        1.015
+      ],
+      "triangles": 188,
+      "min": [
+        0.9599999785423279,
+        1.909999966621399,
+        0.9799999594688416
+      ],
+      "max": [
+        2.1399998664855957,
+        2.25,
+        1.0499999523162842
+      ],
+      "dimensions": [
+        1.18,
+        0.34,
+        0.07
+      ]
+    },
+    {
+      "name": "V2_Room_WindowStile",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.08,
+        2.179,
+        1.75
+      ],
+      "triangles": 188,
+      "min": [
+        1.0500000715255737,
+        2.133999824523926,
+        1.0499999523162842
+      ],
+      "max": [
+        1.1100000143051147,
+        2.2239999771118164,
+        2.450000047683716
+      ],
+      "dimensions": [
+        0.06,
+        0.09,
+        1.4
+      ]
+    },
+    {
+      "name": "V2_Room_WindowStile.001",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        2.02,
+        2.179,
+        1.75
+      ],
+      "triangles": 188,
+      "min": [
+        1.9900000095367432,
+        2.133999824523926,
+        1.0499999523162842
+      ],
+      "max": [
+        2.049999952316284,
+        2.2239999771118164,
+        2.450000047683716
+      ],
+      "dimensions": [
+        0.06,
+        0.09,
+        1.4
+      ]
+    },
+    {
+      "name": "V2_Room_WindowTransom",
+      "type": "MESH",
+      "collection": [
+        "Static_Room"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.55,
+        2.164,
+        1.78
+      ],
+      "triangles": 188,
+      "min": [
+        1.0799999237060547,
+        2.134000062942505,
+        1.7624999284744263
+      ],
+      "max": [
+        2.0199999809265137,
+        2.194000005722046,
+        1.7975000143051147
+      ],
+      "dimensions": [
+        0.94,
+        0.06,
+        0.035
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "check": "Six requested collections",
+      "passed": true
+    },
+    {
+      "check": "All interactive roots exist",
+      "passed": true
+    },
+    {
+      "check": "Diary origin",
+      "passed": true
+    },
+    {
+      "check": "Computer origin",
+      "passed": true
+    },
+    {
+      "check": "Computer_Screen origin",
+      "passed": true
+    },
+    {
+      "check": "Lamp origin",
+      "passed": true
+    },
+    {
+      "check": "Cat origin",
+      "passed": true
+    },
+    {
+      "check": "Bookshelf origin",
+      "passed": true
+    },
+    {
+      "check": "Diary applied scale",
+      "passed": true
+    },
+    {
+      "check": "Computer applied scale",
+      "passed": true
+    },
+    {
+      "check": "Computer_Screen applied scale",
+      "passed": true
+    },
+    {
+      "check": "Lamp applied scale",
+      "passed": true
+    },
+    {
+      "check": "Lamp_Shade applied scale",
+      "passed": true
+    },
+    {
+      "check": "Lamp_Light applied scale",
+      "passed": true
+    },
+    {
+      "check": "Cat applied scale",
+      "passed": true
+    },
+    {
+      "check": "Bookshelf applied scale",
+      "passed": true
+    },
+    {
+      "check": "Frame_1 applied scale",
+      "passed": true
+    },
+    {
+      "check": "Frame_2 applied scale",
+      "passed": true
+    },
+    {
+      "check": "Computer_Screen parent",
+      "passed": true
+    },
+    {
+      "check": "Lamp_Shade parent",
+      "passed": true
+    },
+    {
+      "check": "Lamp_Light parent",
+      "passed": true
+    },
+    {
+      "check": "Screen 0.94 x 0.56",
+      "passed": true
+    },
+    {
+      "check": "Screen faces -Y",
+      "passed": true
+    },
+    {
+      "check": "Desktop top 0.80",
+      "passed": true
+    },
+    {
+      "check": "Floor top 0",
+      "passed": true
+    },
+    {
+      "check": "Plinth 0.30m thick",
+      "passed": true
+    },
+    {
+      "check": "Diary desktop contact",
+      "passed": true
+    },
+    {
+      "check": "Computer desktop contact",
+      "passed": true
+    },
+    {
+      "check": "Lamp desktop contact",
+      "passed": true
+    },
+    {
+      "check": "Rotated diary fully within desktop",
+      "passed": true
+    },
+    {
+      "check": "Cat bed above rug",
+      "passed": true
+    },
+    {
+      "check": "Cat touches cat bed",
+      "passed": true
+    },
+    {
+      "check": "Beanbag touches rug",
+      "passed": true
+    },
+    {
+      "check": "Headboard clears skirting",
+      "passed": true
+    },
+    {
+      "check": "No contract duplicates",
+      "passed": true
+    },
+    {
+      "check": "Under final 150000 triangle budget",
+      "passed": true
+    },
+    {
+      "check": "Full camera framing",
+      "passed": true
+    },
+    {
+      "check": "Compact interior 4.8 x 4.4",
+      "passed": true
+    },
+    {
+      "check": "Bed real dimensions preserved",
+      "passed": true
+    },
+    {
+      "check": "Desk real dimensions preserved",
+      "passed": true
+    },
+    {
+      "check": "Nightstand clears rug",
+      "passed": true
+    }
+  ],
+  "fingerprint": "cc472f0ee94bc6a450c5f748ad055f82cfaeca7516e3bafd60eec1a18a5d68e1",
+  "rerun_matches_previous": false,
+  "adjustments": [
+    "Interior reduced from 6x6 to 4.8x4.4m; bed 1.3x2 and desk 2.3x0.8 unchanged.",
+    "All updated interactive and marker coordinates are in all_objects.",
+    "Nightstand moved clear of the rug; furniture colored for layout review."
+  ],
+  "deferred": [
+    "Detailed geometry and subdivision",
+    "Final night lighting",
+    "UVs",
+    "Baking",
+    "GLB export"
+  ],
+  "layout_variant": "compact-color",
+  "interior_dimensions": [
+    4.8,
+    4.4
+  ],
+  "floor_area_reduction": 0.41333333333333333
+}

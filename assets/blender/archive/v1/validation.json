@@ -1,0 +1,2916 @@
+{
+  "blender": "5.2.3 LTS",
+  "stage": 6,
+  "approval_status": "awaiting user approval before UV/bake/export",
+  "triangles_total": 45258,
+  "static_triangles": 15932,
+  "interactive": [
+    {
+      "name": "Bookshelf",
+      "type": "MESH",
+      "collection": [
+        "Interactive"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -2.78,
+        1.6,
+        0.0
+      ],
+      "origin_three": [
+        -2.78,
+        0.0,
+        -1.6
+      ],
+      "triangles": 13724,
+      "dimensions": [
+        0.4,
+        1.2,
+        2.0
+      ],
+      "min_z": 0.0,
+      "max_z": 2.0
+    },
+    {
+      "name": "Cat",
+      "type": "MESH",
+      "collection": [
+        "Interactive"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.2,
+        -1.1,
+        0.03
+      ],
+      "origin_three": [
+        1.2,
+        0.03,
+        1.1
+      ],
+      "triangles": 3428,
+      "dimensions": [
+        0.572417,
+        0.442199,
+        0.328
+      ],
+      "min_z": 0.029999999329447746,
+      "max_z": 0.3579999804496765
+    },
+    {
+      "name": "Computer",
+      "type": "MESH",
+      "collection": [
+        "Interactive"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.85,
+        2.68,
+        0.8
+      ],
+      "origin_three": [
+        0.85,
+        0.8,
+        -2.68
+      ],
+      "triangles": 6940,
+      "dimensions": [
+        1.024,
+        0.65,
+        0.92
+      ],
+      "min_z": 0.800000011920929,
+      "max_z": 1.7200000286102295
+    },
+    {
+      "name": "Computer_Screen",
+      "type": "MESH",
+      "collection": [
+        "Interactive"
+      ],
+      "parent": "Computer",
+      "origin_blender": [
+        0.85,
+        2.652,
+        1.4
+      ],
+      "origin_three": [
+        0.85,
+        1.4,
+        -2.652
+      ],
+      "triangles": 2,
+      "dimensions": [
+        0.94,
+        0.0,
+        0.56
+      ],
+      "min_z": 1.1200000047683716,
+      "max_z": 1.6799999475479126
+    },
+    {
+      "name": "Diary",
+      "type": "MESH",
+      "collection": [
+        "Interactive"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.05,
+        2.3,
+        0.8
+      ],
+      "origin_three": [
+        -0.05,
+        0.8,
+        -2.3
+      ],
+      "triangles": 1256,
+      "dimensions": [
+        0.475471,
+        0.541864,
+        0.075
+      ],
+      "min_z": 0.800000011920929,
+      "max_z": 0.875
+    },
+    {
+      "name": "Frame_1",
+      "type": "MESH",
+      "collection": [
+        "Interactive"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -2.98,
+        -1.15,
+        1.44
+      ],
+      "origin_three": [
+        -2.98,
+        1.44,
+        1.15
+      ],
+      "triangles": 1444,
+      "dimensions": [
+        0.04,
+        0.5,
+        0.42
+      ],
+      "min_z": 1.440000057220459,
+      "max_z": 1.8600001335144043
+    },
+    {
+      "name": "Frame_2",
+      "type": "MESH",
+      "collection": [
+        "Interactive"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -2.98,
+        -1.8,
+        1.54
+      ],
+      "origin_three": [
+        -2.98,
+        1.54,
+        1.8
+      ],
+      "triangles": 1444,
+      "dimensions": [
+        0.04,
+        0.4,
+        0.52
+      ],
+      "min_z": 1.5399999618530273,
+      "max_z": 2.059999942779541
+    },
+    {
+      "name": "Lamp",
+      "type": "MESH",
+      "collection": [
+        "Interactive"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.42,
+        2.72,
+        0.8
+      ],
+      "origin_three": [
+        -0.42,
+        0.8,
+        -2.72
+      ],
+      "triangles": 928,
+      "dimensions": [
+        0.2,
+        0.2,
+        0.418
+      ],
+      "min_z": 0.800000011920929,
+      "max_z": 1.2179999351501465
+    },
+    {
+      "name": "Lamp_Light",
+      "type": "EMPTY",
+      "collection": [
+        "Interactive"
+      ],
+      "parent": "Lamp",
+      "origin_blender": [
+        -0.42,
+        2.72,
+        1.07
+      ],
+      "origin_three": [
+        -0.42,
+        1.07,
+        -2.72
+      ],
+      "triangles": 0,
+      "dimensions": [
+        0,
+        0,
+        0
+      ],
+      "min_z": null
+    },
+    {
+      "name": "Lamp_Shade",
+      "type": "MESH",
+      "collection": [
+        "Interactive"
+      ],
+      "parent": "Lamp",
+      "origin_blender": [
+        -0.42,
+        2.72,
+        1.148719
+      ],
+      "origin_three": [
+        -0.42,
+        1.148719,
+        -2.72
+      ],
+      "triangles": 160,
+      "dimensions": [
+        0.325425,
+        0.325426,
+        0.182562
+      ],
+      "min_z": 1.1487189531326294,
+      "max_z": 1.331281065940857
+    }
+  ],
+  "markers": [
+    {
+      "name": "Cam_Diary",
+      "type": "EMPTY",
+      "collection": [
+        "Markers"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.05,
+        1.5,
+        2.0
+      ],
+      "origin_three": [
+        -0.05,
+        2.0,
+        -1.5
+      ],
+      "triangles": 0,
+      "dimensions": [
+        0,
+        0,
+        0
+      ],
+      "min_z": null
+    },
+    {
+      "name": "Cam_Diary_Target",
+      "type": "EMPTY",
+      "collection": [
+        "Markers"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.05,
+        2.3,
+        0.8
+      ],
+      "origin_three": [
+        -0.05,
+        0.8,
+        -2.3
+      ],
+      "triangles": 0,
+      "dimensions": [
+        0,
+        0,
+        0
+      ],
+      "min_z": null
+    },
+    {
+      "name": "Cam_Room",
+      "type": "EMPTY",
+      "collection": [
+        "Markers"
+      ],
+      "parent": null,
+      "origin_blender": [
+        7.5,
+        -7.5,
+        6.2
+      ],
+      "origin_three": [
+        7.5,
+        6.2,
+        7.5
+      ],
+      "triangles": 0,
+      "dimensions": [
+        0,
+        0,
+        0
+      ],
+      "min_z": null
+    },
+    {
+      "name": "Cam_Room_Target",
+      "type": "EMPTY",
+      "collection": [
+        "Markers"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.0,
+        0.4,
+        0.8
+      ],
+      "origin_three": [
+        0.0,
+        0.8,
+        -0.4
+      ],
+      "triangles": 0,
+      "dimensions": [
+        0,
+        0,
+        0
+      ],
+      "min_z": null
+    },
+    {
+      "name": "Cam_Shelf",
+      "type": "EMPTY",
+      "collection": [
+        "Markers"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.78,
+        1.6,
+        1.2
+      ],
+      "origin_three": [
+        -0.78,
+        1.2,
+        -1.6
+      ],
+      "triangles": 0,
+      "dimensions": [
+        0,
+        0,
+        0
+      ],
+      "min_z": null
+    },
+    {
+      "name": "Cam_Shelf_Target",
+      "type": "EMPTY",
+      "collection": [
+        "Markers"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -2.78,
+        1.6,
+        1.0
+      ],
+      "origin_three": [
+        -2.78,
+        1.0,
+        -1.6
+      ],
+      "triangles": 0,
+      "dimensions": [
+        0,
+        0,
+        0
+      ],
+      "min_z": null
+    }
+  ],
+  "all_objects": [
+    {
+      "name": "Bookshelf",
+      "type": "MESH",
+      "collection": [
+        "Interactive"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -2.78,
+        1.6,
+        0.0
+      ],
+      "origin_three": [
+        -2.78,
+        0.0,
+        -1.6
+      ],
+      "triangles": 13724,
+      "dimensions": [
+        0.4,
+        1.2,
+        2.0
+      ],
+      "min_z": 0.0,
+      "max_z": 2.0
+    },
+    {
+      "name": "Cam_Diary",
+      "type": "EMPTY",
+      "collection": [
+        "Markers"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.05,
+        1.5,
+        2.0
+      ],
+      "origin_three": [
+        -0.05,
+        2.0,
+        -1.5
+      ],
+      "triangles": 0,
+      "dimensions": [
+        0,
+        0,
+        0
+      ],
+      "min_z": null
+    },
+    {
+      "name": "Cam_Diary_Target",
+      "type": "EMPTY",
+      "collection": [
+        "Markers"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.05,
+        2.3,
+        0.8
+      ],
+      "origin_three": [
+        -0.05,
+        0.8,
+        -2.3
+      ],
+      "triangles": 0,
+      "dimensions": [
+        0,
+        0,
+        0
+      ],
+      "min_z": null
+    },
+    {
+      "name": "Cam_Room",
+      "type": "EMPTY",
+      "collection": [
+        "Markers"
+      ],
+      "parent": null,
+      "origin_blender": [
+        7.5,
+        -7.5,
+        6.2
+      ],
+      "origin_three": [
+        7.5,
+        6.2,
+        7.5
+      ],
+      "triangles": 0,
+      "dimensions": [
+        0,
+        0,
+        0
+      ],
+      "min_z": null
+    },
+    {
+      "name": "Cam_Room_Target",
+      "type": "EMPTY",
+      "collection": [
+        "Markers"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.0,
+        0.4,
+        0.8
+      ],
+      "origin_three": [
+        0.0,
+        0.8,
+        -0.4
+      ],
+      "triangles": 0,
+      "dimensions": [
+        0,
+        0,
+        0
+      ],
+      "min_z": null
+    },
+    {
+      "name": "Cam_Shelf",
+      "type": "EMPTY",
+      "collection": [
+        "Markers"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.78,
+        1.6,
+        1.2
+      ],
+      "origin_three": [
+        -0.78,
+        1.2,
+        -1.6
+      ],
+      "triangles": 0,
+      "dimensions": [
+        0,
+        0,
+        0
+      ],
+      "min_z": null
+    },
+    {
+      "name": "Cam_Shelf_Target",
+      "type": "EMPTY",
+      "collection": [
+        "Markers"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -2.78,
+        1.6,
+        1.0
+      ],
+      "origin_three": [
+        -2.78,
+        1.0,
+        -1.6
+      ],
+      "triangles": 0,
+      "dimensions": [
+        0,
+        0,
+        0
+      ],
+      "min_z": null
+    },
+    {
+      "name": "Cat",
+      "type": "MESH",
+      "collection": [
+        "Interactive"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.2,
+        -1.1,
+        0.03
+      ],
+      "origin_three": [
+        1.2,
+        0.03,
+        1.1
+      ],
+      "triangles": 3428,
+      "dimensions": [
+        0.572417,
+        0.442199,
+        0.328
+      ],
+      "min_z": 0.029999999329447746,
+      "max_z": 0.3579999804496765
+    },
+    {
+      "name": "Computer",
+      "type": "MESH",
+      "collection": [
+        "Interactive"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.85,
+        2.68,
+        0.8
+      ],
+      "origin_three": [
+        0.85,
+        0.8,
+        -2.68
+      ],
+      "triangles": 6940,
+      "dimensions": [
+        1.024,
+        0.65,
+        0.92
+      ],
+      "min_z": 0.800000011920929,
+      "max_z": 1.7200000286102295
+    },
+    {
+      "name": "Computer_Screen",
+      "type": "MESH",
+      "collection": [
+        "Interactive"
+      ],
+      "parent": "Computer",
+      "origin_blender": [
+        0.85,
+        2.652,
+        1.4
+      ],
+      "origin_three": [
+        0.85,
+        1.4,
+        -2.652
+      ],
+      "triangles": 2,
+      "dimensions": [
+        0.94,
+        0.0,
+        0.56
+      ],
+      "min_z": 1.1200000047683716,
+      "max_z": 1.6799999475479126
+    },
+    {
+      "name": "Diary",
+      "type": "MESH",
+      "collection": [
+        "Interactive"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.05,
+        2.3,
+        0.8
+      ],
+      "origin_three": [
+        -0.05,
+        0.8,
+        -2.3
+      ],
+      "triangles": 1256,
+      "dimensions": [
+        0.475471,
+        0.541864,
+        0.075
+      ],
+      "min_z": 0.800000011920929,
+      "max_z": 0.875
+    },
+    {
+      "name": "Frame_1",
+      "type": "MESH",
+      "collection": [
+        "Interactive"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -2.98,
+        -1.15,
+        1.44
+      ],
+      "origin_three": [
+        -2.98,
+        1.44,
+        1.15
+      ],
+      "triangles": 1444,
+      "dimensions": [
+        0.04,
+        0.5,
+        0.42
+      ],
+      "min_z": 1.440000057220459,
+      "max_z": 1.8600001335144043
+    },
+    {
+      "name": "Frame_2",
+      "type": "MESH",
+      "collection": [
+        "Interactive"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -2.98,
+        -1.8,
+        1.54
+      ],
+      "origin_three": [
+        -2.98,
+        1.54,
+        1.8
+      ],
+      "triangles": 1444,
+      "dimensions": [
+        0.04,
+        0.4,
+        0.52
+      ],
+      "min_z": 1.5399999618530273,
+      "max_z": 2.059999942779541
+    },
+    {
+      "name": "Lamp",
+      "type": "MESH",
+      "collection": [
+        "Interactive"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.42,
+        2.72,
+        0.8
+      ],
+      "origin_three": [
+        -0.42,
+        0.8,
+        -2.72
+      ],
+      "triangles": 928,
+      "dimensions": [
+        0.2,
+        0.2,
+        0.418
+      ],
+      "min_z": 0.800000011920929,
+      "max_z": 1.2179999351501465
+    },
+    {
+      "name": "Lamp_Light",
+      "type": "EMPTY",
+      "collection": [
+        "Interactive"
+      ],
+      "parent": "Lamp",
+      "origin_blender": [
+        -0.42,
+        2.72,
+        1.07
+      ],
+      "origin_three": [
+        -0.42,
+        1.07,
+        -2.72
+      ],
+      "triangles": 0,
+      "dimensions": [
+        0,
+        0,
+        0
+      ],
+      "min_z": null
+    },
+    {
+      "name": "Lamp_Shade",
+      "type": "MESH",
+      "collection": [
+        "Interactive"
+      ],
+      "parent": "Lamp",
+      "origin_blender": [
+        -0.42,
+        2.72,
+        1.148719
+      ],
+      "origin_three": [
+        -0.42,
+        1.148719,
+        -2.72
+      ],
+      "triangles": 160,
+      "dimensions": [
+        0.325425,
+        0.325426,
+        0.182562
+      ],
+      "min_z": 1.1487189531326294,
+      "max_z": 1.331281065940857
+    },
+    {
+      "name": "PreviewCam",
+      "type": "CAMERA",
+      "collection": [
+        "_Preview"
+      ],
+      "parent": null,
+      "origin_blender": [
+        7.5,
+        -7.5,
+        6.2
+      ],
+      "origin_three": [
+        7.5,
+        6.2,
+        7.5
+      ],
+      "triangles": 0,
+      "dimensions": [
+        0,
+        0,
+        0
+      ],
+      "min_z": null
+    },
+    {
+      "name": "PreviewLight_Lamp",
+      "type": "LIGHT",
+      "collection": [
+        "_Preview"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.42,
+        2.72,
+        1.07
+      ],
+      "origin_three": [
+        -0.42,
+        1.07,
+        -2.72
+      ],
+      "triangles": 0,
+      "dimensions": [
+        0,
+        0,
+        0
+      ],
+      "min_z": null
+    },
+    {
+      "name": "PreviewLight_Sun",
+      "type": "LIGHT",
+      "collection": [
+        "_Preview"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -3.0,
+        5.0,
+        8.0
+      ],
+      "origin_three": [
+        -3.0,
+        8.0,
+        -5.0
+      ],
+      "triangles": 0,
+      "dimensions": [
+        0,
+        0,
+        0
+      ],
+      "min_z": null
+    },
+    {
+      "name": "PreviewLight_Window",
+      "type": "LIGHT",
+      "collection": [
+        "_Preview"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -1.75,
+        2.82,
+        1.9
+      ],
+      "origin_three": [
+        -1.75,
+        1.9,
+        -2.82
+      ],
+      "triangles": 0,
+      "dimensions": [
+        0,
+        0,
+        0
+      ],
+      "min_z": null
+    },
+    {
+      "name": "S_Furn_BedFoot",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -2.9,
+        -2.24,
+        0.13
+      ],
+      "origin_three": [
+        -2.9,
+        0.13,
+        2.24
+      ],
+      "triangles": 188,
+      "dimensions": [
+        0.09,
+        0.09,
+        0.22
+      ],
+      "min_z": 0.019999995827674866,
+      "max_z": 0.23999999463558197
+    },
+    {
+      "name": "S_Furn_BedFoot.001",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -2.9,
+        -0.56,
+        0.13
+      ],
+      "origin_three": [
+        -2.9,
+        0.13,
+        0.56
+      ],
+      "triangles": 188,
+      "dimensions": [
+        0.09,
+        0.09,
+        0.22
+      ],
+      "min_z": 0.019999995827674866,
+      "max_z": 0.23999999463558197
+    },
+    {
+      "name": "S_Furn_BedFoot.002",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -1.9,
+        -2.24,
+        0.13
+      ],
+      "origin_three": [
+        -1.9,
+        0.13,
+        2.24
+      ],
+      "triangles": 188,
+      "dimensions": [
+        0.09,
+        0.09,
+        0.22
+      ],
+      "min_z": 0.019999995827674866,
+      "max_z": 0.23999999463558197
+    },
+    {
+      "name": "S_Furn_BedFoot.003",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -1.9,
+        -0.56,
+        0.13
+      ],
+      "origin_three": [
+        -1.9,
+        0.13,
+        0.56
+      ],
+      "triangles": 188,
+      "dimensions": [
+        0.09,
+        0.09,
+        0.22
+      ],
+      "min_z": 0.019999995827674866,
+      "max_z": 0.23999999463558197
+    },
+    {
+      "name": "S_Furn_BedFrame",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -2.4,
+        -1.4,
+        0.255
+      ],
+      "origin_three": [
+        -2.4,
+        0.255,
+        1.4
+      ],
+      "triangles": 188,
+      "dimensions": [
+        1.2,
+        2.0,
+        0.19
+      ],
+      "min_z": 0.1599999964237213,
+      "max_z": 0.3499999940395355
+    },
+    {
+      "name": "S_Furn_ChairBack",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.813411,
+        1.463348,
+        0.83
+      ],
+      "origin_three": [
+        0.813411,
+        0.83,
+        -1.463348
+      ],
+      "triangles": 188,
+      "dimensions": [
+        0.537739,
+        0.201864,
+        0.29
+      ],
+      "min_z": 0.6850000023841858,
+      "max_z": 0.9749999642372131
+    },
+    {
+      "name": "S_Furn_ChairBackPost",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.607978,
+        1.418656,
+        0.68
+      ],
+      "origin_three": [
+        0.607978,
+        0.68,
+        -1.418656
+      ],
+      "triangles": 188,
+      "dimensions": [
+        0.05503,
+        0.05503,
+        0.43
+      ],
+      "min_z": 0.4650000035762787,
+      "max_z": 0.8949999809265137
+    },
+    {
+      "name": "S_Furn_ChairBackPost.001",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.013667,
+        1.527359,
+        0.68
+      ],
+      "origin_three": [
+        1.013667,
+        0.68,
+        -1.527359
+      ],
+      "triangles": 188,
+      "dimensions": [
+        0.05503,
+        0.05503,
+        0.43
+      ],
+      "min_z": 0.4650000035762787,
+      "max_z": 0.8949999809265137
+    },
+    {
+      "name": "S_Furn_ChairLeg",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.608579,
+        1.455051,
+        0.245
+      ],
+      "origin_three": [
+        0.608579,
+        0.245,
+        -1.455051
+      ],
+      "triangles": 188,
+      "dimensions": [
+        0.062189,
+        0.062188,
+        0.45
+      ],
+      "min_z": 0.02000001072883606,
+      "max_z": 0.4699999988079071
+    },
+    {
+      "name": "S_Furn_ChairLeg.001",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.505051,
+        1.841421,
+        0.245
+      ],
+      "origin_three": [
+        0.505051,
+        0.245,
+        -1.841421
+      ],
+      "triangles": 188,
+      "dimensions": [
+        0.062189,
+        0.062188,
+        0.45
+      ],
+      "min_z": 0.02000001072883606,
+      "max_z": 0.4699999988079071
+    },
+    {
+      "name": "S_Furn_ChairLeg.002",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.994949,
+        1.558579,
+        0.245
+      ],
+      "origin_three": [
+        0.994949,
+        0.245,
+        -1.558579
+      ],
+      "triangles": 188,
+      "dimensions": [
+        0.062188,
+        0.062188,
+        0.45
+      ],
+      "min_z": 0.02000001072883606,
+      "max_z": 0.4699999988079071
+    },
+    {
+      "name": "S_Furn_ChairLeg.003",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.891421,
+        1.944949,
+        0.245
+      ],
+      "origin_three": [
+        0.891421,
+        0.245,
+        -1.944949
+      ],
+      "triangles": 188,
+      "dimensions": [
+        0.062189,
+        0.062188,
+        0.45
+      ],
+      "min_z": 0.02000001072883606,
+      "max_z": 0.4699999988079071
+    },
+    {
+      "name": "S_Furn_ChairSeat",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.75,
+        1.7,
+        0.48
+      ],
+      "origin_three": [
+        0.75,
+        0.48,
+        -1.7
+      ],
+      "triangles": 188,
+      "dimensions": [
+        0.660678,
+        0.660678,
+        0.085
+      ],
+      "min_z": 0.4375,
+      "max_z": 0.5224999785423279
+    },
+    {
+      "name": "S_Furn_DeskApron",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.5,
+        2.78,
+        0.67
+      ],
+      "origin_three": [
+        0.5,
+        0.67,
+        -2.78
+      ],
+      "triangles": 188,
+      "dimensions": [
+        2.05,
+        0.06,
+        0.11
+      ],
+      "min_z": 0.6150000095367432,
+      "max_z": 0.7250000238418579
+    },
+    {
+      "name": "S_Furn_DeskLeg",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.49,
+        2.1,
+        0.37
+      ],
+      "origin_three": [
+        -0.49,
+        0.37,
+        -2.1
+      ],
+      "triangles": 188,
+      "dimensions": [
+        0.095,
+        0.095,
+        0.7
+      ],
+      "min_z": 0.02000001072883606,
+      "max_z": 0.7200000286102295
+    },
+    {
+      "name": "S_Furn_DeskLeg.001",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -0.49,
+        2.8,
+        0.37
+      ],
+      "origin_three": [
+        -0.49,
+        0.37,
+        -2.8
+      ],
+      "triangles": 188,
+      "dimensions": [
+        0.095,
+        0.095,
+        0.7
+      ],
+      "min_z": 0.02000001072883606,
+      "max_z": 0.7200000286102295
+    },
+    {
+      "name": "S_Furn_DeskLeg.002",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.49,
+        2.1,
+        0.37
+      ],
+      "origin_three": [
+        1.49,
+        0.37,
+        -2.1
+      ],
+      "triangles": 188,
+      "dimensions": [
+        0.095,
+        0.095,
+        0.7
+      ],
+      "min_z": 0.02000001072883606,
+      "max_z": 0.7200000286102295
+    },
+    {
+      "name": "S_Furn_DeskLeg.003",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.49,
+        2.8,
+        0.37
+      ],
+      "origin_three": [
+        1.49,
+        0.37,
+        -2.8
+      ],
+      "triangles": 188,
+      "dimensions": [
+        0.095,
+        0.095,
+        0.7
+      ],
+      "min_z": 0.02000001072883606,
+      "max_z": 0.7200000286102295
+    },
+    {
+      "name": "S_Furn_DeskTop",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.5,
+        2.45,
+        0.76
+      ],
+      "origin_three": [
+        0.5,
+        0.76,
+        -2.45
+      ],
+      "triangles": 188,
+      "dimensions": [
+        2.3,
+        0.92,
+        0.08
+      ],
+      "min_z": 0.7199999690055847,
+      "max_z": 0.800000011920929
+    },
+    {
+      "name": "S_Furn_Headboard",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -2.4,
+        -0.415,
+        0.49
+      ],
+      "origin_three": [
+        -2.4,
+        0.49,
+        0.415
+      ],
+      "triangles": 188,
+      "dimensions": [
+        1.2,
+        0.07,
+        0.8
+      ],
+      "min_z": 0.09000000357627869,
+      "max_z": 0.8899999856948853
+    },
+    {
+      "name": "S_Furn_Mattress",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -2.4,
+        -1.4,
+        0.405
+      ],
+      "origin_three": [
+        -2.4,
+        0.405,
+        1.4
+      ],
+      "triangles": 188,
+      "dimensions": [
+        1.15,
+        1.93,
+        0.2
+      ],
+      "min_z": 0.3050000071525574,
+      "max_z": 0.5049999952316284
+    },
+    {
+      "name": "S_Furn_Mug",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.48,
+        2.24,
+        0.875
+      ],
+      "origin_three": [
+        1.48,
+        0.875,
+        -2.24
+      ],
+      "triangles": 316,
+      "dimensions": [
+        0.12,
+        0.12,
+        0.15
+      ],
+      "min_z": 0.800000011920929,
+      "max_z": 0.949999988079071
+    },
+    {
+      "name": "S_Furn_MugHandle",
+      "type": "CURVE",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "origin_three": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "triangles": 296,
+      "dimensions": [
+        0.073914,
+        0.022,
+        0.086887
+      ],
+      "min_z": 0.8390565514564514,
+      "max_z": 0.9259434938430786
+    },
+    {
+      "name": "S_Furn_MugInner",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.48,
+        2.24,
+        0.953
+      ],
+      "origin_three": [
+        1.48,
+        0.953,
+        -2.24
+      ],
+      "triangles": 316,
+      "dimensions": [
+        0.09,
+        0.09,
+        0.003
+      ],
+      "min_z": 0.9514999985694885,
+      "max_z": 0.9545000195503235
+    },
+    {
+      "name": "S_Furn_Pen",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        1.455,
+        2.1,
+        0.811
+      ],
+      "origin_three": [
+        1.455,
+        0.811,
+        -2.1
+      ],
+      "triangles": 252,
+      "dimensions": [
+        0.21,
+        0.03444,
+        0.016
+      ],
+      "min_z": 0.8029999732971191,
+      "max_z": 0.8190000057220459
+    },
+    {
+      "name": "S_Furn_Pillow",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -2.4,
+        -0.77,
+        0.57
+      ],
+      "origin_three": [
+        -2.4,
+        0.57,
+        0.77
+      ],
+      "triangles": 188,
+      "dimensions": [
+        0.77,
+        0.37,
+        0.15
+      ],
+      "min_z": 0.4950000047683716,
+      "max_z": 0.6449999809265137
+    },
+    {
+      "name": "S_Furn_PlantCrown_0",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        2.42,
+        2.55,
+        0.85
+      ],
+      "origin_three": [
+        2.42,
+        0.85,
+        -2.55
+      ],
+      "triangles": 360,
+      "dimensions": [
+        0.5,
+        0.46,
+        0.52
+      ],
+      "min_z": 0.5900000333786011,
+      "max_z": 1.1100000143051147
+    },
+    {
+      "name": "S_Furn_PlantCrown_1",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        2.68,
+        2.59,
+        0.96
+      ],
+      "origin_three": [
+        2.68,
+        0.96,
+        -2.59
+      ],
+      "triangles": 360,
+      "dimensions": [
+        0.46,
+        0.4232,
+        0.4784
+      ],
+      "min_z": 0.72079998254776,
+      "max_z": 1.199199914932251
+    },
+    {
+      "name": "S_Furn_PlantCrown_2",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        2.55,
+        2.45,
+        1.12
+      ],
+      "origin_three": [
+        2.55,
+        1.12,
+        -2.45
+      ],
+      "triangles": 360,
+      "dimensions": [
+        0.5,
+        0.46,
+        0.52
+      ],
+      "min_z": 0.8600000143051147,
+      "max_z": 1.3799999952316284
+    },
+    {
+      "name": "S_Furn_PlantCrown_3",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        2.57,
+        2.65,
+        1.22
+      ],
+      "origin_three": [
+        2.57,
+        1.22,
+        -2.65
+      ],
+      "triangles": 360,
+      "dimensions": [
+        0.4,
+        0.368,
+        0.416
+      ],
+      "min_z": 1.0120000839233398,
+      "max_z": 1.4279999732971191
+    },
+    {
+      "name": "S_Furn_PlantPot",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        2.55,
+        2.55,
+        0.21
+      ],
+      "origin_three": [
+        2.55,
+        0.21,
+        -2.55
+      ],
+      "triangles": 316,
+      "dimensions": [
+        0.537504,
+        0.537504,
+        0.38
+      ],
+      "min_z": 0.019999995827674866,
+      "max_z": 0.3999999761581421
+    },
+    {
+      "name": "S_Furn_PlantSoil",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        2.55,
+        2.55,
+        0.402
+      ],
+      "origin_three": [
+        2.55,
+        0.402,
+        -2.55
+      ],
+      "triangles": 316,
+      "dimensions": [
+        0.47,
+        0.47,
+        0.012
+      ],
+      "min_z": 0.3959999978542328,
+      "max_z": 0.40800002217292786
+    },
+    {
+      "name": "S_Furn_PlantTrunk",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        2.55,
+        2.55,
+        0.645
+      ],
+      "origin_three": [
+        2.55,
+        0.645,
+        -2.55
+      ],
+      "triangles": 252,
+      "dimensions": [
+        0.09,
+        0.09,
+        0.49
+      ],
+      "min_z": 0.3999999761581421,
+      "max_z": 0.8899999856948853
+    },
+    {
+      "name": "S_Furn_Quilt",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -2.4,
+        -1.65,
+        0.535
+      ],
+      "origin_three": [
+        -2.4,
+        0.535,
+        1.65
+      ],
+      "triangles": 188,
+      "dimensions": [
+        1.17,
+        1.4,
+        0.12
+      ],
+      "min_z": 0.4750000238418579,
+      "max_z": 0.5950000286102295
+    },
+    {
+      "name": "S_Furn_QuiltFold",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -2.4,
+        -1.0,
+        0.6
+      ],
+      "origin_three": [
+        -2.4,
+        0.6,
+        1.0
+      ],
+      "triangles": 188,
+      "dimensions": [
+        1.16,
+        0.16,
+        0.07
+      ],
+      "min_z": 0.5649999976158142,
+      "max_z": 0.6350000500679016
+    },
+    {
+      "name": "S_Furn_Rug",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.5,
+        -0.7,
+        0.025
+      ],
+      "origin_three": [
+        0.5,
+        0.025,
+        0.7
+      ],
+      "triangles": 380,
+      "dimensions": [
+        2.8,
+        2.8,
+        0.01
+      ],
+      "min_z": 0.019999999552965164,
+      "max_z": 0.030000001192092896
+    },
+    {
+      "name": "S_Furn_RugInner",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.5,
+        -0.7,
+        0.0303
+      ],
+      "origin_three": [
+        0.5,
+        0.0303,
+        0.7
+      ],
+      "triangles": 380,
+      "dimensions": [
+        2.1,
+        2.1,
+        0.0006
+      ],
+      "min_z": 0.030000001192092896,
+      "max_z": 0.03060000017285347
+    },
+    {
+      "name": "S_Shell_Clock",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.85,
+        2.98,
+        2.55
+      ],
+      "origin_three": [
+        0.85,
+        2.55,
+        -2.98
+      ],
+      "triangles": 316,
+      "dimensions": [
+        0.4,
+        0.05,
+        0.4
+      ],
+      "min_z": 2.3499999046325684,
+      "max_z": 2.75
+    },
+    {
+      "name": "S_Shell_ClockHour",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.815,
+        2.948,
+        2.575
+      ],
+      "origin_three": [
+        0.815,
+        2.575,
+        -2.948
+      ],
+      "triangles": 252,
+      "dimensions": [
+        0.07514,
+        0.02,
+        0.059846
+      ],
+      "min_z": 2.545076608657837,
+      "max_z": 2.6049230098724365
+    },
+    {
+      "name": "S_Shell_ClockMinute",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.865,
+        2.944,
+        2.62
+      ],
+      "origin_three": [
+        0.865,
+        2.62,
+        -2.944
+      ],
+      "triangles": 252,
+      "dimensions": [
+        0.040812,
+        0.014,
+        0.14
+      ],
+      "min_z": 2.549999713897705,
+      "max_z": 2.690000057220459
+    },
+    {
+      "name": "S_Shell_ClockPin",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.85,
+        2.937,
+        2.55
+      ],
+      "origin_three": [
+        0.85,
+        2.55,
+        -2.937
+      ],
+      "triangles": 360,
+      "dimensions": [
+        0.034,
+        0.016,
+        0.034
+      ],
+      "min_z": 2.5329999923706055,
+      "max_z": 2.566999912261963
+    },
+    {
+      "name": "S_Shell_Floor",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.0,
+        0.0,
+        0.01
+      ],
+      "origin_three": [
+        0.0,
+        0.01,
+        -0.0
+      ],
+      "triangles": 384,
+      "dimensions": [
+        6.0,
+        6.0,
+        0.02
+      ],
+      "min_z": 0.0,
+      "max_z": 0.019999999552965164
+    },
+    {
+      "name": "S_Shell_FloorSeam_01",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.0,
+        -2.333333,
+        0.0205
+      ],
+      "origin_three": [
+        0.0,
+        0.0205,
+        2.333333
+      ],
+      "triangles": 188,
+      "dimensions": [
+        6.0,
+        0.009,
+        0.002
+      ],
+      "min_z": 0.019500000402331352,
+      "max_z": 0.0215000007301569
+    },
+    {
+      "name": "S_Shell_FloorSeam_02",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.0,
+        -1.666667,
+        0.0205
+      ],
+      "origin_three": [
+        0.0,
+        0.0205,
+        1.666667
+      ],
+      "triangles": 188,
+      "dimensions": [
+        6.0,
+        0.009,
+        0.002
+      ],
+      "min_z": 0.019500000402331352,
+      "max_z": 0.0215000007301569
+    },
+    {
+      "name": "S_Shell_FloorSeam_03",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.0,
+        -1.0,
+        0.0205
+      ],
+      "origin_three": [
+        0.0,
+        0.0205,
+        1.0
+      ],
+      "triangles": 188,
+      "dimensions": [
+        6.0,
+        0.009,
+        0.002
+      ],
+      "min_z": 0.019500000402331352,
+      "max_z": 0.0215000007301569
+    },
+    {
+      "name": "S_Shell_FloorSeam_04",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.0,
+        -0.333333,
+        0.0205
+      ],
+      "origin_three": [
+        0.0,
+        0.0205,
+        0.333333
+      ],
+      "triangles": 188,
+      "dimensions": [
+        6.0,
+        0.009,
+        0.002
+      ],
+      "min_z": 0.019500000402331352,
+      "max_z": 0.0215000007301569
+    },
+    {
+      "name": "S_Shell_FloorSeam_05",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.0,
+        0.333333,
+        0.0205
+      ],
+      "origin_three": [
+        0.0,
+        0.0205,
+        -0.333333
+      ],
+      "triangles": 188,
+      "dimensions": [
+        6.0,
+        0.009,
+        0.002
+      ],
+      "min_z": 0.019500000402331352,
+      "max_z": 0.0215000007301569
+    },
+    {
+      "name": "S_Shell_FloorSeam_06",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.0,
+        1.0,
+        0.0205
+      ],
+      "origin_three": [
+        0.0,
+        0.0205,
+        -1.0
+      ],
+      "triangles": 380,
+      "dimensions": [
+        6.0,
+        0.009,
+        0.002
+      ],
+      "min_z": 0.019500000402331352,
+      "max_z": 0.0215000007301569
+    },
+    {
+      "name": "S_Shell_FloorSeam_07",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.0,
+        1.666667,
+        0.0205
+      ],
+      "origin_three": [
+        0.0,
+        0.0205,
+        -1.666667
+      ],
+      "triangles": 376,
+      "dimensions": [
+        6.0,
+        0.009,
+        0.002
+      ],
+      "min_z": 0.019500000402331352,
+      "max_z": 0.0215000007301569
+    },
+    {
+      "name": "S_Shell_FloorSeam_08",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.0,
+        2.333333,
+        0.0205
+      ],
+      "origin_three": [
+        0.0,
+        0.0205,
+        -2.333333
+      ],
+      "triangles": 188,
+      "dimensions": [
+        6.0,
+        0.009,
+        0.002
+      ],
+      "min_z": 0.019500000402331352,
+      "max_z": 0.0215000007301569
+    },
+    {
+      "name": "S_Shell_LeftSkirting",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -2.984,
+        0.0,
+        0.06
+      ],
+      "origin_three": [
+        -2.984,
+        0.06,
+        -0.0
+      ],
+      "triangles": 188,
+      "dimensions": [
+        0.032,
+        6.0,
+        0.12
+      ],
+      "min_z": 0.0,
+      "max_z": 0.11999999731779099
+    },
+    {
+      "name": "S_Shell_LeftWall",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -3.1,
+        0.0,
+        1.6
+      ],
+      "origin_three": [
+        -3.1,
+        1.6,
+        -0.0
+      ],
+      "triangles": 188,
+      "dimensions": [
+        0.2,
+        6.4,
+        3.2
+      ],
+      "min_z": 0.0,
+      "max_z": 3.200000047683716
+    },
+    {
+      "name": "S_Shell_Plinth",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.0,
+        0.0,
+        -0.2
+      ],
+      "origin_three": [
+        0.0,
+        -0.2,
+        -0.0
+      ],
+      "triangles": 188,
+      "dimensions": [
+        6.4,
+        6.4,
+        0.4
+      ],
+      "min_z": -0.4000000059604645,
+      "max_z": 0.0
+    },
+    {
+      "name": "S_Shell_PosterFrame",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        2.1,
+        2.985,
+        1.95
+      ],
+      "origin_three": [
+        2.1,
+        1.95,
+        -2.985
+      ],
+      "triangles": 188,
+      "dimensions": [
+        0.76,
+        0.04,
+        0.96
+      ],
+      "min_z": 1.4700000286102295,
+      "max_z": 2.430000066757202
+    },
+    {
+      "name": "S_Shell_PosterLine",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        2.1,
+        2.948,
+        1.8
+      ],
+      "origin_three": [
+        2.1,
+        1.8,
+        -2.948
+      ],
+      "triangles": 188,
+      "dimensions": [
+        0.39,
+        0.008,
+        0.027
+      ],
+      "min_z": 1.7864999771118164,
+      "max_z": 1.813499927520752
+    },
+    {
+      "name": "S_Shell_PosterLine.001",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        2.1,
+        2.948,
+        1.7
+      ],
+      "origin_three": [
+        2.1,
+        1.7,
+        -2.948
+      ],
+      "triangles": 188,
+      "dimensions": [
+        0.27,
+        0.008,
+        0.027
+      ],
+      "min_z": 1.686500072479248,
+      "max_z": 1.7135000228881836
+    },
+    {
+      "name": "S_Shell_PosterPaper",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        2.1,
+        2.959,
+        1.95
+      ],
+      "origin_three": [
+        2.1,
+        1.95,
+        -2.959
+      ],
+      "triangles": 188,
+      "dimensions": [
+        0.72,
+        0.009,
+        0.92
+      ],
+      "min_z": 1.4900000095367432,
+      "max_z": 2.4100000858306885
+    },
+    {
+      "name": "S_Shell_PosterSun",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        2.1,
+        2.95,
+        2.1
+      ],
+      "origin_three": [
+        2.1,
+        2.1,
+        -2.95
+      ],
+      "triangles": 316,
+      "dimensions": [
+        0.34,
+        0.008,
+        0.34
+      ],
+      "min_z": 1.9299999475479126,
+      "max_z": 2.2699999809265137
+    },
+    {
+      "name": "S_Shell_RearSkirting",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.0,
+        2.984,
+        0.06
+      ],
+      "origin_three": [
+        0.0,
+        0.06,
+        -2.984
+      ],
+      "triangles": 188,
+      "dimensions": [
+        6.0,
+        0.032,
+        0.12
+      ],
+      "min_z": 0.0,
+      "max_z": 0.11999999731779099
+    },
+    {
+      "name": "S_Shell_RearWall",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        0.0,
+        3.1,
+        1.6
+      ],
+      "origin_three": [
+        0.0,
+        1.6,
+        -3.1
+      ],
+      "triangles": 384,
+      "dimensions": [
+        6.4,
+        0.2,
+        3.2
+      ],
+      "min_z": 0.0,
+      "max_z": 3.200000047683716
+    },
+    {
+      "name": "S_Shell_WindowCrossHorizontal",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -1.75,
+        2.957,
+        1.9
+      ],
+      "origin_three": [
+        -1.75,
+        1.9,
+        -2.957
+      ],
+      "triangles": 188,
+      "dimensions": [
+        1.22,
+        0.055,
+        0.04
+      ],
+      "min_z": 1.8799999952316284,
+      "max_z": 1.9199999570846558
+    },
+    {
+      "name": "S_Shell_WindowCrossVertical",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -1.75,
+        2.958,
+        1.9
+      ],
+      "origin_three": [
+        -1.75,
+        1.9,
+        -2.958
+      ],
+      "triangles": 188,
+      "dimensions": [
+        0.04,
+        0.055,
+        1.02
+      ],
+      "min_z": 1.3899999856948853,
+      "max_z": 2.4099998474121094
+    },
+    {
+      "name": "S_Shell_WindowGlass",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -1.75,
+        3.075,
+        1.9
+      ],
+      "origin_three": [
+        -1.75,
+        1.9,
+        -3.075
+      ],
+      "triangles": 188,
+      "dimensions": [
+        1.23,
+        0.025,
+        1.03
+      ],
+      "min_z": 1.3849999904632568,
+      "max_z": 2.4149999618530273
+    },
+    {
+      "name": "S_Shell_WindowRail",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -1.75,
+        2.975,
+        1.39
+      ],
+      "origin_three": [
+        -1.75,
+        1.39,
+        -2.975
+      ],
+      "triangles": 188,
+      "dimensions": [
+        1.3,
+        0.09,
+        0.08
+      ],
+      "min_z": 1.350000023841858,
+      "max_z": 1.4299999475479126
+    },
+    {
+      "name": "S_Shell_WindowRail.001",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -1.75,
+        2.975,
+        2.41
+      ],
+      "origin_three": [
+        -1.75,
+        2.41,
+        -2.975
+      ],
+      "triangles": 188,
+      "dimensions": [
+        1.3,
+        0.09,
+        0.08
+      ],
+      "min_z": 2.370000123977661,
+      "max_z": 2.450000047683716
+    },
+    {
+      "name": "S_Shell_WindowSill",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -1.75,
+        2.9,
+        1.325
+      ],
+      "origin_three": [
+        -1.75,
+        1.325,
+        -2.9
+      ],
+      "triangles": 188,
+      "dimensions": [
+        1.46,
+        0.32,
+        0.075
+      ],
+      "min_z": 1.287500023841858,
+      "max_z": 1.3625000715255737
+    },
+    {
+      "name": "S_Shell_WindowStile",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -2.36,
+        2.975,
+        1.9
+      ],
+      "origin_three": [
+        -2.36,
+        1.9,
+        -2.975
+      ],
+      "triangles": 188,
+      "dimensions": [
+        0.08,
+        0.09,
+        1.1
+      ],
+      "min_z": 1.3499999046325684,
+      "max_z": 2.450000047683716
+    },
+    {
+      "name": "S_Shell_WindowStile.001",
+      "type": "MESH",
+      "collection": [
+        "Static"
+      ],
+      "parent": null,
+      "origin_blender": [
+        -1.14,
+        2.975,
+        1.9
+      ],
+      "origin_three": [
+        -1.14,
+        1.9,
+        -2.975
+      ],
+      "triangles": 188,
+      "dimensions": [
+        0.08,
+        0.09,
+        1.1
+      ],
+      "min_z": 1.3499999046325684,
+      "max_z": 2.450000047683716
+    }
+  ],
+  "checks": [
+    {
+      "check": "exact interactive and marker names",
+      "passed": true
+    },
+    {
+      "check": "static remains unmerged before approval",
+      "passed": true
+    },
+    {
+      "check": "Diary belongs to Interactive",
+      "passed": true
+    },
+    {
+      "check": "Diary applied scale",
+      "passed": true
+    },
+    {
+      "check": "Diary pivot at bottom height",
+      "passed": true
+    },
+    {
+      "check": "Computer belongs to Interactive",
+      "passed": true
+    },
+    {
+      "check": "Computer applied scale",
+      "passed": true
+    },
+    {
+      "check": "Computer pivot at bottom height",
+      "passed": true
+    },
+    {
+      "check": "Computer_Screen belongs to Interactive",
+      "passed": true
+    },
+    {
+      "check": "Computer_Screen applied scale",
+      "passed": true
+    },
+    {
+      "check": "Lamp belongs to Interactive",
+      "passed": true
+    },
+    {
+      "check": "Lamp applied scale",
+      "passed": true
+    },
+    {
+      "check": "Lamp pivot at bottom height",
+      "passed": true
+    },
+    {
+      "check": "Lamp_Shade belongs to Interactive",
+      "passed": true
+    },
+    {
+      "check": "Lamp_Shade applied scale",
+      "passed": true
+    },
+    {
+      "check": "Lamp_Shade pivot at bottom height",
+      "passed": true
+    },
+    {
+      "check": "Lamp_Light belongs to Interactive",
+      "passed": true
+    },
+    {
+      "check": "Lamp_Light applied scale",
+      "passed": true
+    },
+    {
+      "check": "Cat belongs to Interactive",
+      "passed": true
+    },
+    {
+      "check": "Cat applied scale",
+      "passed": true
+    },
+    {
+      "check": "Cat pivot at bottom height",
+      "passed": true
+    },
+    {
+      "check": "Bookshelf belongs to Interactive",
+      "passed": true
+    },
+    {
+      "check": "Bookshelf applied scale",
+      "passed": true
+    },
+    {
+      "check": "Bookshelf pivot at bottom height",
+      "passed": true
+    },
+    {
+      "check": "Frame_1 belongs to Interactive",
+      "passed": true
+    },
+    {
+      "check": "Frame_1 applied scale",
+      "passed": true
+    },
+    {
+      "check": "Frame_1 pivot at bottom height",
+      "passed": true
+    },
+    {
+      "check": "Frame_2 belongs to Interactive",
+      "passed": true
+    },
+    {
+      "check": "Frame_2 applied scale",
+      "passed": true
+    },
+    {
+      "check": "Frame_2 pivot at bottom height",
+      "passed": true
+    },
+    {
+      "check": "Diary exact world origin",
+      "passed": true
+    },
+    {
+      "check": "Computer exact world origin",
+      "passed": true
+    },
+    {
+      "check": "Lamp exact world origin",
+      "passed": true
+    },
+    {
+      "check": "Cat exact world origin",
+      "passed": true
+    },
+    {
+      "check": "Bookshelf exact world origin",
+      "passed": true
+    },
+    {
+      "check": "screen dimensions 0.94 x 0.56",
+      "passed": true
+    },
+    {
+      "check": "screen world centre",
+      "passed": true
+    },
+    {
+      "check": "screen normal -Y",
+      "passed": true
+    },
+    {
+      "check": "Computer_Screen parent Computer",
+      "passed": true
+    },
+    {
+      "check": "Lamp_Shade parent Lamp",
+      "passed": true
+    },
+    {
+      "check": "Lamp_Light parent Lamp",
+      "passed": true
+    },
+    {
+      "check": "desktop top 0.80",
+      "passed": true
+    },
+    {
+      "check": "concealed floor recess below zero-origin shelf",
+      "passed": true
+    },
+    {
+      "check": "Diary rests at desktop height",
+      "passed": true
+    },
+    {
+      "check": "Computer rests at desktop height",
+      "passed": true
+    },
+    {
+      "check": "Lamp rests at desktop height",
+      "passed": true
+    },
+    {
+      "check": "window and poster face inward",
+      "passed": true
+    },
+    {
+      "check": "no image texture nodes",
+      "passed": true
+    },
+    {
+      "check": "material roughness and metallic",
+      "passed": true
+    },
+    {
+      "check": "triangle budget <= 60000",
+      "passed": true
+    },
+    {
+      "check": "complete preview framing",
+      "passed": true
+    },
+    {
+      "check": "no duplicate contract nodes",
+      "passed": true
+    }
+  ],
+  "notes": [
+    "Computer_Screen origin is its specified centre; Lamp_Light is an Empty.",
+    "Frame_1/Frame_2 origins are bottom centres below their specified artwork centres.",
+    "PreviewCam uses 40mm to prevent cropping at the exact requested camera position.",
+    "A concealed floor recess beneath Bookshelf preserves its exact Z=0 pivot without intersection with the 0.02m floor layer.",
+    "Room_Static, UVs, baked textures and room.glb are intentionally pending approval."
+  ]
+}
