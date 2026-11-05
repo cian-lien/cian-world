@@ -4,6 +4,7 @@ import { Loader } from '@react-three/drei'
 import { AgXToneMapping, DoubleSide, Object3D, Path, Shape } from 'three'
 import { Room } from './Room'
 import { CameraRig } from './CameraRig'
+import { bakeReference, bakeTrial, hybridTrial } from './bakeTrial'
 import { INTRO_POSITION, type RoomMode } from './layout'
 
 export function Experience({ mode }: { mode: RoomMode }) {
@@ -12,18 +13,22 @@ export function Experience({ mode }: { mode: RoomMode }) {
   return (
     <>
       <Canvas
-        shadows
-        gl={{ toneMapping: AgXToneMapping }}
+        shadows={!bakeTrial}
+        gl={{ toneMapping: AgXToneMapping, preserveDrawingBuffer: hybridTrial && bakeReference }}
         dpr={[1, 2]}
         camera={{ position: INTRO_POSITION, fov: 35, near: 0.1, far: 100 }}
         className="canvas"
       >
-        <color attach="background" args={[isDay ? '#efddc8' : '#242635']} />
-        {isDay ? <DayLights /> : <NightLights />}
+        {!bakeTrial && !hybridTrial && (
+          <>
+            <color attach="background" args={[isDay ? '#efddc8' : '#242635']} />
+            {isDay ? <DayLights /> : <NightLights />}
+          </>
+        )}
         <Suspense fallback={null}>
           <Room mode={mode} />
         </Suspense>
-        <CameraRig />
+        {!bakeReference && <CameraRig />}
       </Canvas>
       <Loader />
     </>

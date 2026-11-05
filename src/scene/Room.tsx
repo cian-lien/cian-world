@@ -1,12 +1,16 @@
 import * as THREE from 'three'
-import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+import { lazy, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { ContactShadows, Html, useGLTF } from '@react-three/drei'
 import { navigate } from '../route'
 import { playRoomSound } from '../sound'
 import { Interactive } from './Interactive'
 import { ComputerScreen } from './ComputerScreen'
+import { BakedTrialLayers } from './BakedTrialLayers'
+import { bakeReference, bakeTrial, bakeTrialUrl, hybridTrial, hybridTrialUrl } from './bakeTrial'
 import type { RoomMode, V3 } from './layout'
+
+const HybridTrialLayers = lazy(() => import('./HybridTrialLayers'))
 
 const NIGHT_ACCENTS: Record<string, { color?: string; emissive: string; intensity: number }> = {
   RBN_Glass: { color: '#172745', emissive: '#304775', intensity: 0.44 },
@@ -27,8 +31,11 @@ function takeInteractive(scene: THREE.Group, name: string) {
 }
 
 export function Room({ mode }: { mode: RoomMode }) {
-  const { scene } = useGLTF(`${import.meta.env.BASE_URL}models/room-day-warm.glb`, false)
-  const { model, diary, computer, lamp, cat } = useMemo(() => {
+  const modelUrl = hybridTrial ? `${hybridTrialUrl}room.glb`
+    : bakeTrial ? `${bakeTrialUrl}room.glb`
+      : `${import.meta.env.BASE_URL}models/room-day-warm.glb`
+  const { scene } = useGLTF(modelUrl, false)
+  const { model, diary, computer, lamp, cat, lampPosition } = useMemo(() => {
     const model = scene.clone(true)
     model.updateMatrixWorld(true)
     model.traverse((object) => {
@@ -40,6 +47,7 @@ export function Room({ mode }: { mode: RoomMode }) {
 
     return {
       model,
+      lampPosition: model.getObjectByName('Lamp_Light')?.getWorldPosition(new THREE.Vector3()).toArray(),
       diary: takeInteractive(model, 'Diary'),
       computer: takeInteractive(model, 'Computer'),
       lamp: takeInteractive(model, 'Lamp'),
@@ -48,7 +56,7 @@ export function Room({ mode }: { mode: RoomMode }) {
   }, [scene])
 
   useLayoutEffect(() => {
-    if (mode !== 'night') return
+    if (bakeTrial || hybridTrial || mode !== 'night') return
 
     const originals = new Map<THREE.Mesh, THREE.MeshStandardMaterial>()
     const accents = new Map<THREE.MeshStandardMaterial, THREE.MeshStandardMaterial>()
@@ -77,12 +85,18 @@ export function Room({ mode }: { mode: RoomMode }) {
   }, [mode, model])
 
   const [lampOverride, setLampOverride] = useState<boolean>()
-  const lampOn = lampOverride ?? mode === 'night'
+  const referenceLamp = new URLSearchParams(window.location.search).get('lamp')
+  const lampOn = lampOverride ?? (bakeReference ? referenceLamp === 'on' : mode === 'night')
+  const bakedRoots = useMemo(() => [model, diary.object, computer.object, lamp.object, cat.object],
+    [model, diary, computer, lamp, cat])
 
   return (
     <>
       <primitive object={model} />
-      <ContactShadows
+      {hybridTrial && <HybridTrialLayers roots={bakedRoots} mode={mode} lampOn={lampOn}
+        lampPosition={lampPosition ?? lamp.position} />}
+      {bakeTrial && <BakedTrialLayers roots={bakedRoots} mode={mode} lampOn={lampOn} />}
+      {!bakeTrial && !hybridTrial && <ContactShadows
         position={[0, 0.004, 0]}
         width={4.8}
         height={4.4}
@@ -92,7 +106,7 @@ export function Room({ mode }: { mode: RoomMode }) {
         color="#281b16"
         resolution={256}
         frames={1}
-      />
+      />}
       <Interactive label="📔 日记本 · 看看我的博客" labelHeight={0.35} position={diary.position} onSelect={() => {
         playRoomSound('diary')
         navigate('/diary')
@@ -104,19 +118,19 @@ export function Room({ mode }: { mode: RoomMode }) {
         navigate('/computer')
       }}>
         <primitive object={computer.object} />
-        <ComputerScreen />
+        {!bakeReference && <ComputerScreen />}
       </Interactive>
       <Interactive label={lampOn ? '💡 关灯' : '💡 开灯'} labelHeight={0.65} position={lamp.position} onSelect={() => {
         playRoomSound('lamp')
         setLampOverride(!lampOn)
       }}>
         <primitive object={lamp.object} />
-        <pointLight
+        {!bakeTrial && !hybridTrial && <pointLight
           position={lamp.object.getObjectByName('Lamp_Light')?.position}
           color="#ffbd77"
           intensity={lampOn ? 3 : 0}
           distance={2.5}
-        />
+        />}
       </Interactive>
       <Cat position={cat.position}>
         <primitive object={cat.object} />
