@@ -22,6 +22,7 @@ const io = new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies(
   'meshopt.decoder': MeshoptDecoder,
 })
 const [doc, baked] = await Promise.all([io.read(source), io.read(shell)])
+const manifest = JSON.parse(await readFile(pathJoin(dirname(shell), 'manifest.json'), 'utf8'))
 const root = doc.getRoot()
 const scene = root.listScenes()[0]
 const shellPrefixes = ['V2_Room_Plinth', 'V2_Room_RearWall', 'V2_Room_LeftWall',
@@ -168,8 +169,13 @@ if (!shellMesh.listPrimitives().every(p => p.getAttribute('TEXCOORD_1'))) {
 const [buffer, ...extraBuffers] = root.listBuffers()
 for (const accessor of root.listAccessors()) accessor.setBuffer(buffer)
 for (const extra of extraBuffers) extra.dispose()
+if (manifest.resolution === 2048) {
+  // Keep the original floor UV and resolution while fitting the larger light map into the startup budget.
+  const floor = root.listTextures().find(texture => texture.getName() === 'Floor_BaseColor')
+  if (!floor) throw new Error('Missing original floor texture')
+  floor.setImage(await sharp(floor.getImage()).webp({ nearLossless: true, quality: 95, effort: 6 }).toBuffer())
+}
 await io.write(output, doc)
-const manifest = JSON.parse(await readFile(pathJoin(dirname(shell), 'manifest.json'), 'utf8'))
 manifest.maps = {}
 for (const layer of ['day', 'night', 'lamp']) {
   const png = `light-${layer}.png`

@@ -1,4 +1,4 @@
-"""Shell-only trial bake using the current room GLB and the Blender light rigs."""
+"""Shell-only bake using the current room GLB and the Blender light rigs."""
 import argparse
 import json
 import math
@@ -29,6 +29,7 @@ def args():
     parser.add_argument('--res', type=int, default=1024)
     parser.add_argument('--samples', type=int, default=2048)
     parser.add_argument('--scale', type=float, default=6)
+    parser.add_argument('--hdr', action='store_true', help='Preserve highlights using a reversible shoulder')
     parser.add_argument('--device', choices=('metal', 'cpu'), default='metal')
     return parser.parse_args(sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else [])
 
@@ -165,13 +166,15 @@ def color_metadata(linear, pixels, scale):
     return result
 
 
-def set_reference_emitters(emitters, night):
+def set_reference_emitters(emitters, night, lamp_on):
     colors = {'RBN_FairyBulb': (.95,.69,.36,1), 'RBN_LEDStrip': (.63,.28,.82,1),
               'RBN_ScreenGradient': (.35,.42,.85,1), 'RBN_LaptopWallpaper': (.54,.31,.28,1)}
     for strength, material, obj in emitters:
         level = EMISSION.get(material.name, (0, 0))[int(night)]
         if obj.startswith('Lamp_Shade'):
-            level = 0
+            level = 1.1 if lamp_on else 0
+        for link in list(strength.links):
+            material.node_tree.links.remove(link)
         if not level:
             strength.default_value = 0
             continue
@@ -233,13 +236,18 @@ def main():
     dark = bpy.data.worlds.new('Lamp only')
     dark.use_nodes = True
     next(n for n in dark.node_tree.nodes if n.type == 'BACKGROUND').inputs['Strength'].default_value = 0
+    for obj in scene.objects:
+        if obj.type == 'MESH' and obj.name.startswith('Lamp_Shade'):
+            for slot in obj.material_slots:
+                if slot.material:
+                    slot.material = slot.material.copy()
     emitters = no_emission_and_ref_states(scene)
 
-    def state(label):
+    def state(label, lamp_on=False):
         scene.world = {'day': day.world, 'night': night.world, 'lamp': dark}[label]
         for name, lights in [('day', day_lights), ('night', night_lights), ('lamp', [desk])]:
             for light in lights:
-                light.hide_render = name != label
+                light.hide_render = name != label and not (name == 'lamp' and lamp_on)
         bpy.context.view_layer.update()
 
     capture = bpy.data.scenes.new('Shell OIDN')
@@ -257,6 +265,10 @@ def main():
     normal[normal[:, :, 3] == 0, :3] = 0
     manifest = {'version': 1, 'scale': config.scale, 'resolution': config.res, 'samples': config.samples,
                 'probes': {}, 'clipped': {}, 'exposure': {'day': day.view_settings.exposure, 'night': night.view_settings.exposure}}
+    knee = .55 if config.hdr else None
+    if knee is not None:
+        manifest['highlightKnee'] = knee
+        manifest['version'] = 2
     for label in ('day', 'night', 'lamp'):
         state(label)
         noisy = bake(scene, shell, 'light-' + label, 'DIFFUSE', {'DIRECT', 'INDIRECT'}, config.res, config.samples)
@@ -264,10 +276,12 @@ def main():
         linear = np.flipud(np.maximum(result[:, :, :3], 0)).copy()
         assert np.isfinite(linear).all() and linear.max() > .05, label
         name = 'light-' + label + '.png'
-        pixels = encode_srgb(linear, config.scale)
+        encoded = linear if knee is None else np.minimum(linear, knee) + np.log1p(np.maximum(linear - knee, 0))
+        pixels = encode_srgb(encoded, config.scale)
         write_png(output/name, pixels)
-        manifest['probes'][name] = color_metadata(linear, pixels, config.scale)
-        manifest['clipped'][name] = int(np.count_nonzero(linear.max(axis=2) > config.scale))
+        linear_limit = config.scale if knee is None else knee + math.expm1(config.scale - knee)
+        manifest['probes'][name] = color_metadata(linear, pixels, linear_limit)
+        manifest['clipped'][name] = int(np.count_nonzero(encoded.max(axis=2) > config.scale))
         print(label, 'peak', float(linear.max()), 'clipped', manifest['clipped'][name], flush=True)
 
     frame = camera.data.view_frame(scene=day)
@@ -291,13 +305,13 @@ def main():
     scene.cycles.use_denoising = True
     glass = bpy.data.materials.get('RBN_Glass')
     glass_color = next(n for n in glass.node_tree.nodes if n.type == 'BSDF_PRINCIPLED').inputs['Base Color']
-    for label in ('day','night'):
-        state(label)
-        set_reference_emitters(emitters, label == 'night')
+    for label, lamp_on in [('day', False), ('night', False), ('night', True)]:
+        state(label, lamp_on)
+        set_reference_emitters(emitters, label == 'night', lamp_on)
         if label == 'night':
             glass_color.default_value = (*srgb_linear(.09, .15, .27), 1)
         scene.view_settings.exposure = manifest['exposure'][label]
-        scene.render.filepath = str(output/('blender-' + label + '.png'))
+        scene.render.filepath = str(output / f"blender-{label}{'-lamp' if lamp_on else ''}.png")
         assert bpy.ops.render.render(write_still=True, scene=scene.name) == {'FINISHED'}
 
 
