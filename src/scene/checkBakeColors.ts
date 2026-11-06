@@ -4,6 +4,7 @@ type RGB = [number, number, number]
 type Probe = { x: number; y: number; linear: RGB; encoded: RGB }
 type ColorManifest = {
   scale: number
+  highlightKnee?: number
   resolution: number | { light: number }
   probes: Record<string, Probe[]>
 }
@@ -19,7 +20,9 @@ export async function checkBakeColors(url = bakeTrialUrl) {
 
   const decode = (byte: number) => {
     const srgb = byte / 255
-    return manifest.scale * (srgb <= 0.04045 ? srgb / 12.92 : ((srgb + 0.055) / 1.055) ** 2.4)
+    const encoded = manifest.scale * (srgb <= 0.04045 ? srgb / 12.92 : ((srgb + 0.055) / 1.055) ** 2.4)
+    const knee = manifest.highlightKnee
+    return knee === undefined || encoded <= knee ? encoded : knee + Math.expm1(encoded - knee)
   }
 
   const samples = []

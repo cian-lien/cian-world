@@ -7,7 +7,7 @@ import { playRoomSound } from '../sound'
 import { Interactive } from './Interactive'
 import { ComputerScreen } from './ComputerScreen'
 import { BakedTrialLayers } from './BakedTrialLayers'
-import { bakeReference, bakeTrial, bakeTrialUrl, hybridTrial, hybridTrialUrl } from './bakeTrial'
+import { bakeReference, bakeTrial, bakeTrialUrl, hybridRoom, hybridRoomUrl } from './bakeTrial'
 import type { RoomMode, V3 } from './layout'
 
 const HybridTrialLayers = lazy(() => import('./HybridTrialLayers'))
@@ -31,7 +31,7 @@ function takeInteractive(scene: THREE.Group, name: string) {
 }
 
 export function Room({ mode }: { mode: RoomMode }) {
-  const modelUrl = hybridTrial ? `${hybridTrialUrl}room.glb`
+  const modelUrl = hybridRoom ? `${hybridRoomUrl}room.glb`
     : bakeTrial ? `${bakeTrialUrl}room.glb`
       : `${import.meta.env.BASE_URL}models/room-day-warm.glb`
   const { scene } = useGLTF(modelUrl, false)
@@ -56,7 +56,7 @@ export function Room({ mode }: { mode: RoomMode }) {
   }, [scene])
 
   useLayoutEffect(() => {
-    if (bakeTrial || hybridTrial || mode !== 'night') return
+    if (bakeTrial || hybridRoom || mode !== 'night') return
 
     const originals = new Map<THREE.Mesh, THREE.MeshStandardMaterial>()
     const accents = new Map<THREE.MeshStandardMaterial, THREE.MeshStandardMaterial>()
@@ -93,10 +93,10 @@ export function Room({ mode }: { mode: RoomMode }) {
   return (
     <>
       <primitive object={model} />
-      {hybridTrial && <HybridTrialLayers roots={bakedRoots} mode={mode} lampOn={lampOn}
+      {hybridRoom && <HybridTrialLayers roots={bakedRoots} mode={mode} lampOn={lampOn}
         lampPosition={lampPosition ?? lamp.position} />}
       {bakeTrial && <BakedTrialLayers roots={bakedRoots} mode={mode} lampOn={lampOn} />}
-      {!bakeTrial && !hybridTrial && <ContactShadows
+      {!bakeTrial && !hybridRoom && <ContactShadows
         position={[0, 0.004, 0]}
         width={4.8}
         height={4.4}
@@ -125,7 +125,7 @@ export function Room({ mode }: { mode: RoomMode }) {
         setLampOverride(!lampOn)
       }}>
         <primitive object={lamp.object} />
-        {!bakeTrial && !hybridTrial && <pointLight
+        {!bakeTrial && !hybridRoom && <pointLight
           position={lamp.object.getObjectByName('Lamp_Light')?.position}
           color="#ffbd77"
           intensity={lampOn ? 3 : 0}

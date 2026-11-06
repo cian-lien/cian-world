@@ -9,7 +9,7 @@ import {
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js'
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js'
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js'
-import { bakeReference, hybridTrialUrl } from './bakeTrial'
+import { bakeReference, hybridProduction, hybridRoomUrl } from './bakeTrial'
 import { bakedAccentMaterial } from './bakedMaterial'
 import type { RoomMode, V3 } from './layout'
 
@@ -18,10 +18,12 @@ type LightLayer = RoomMode | 'lamp'
 type Manifest = {
   maps: Record<LightLayer, string>
   scale: number
+  highlightKnee?: number
   exposure: Record<RoomMode, number>
   camera: { position: V3; target: V3; fov: number; offset: [number, number]; resolution: [number, number] }
 }
 
+const NIGHT_DIFFUSE = { shelf: 0.73, rug: 0.83 }
 const LIGHT_LAYERS: LightLayer[] = ['day', 'night', 'lamp']
 const ACCENTS = {
   fairy: ['#ab9f89', '#fff0b2'],
@@ -77,19 +79,21 @@ export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition }:
   lampOn: boolean
   lampPosition: V3
 }) {
-  const manifestText = useLoader(FileLoader, `${hybridTrialUrl}manifest.json`)
+  const manifestText = useLoader(FileLoader, `${hybridRoomUrl}manifest.json`)
   const manifest = useMemo(() => JSON.parse(manifestText as string) as Manifest, [manifestText])
   const initialMode = useRef(mode).current
-  const initialTexture = useLoader(TextureLoader, hybridTrialUrl + manifest.maps[initialMode])
+  const initialTexture = useLoader(TextureLoader, hybridRoomUrl + manifest.maps[initialMode])
   const available = useRef<Partial<Record<LightLayer, Texture>>>({})
   const { gl, scene, camera, size, viewport } = useThree()
   const blend = useRef({ night: Number(initialMode === 'night'), lamp: 0 })
   const uniforms = useMemo(() => ({
     lightDay: { value: initialTexture }, lightNight: { value: initialTexture }, lightLamp: { value: initialTexture },
     uNight: { value: 0 }, uLamp: { value: 0 }, uScale: { value: manifest.scale },
+    uHighlightKnee: { value: manifest.highlightKnee ?? -1 },
   }), [initialTexture, manifest])
   const background = useMemo(() => new Color(), [])
   const composer = useRef<EffectComposer>()
+  const nightTints = useRef<{ material: MeshStandardMaterial; base: Color; factor: number }[]>([])
   const hemisphere = useRef<HemisphereLight>(null)
   const key = useRef<DirectionalLight>(null)
   const windowLight = useRef<SpotLight>(null)
@@ -114,7 +118,7 @@ export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition }:
     const preload = () => {
       for (const layer of LIGHT_LAYERS) {
         if (loaded[layer]) continue
-        loader.load(hybridTrialUrl + manifest.maps[layer], texture => {
+        loader.load(hybridRoomUrl + manifest.maps[layer], texture => {
           if (!active) {
             texture.dispose()
             return
@@ -142,6 +146,13 @@ export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition }:
   useLayoutEffect(() => {
     const accent = bakedAccentMaterial(false)
     const replacements = new Map<MeshStandardMaterial, MeshBasicMaterial>()
+    const tints = { shelf: new Map<MeshStandardMaterial, MeshStandardMaterial>(), rug: new Map<MeshStandardMaterial, MeshStandardMaterial>() }
+    const bookshelfMeshes = new Set<Object3D>()
+    if (hybridProduction) {
+      for (const root of roots) {
+        root.getObjectByName('Bookshelf')?.traverse(object => bookshelfMeshes.add(object))
+      }
+    }
     const restore: (() => void)[] = []
     const black = new Color(0)
     for (const root of roots) root.traverse(object => {
@@ -167,10 +178,17 @@ export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition }:
               .replace('#include <common>', `#include <common>
                 varying vec2 vBakeUv;
                 uniform sampler2D lightDay, lightNight, lightLamp;
-                uniform float uNight, uLamp, uScale;`)
+                uniform float uNight, uLamp, uScale, uHighlightKnee;
+                vec3 decodeLight(vec3 value) {
+                  vec3 encoded = value * uScale;
+                  if (uHighlightKnee < 0.0) return encoded;
+                  return min(encoded, vec3(uHighlightKnee)) + exp(max(encoded - uHighlightKnee, 0.0)) - 1.0;
+                }`)
               .replace('#include <map_fragment>', `#include <map_fragment>
-                vec3 baseLight = mix(texture2D(lightDay, vBakeUv).rgb, texture2D(lightNight, vBakeUv).rgb, uNight);
-                diffuseColor.rgb *= uScale * (baseLight + texture2D(lightLamp, vBakeUv).rgb * uLamp);`)
+                vec3 dayLight = decodeLight(texture2D(lightDay, vBakeUv).rgb);
+                vec3 nightLight = decodeLight(texture2D(lightNight, vBakeUv).rgb);
+                vec3 lampLight = decodeLight(texture2D(lightLamp, vBakeUv).rgb);
+                diffuseColor.rgb *= mix(dayLight, nightLight, uNight) + lampLight * uLamp;`)
           }
           replacements.set(original, material)
         }
@@ -190,6 +208,17 @@ export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition }:
           uniforms.uLamp.value = blend.current.lamp
           accent.uniformsNeedUpdate = true
         }
+      } else if (hybridProduction && original instanceof MeshStandardMaterial) {
+        const kind = bookshelfMeshes.has(object) ? 'shelf' : original.name === 'RBN_DetailedRug' ? 'rug' : undefined
+        if (kind) {
+          let material = tints[kind].get(original)
+          if (!material) {
+            material = original.clone()
+            tints[kind].set(original, material)
+            nightTints.current.push({ material, base: original.color, factor: NIGHT_DIFFUSE[kind] })
+          }
+          object.material = material
+        }
       }
       const replacement = object.material
       restore.push(() => {
@@ -204,6 +233,8 @@ export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition }:
     })
     return () => {
       restore.forEach(reset => reset())
+      nightTints.current.forEach(({ material }) => material.dispose())
+      nightTints.current = []
       replacements.forEach(material => material.dispose())
       accent.dispose()
     }
@@ -274,6 +305,7 @@ export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition }:
     uniforms.lightLamp.value = layers.lamp ?? initialTexture
     const { night, lamp } = state
     const lerp = (day: number, dusk: number) => day + (dusk - day) * night
+    for (const { material, base, factor } of nightTints.current) material.color.copy(base).multiplyScalar(lerp(1, factor))
     uniforms.uNight.value = night
     uniforms.uLamp.value = lamp
     background.copy(backgroundDay).lerp(backgroundNight, night)
