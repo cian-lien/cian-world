@@ -1,6 +1,7 @@
 import { useEffect, type MouseEvent } from 'react'
 import { navigate, postHref, useRoute } from '../route'
 import { posts } from '../content/posts'
+import { site } from '../content/site'
 import { playRoomSound } from '../sound'
 
 /**
@@ -12,7 +13,7 @@ export function DiaryOverlay() {
   const post = slug ? posts.find((p) => p.slug === slug) : undefined
 
   useEffect(() => {
-    if (view === 'diary') document.title = post ? `${post.title} · 日记本` : '日记本'
+    if (view === 'diary') document.title = post ? `${post.title} · ${site.title}` : `日记本 · ${site.title}`
   }, [view, post])
 
   if (view !== 'diary') return null

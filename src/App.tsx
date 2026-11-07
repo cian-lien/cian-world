@@ -20,8 +20,8 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    if (view === 'room') document.title = `${site.name} 的房间`
-    if (view === 'computer') document.title = `电脑 · ${site.name} 的房间`
+    if (view === 'room') document.title = site.title
+    if (view === 'computer') document.title = `电脑 · ${site.title}`
   }, [view])
 
   return (
@@ -31,7 +31,7 @@ export default function App() {
       {!bakeReference && <header className="hud">
         <div className="brand">
           <span className="brand-emoji">🏠</span>
-          <b>{site.name}</b> 的房间
+          <b>{site.title}</b>
         </div>
         {view === 'room' ? (
           <button

@@ -1,17 +1,18 @@
 // 站点个人信息：电脑桌面里的「关于我」「我的项目」「浏览器书签」都读这里。改成你自己的就行。
 
 export const site = {
-  name: 'Your Name',
+  name: 'Cian Lien',
+  title: 'Cian Lien’s World',
   avatar: '🧑‍💻',
   role: '全栈开发工程师',
-  bio: '前端出身，正在系统地补后端。喜欢做有意思的网页，这个 3D 房间就是我的博客。',
+  bio: '前端出身，正在系统地补后端。喜欢做有意思的网页，这里收藏我的作品、文章与生活记录。',
   location: '广州',
   skills: ['TypeScript', 'React', 'Three.js', 'Node.js', 'SQL', 'Blender'],
 
   projects: [
     {
-      name: '3D 房间博客',
-      desc: '你现在看到的这个网站。React Three Fiber + Blender，日记本里是我的博客文章。',
+      name: 'Cian Lien’s World',
+      desc: '从一间 3D 房间开始的个人世界，展示我的作品、个人介绍与文章。',
       tech: ['R3F', 'Three.js', 'Blender', 'Markdown'],
       url: 'https://github.com/',
     },
