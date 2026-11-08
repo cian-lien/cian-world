@@ -203,6 +203,16 @@ pnpm preview
 
 部署到子路径时，在 `vite.config.ts` 中配置对应的 `base`，并检查文章中的图片路径是否与部署路径一致。Hash 路由中的电脑和文章地址共用同一个页面入口。
 
+### Cloudflare Workers
+
+仓库中的 `wrangler.jsonc` 将 `dist/` 作为静态资源发布到 Worker `cian-world`。项目使用 Hash 路由，无需服务端路由回退或 Worker 脚本。
+
+在 Workers Builds 中连接仓库，生产分支选择 `main`，根目录使用仓库根目录，构建命令设置为 `pnpm run build`，部署命令设置为 `npx wrangler deploy`。pnpm 版本由 `packageManager` 固定，Node.js 建议使用 24 LTS。
+
+本地部署前先执行 `pnpm build`，再执行 `npx wrangler deploy`（需要 Cloudflare 登录权限）。可用 `npx wrangler deploy --dry-run` 检查部署配置而不发布。
+
+保留明确的 Wrangler 配置，使 CI 直接上传构建产物，避免部署阶段自动改写 Vite 配置并临时安装依赖。静态资源配置见 [Cloudflare 官方文档](https://developers.cloudflare.com/workers/static-assets/binding/)。
+
 ## 后续方向
 
 - [ ] 增加通往房间外部世界的场景切换入口。
