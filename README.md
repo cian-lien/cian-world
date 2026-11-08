@@ -40,14 +40,14 @@
 | 实时渲染 | 烘焙光照与实时光照混合、N8AO 环境光遮蔽 |
 | 文章内容 | Markdown、简单 frontmatter、marked |
 | 路由 | 基于 URL hash 的视图切换 |
-| 开发与构建 | Vite、pnpm |
+| 开发与构建 | Vite 8、pnpm |
 | 多语言 | i18next、react-i18next，简体中文与英文 |
 
 文章与个人信息随前端构建，模型、贴图和音效作为静态资源加载。
 
 ## 本地运行
 
-准备 Node.js 和 pnpm，在项目根目录执行以下命令。本地验证环境为 Node.js 24、pnpm 12。
+准备 Node.js 和 pnpm，在项目根目录执行以下命令。开发和测试支持 Node.js 22.12+（22.x）、24.x 或 26+，建议使用 Node.js 24 LTS；pnpm 通过 `packageManager` 固定为 12.8.1。本地验证环境为 Node.js 24.22.1、pnpm 12.8.1。
 
 ```bash
 pnpm install --frozen-lockfile
