@@ -2,7 +2,9 @@ import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { navigate, postHref } from '../route'
 import { playRoomSound } from '../sound'
 import { posts } from '../content/posts'
-import { site } from '../content/site'
+import { getSite } from '../content/site'
+import { useTranslation } from 'react-i18next'
+import { useLocale } from '../i18n'
 
 /**
  * 仿桌面系统「RoomOS」：显示在电脑屏幕里的一个普通 React 组件。
@@ -13,24 +15,16 @@ type AppId = 'about' | 'projects' | 'browser' | 'terminal'
 
 interface AppDef {
   id: AppId | 'blog'
-  name: string
   icon: string
 }
 
 const APPS: AppDef[] = [
-  { id: 'about', name: '关于我.txt', icon: '📄' },
-  { id: 'projects', name: '我的项目', icon: '📁' },
-  { id: 'browser', name: '浏览器', icon: '🌐' },
-  { id: 'terminal', name: '终端', icon: '⌨️' },
-  { id: 'blog', name: '日记本', icon: '📔' },
+  { id: 'about', icon: '📄' },
+  { id: 'projects', icon: '📁' },
+  { id: 'browser', icon: '🌐' },
+  { id: 'terminal', icon: '⌨️' },
+  { id: 'blog', icon: '📔' },
 ]
-
-const TITLES: Record<AppId, string> = {
-  about: '关于我.txt',
-  projects: '我的项目',
-  browser: '浏览器',
-  terminal: '终端',
-}
 
 const SIZES: Record<AppId, { w: number; h: number }> = {
   about: { w: 460, h: 340 },
@@ -47,6 +41,7 @@ interface Win {
 }
 
 export function Desktop({ active }: { active: boolean }) {
+  const { t } = useTranslation()
   const [wins, setWins] = useState<Win[]>([{ id: 'about', x: 300, y: 70, z: 1 }])
   const zTop = useRef(1)
   const rootRef = useRef<HTMLDivElement>(null)
@@ -78,7 +73,7 @@ export function Desktop({ active }: { active: boolean }) {
         {APPS.map((app) => (
           <button key={app.id} className="icon" onClick={() => open(app)}>
             <span className="icon-emoji">{app.icon}</span>
-            <span className="icon-name">{app.name}</span>
+            <span className="icon-name">{t(`desktop.${app.id}`)}</span>
           </button>
         ))}
       </div>
@@ -87,7 +82,7 @@ export function Desktop({ active }: { active: boolean }) {
         <Window
           key={w.id}
           win={w}
-          title={TITLES[w.id]}
+          title={t(`desktop.${w.id}`)}
           size={SIZES[w.id]}
           rootRef={rootRef}
           onFocus={() => focus(w.id)}
@@ -120,6 +115,7 @@ interface WindowProps {
 }
 
 function Window({ win, title, size, rootRef, onFocus, onClose, onMove, children }: WindowProps) {
+  const { t } = useTranslation()
   const startDrag = (e: React.PointerEvent) => {
     if ((e.target as HTMLElement).closest('button')) return
     e.preventDefault()
@@ -155,7 +151,7 @@ function Window({ win, title, size, rootRef, onFocus, onClose, onMove, children 
     >
       <div className="titlebar" onPointerDown={startDrag}>
         <span className="dots">
-          <button className="dot red" onClick={onClose} aria-label="关闭" />
+          <button className="dot red" onClick={onClose} aria-label={t('desktop.close')} />
           <span className="dot yellow" />
           <span className="dot green" />
         </span>
@@ -167,28 +163,29 @@ function Window({ win, title, size, rootRef, onFocus, onClose, onMove, children 
 }
 
 function Taskbar({ wins, onPick }: { wins: Win[]; onPick: (id: AppId) => void }) {
+  const { t } = useTranslation()
+  const locale = useLocale()
   const [now, setNow] = useState(() => new Date())
   useEffect(() => {
-    const t = window.setInterval(() => setNow(new Date()), 10_000)
-    return () => window.clearInterval(t)
+    const timer = window.setInterval(() => setNow(new Date()), 10_000)
+    return () => window.clearInterval(timer)
   }, [])
-  const hh = String(now.getHours()).padStart(2, '0')
-  const mm = String(now.getMinutes()).padStart(2, '0')
+  const time = new Intl.DateTimeFormat(locale, { hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).format(now)
 
   return (
     <div className="taskbar">
       <button className="start" onClick={() => navigate('/')}>
-        🏠 离开电脑
+        🏠 {t('desktop.leave')}
       </button>
       <div className="tasks">
         {wins.map((w) => (
           <button key={w.id} className="task" onClick={() => onPick(w.id)}>
-            {TITLES[w.id]}
+            {t(`desktop.${w.id}`)}
           </button>
         ))}
       </div>
       <span className="clock">
-        {hh}:{mm}
+        {time}
       </span>
     </div>
   )
@@ -197,6 +194,7 @@ function Taskbar({ wins, onPick }: { wins: Win[]; onPick: (id: AppId) => void })
 /* ---------------- 应用 ---------------- */
 
 function AboutApp() {
+  const site = getSite(useLocale())
   return (
     <div className="about">
       <div className="avatar">{site.avatar}</div>
@@ -217,15 +215,17 @@ function AboutApp() {
 }
 
 function ProjectsApp() {
+  const { t } = useTranslation()
+  const site = getSite(useLocale())
   return (
     <div className="projects">
       {site.projects.map((p) => (
-        <div key={p.name} className="card">
+        <div key={p.id} className="card">
           <div className="card-head">
             <b>📦 {p.name}</b>
             {p.url && (
               <a href={p.url} target="_blank" rel="noreferrer">
-                查看 ↗
+                {t('desktop.view')}
               </a>
             )}
           </div>
@@ -244,35 +244,32 @@ function ProjectsApp() {
 }
 
 function BrowserApp() {
+  const { t } = useTranslation()
+  const site = getSite(useLocale())
   return (
     <div className="browser">
       <div className="addr">🔒 roomos://bookmarks</div>
       <div className="bookmarks">
         {site.links.map((l) => (
-          <a key={l.name} className="bookmark" href={l.url} target="_blank" rel="noreferrer">
+          <a key={l.id} className="bookmark" href={l.url} target="_blank" rel="noreferrer">
             <span className="bm-icon">{l.icon}</span>
             <span>{l.name}</span>
           </a>
         ))}
       </div>
-      <p className="muted small">书签会在新标签页打开（大多数网站禁止被嵌入到别的页面里）。</p>
+      <p className="muted small">{t('desktop.bookmarks')}</p>
     </div>
   )
 }
 
-const HELP = [
-  'help        显示这份帮助',
-  'whoami      我是谁',
-  'ls          列出所有日记',
-  'cat <编号>  打开第 N 篇日记',
-  'projects    我的项目',
-  'date        现在几点',
-  'clear       清屏',
-  'exit        离开电脑',
-]
+const COMMANDS = ['help', 'whoami', 'ls', 'cat', 'projects', 'date', 'clear', 'exit'] as const
 
 function TerminalApp() {
-  const [lines, setLines] = useState<string[]>(['RoomOS 终端 v0.1 —— 输入 help 查看命令'])
+  const { t } = useTranslation()
+  const locale = useLocale()
+  const site = getSite(locale)
+  const [lines, setLines] = useState<string[]>([])
+  const [showGreeting, setShowGreeting] = useState(true)
   const [input, setInput] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
   const boxRef = useRef<HTMLDivElement>(null)
@@ -290,46 +287,48 @@ function TerminalApp() {
       case '':
         break
       case 'help':
-        out.push(...HELP)
+        out.push(...COMMANDS.map(command => `${(command === 'cat' ? 'cat <N>' : command).padEnd(12)}${t(`terminal.${command}`)}`))
         break
       case 'whoami':
         out.push(`${site.name} —— ${site.role}`, site.bio)
         break
       case 'ls':
-        if (!posts.length) out.push('（还没有日记）')
+        if (!posts.length) out.push(t('terminal.empty'))
         posts.forEach((p, i) => out.push(`${String(i + 1).padStart(2, ' ')}. ${p.date}  ${p.title}`))
         break
       case 'cat': {
         const p = posts[Number(args[0]) - 1]
         if (p) {
-          out.push(`正在打开《${p.title}》……`)
+          out.push(t('terminal.opening', { title: p.title }))
           window.setTimeout(() => (window.location.hash = postHref(p.slug)), 400)
-        } else out.push('用法：cat <编号>，先用 ls 看看编号')
+        } else out.push(t('terminal.usage'))
         break
       }
       case 'projects':
         site.projects.forEach((p) => out.push(`📦 ${p.name} —— ${p.desc}`))
         break
       case 'date':
-        out.push(new Date().toLocaleString('zh-CN'))
+        out.push(new Date().toLocaleString(locale))
         break
       case 'sudo':
-        out.push('权限不足：这是我的房间 😼')
+        out.push(t('terminal.denied'))
         break
       case 'clear':
         setLines([])
+        setShowGreeting(false)
         return
       case 'exit':
         navigate('/')
         return
       default:
-        out.push(`找不到命令：${cmd}（输入 help 看看）`)
+        out.push(t('terminal.unknown', { command: cmd }))
     }
     setLines((ls) => [...ls, ...out])
   }
 
   return (
     <div ref={boxRef} className="terminal" onClick={() => inputRef.current?.focus({ preventScroll: true })}>
+      {showGreeting && <div className="term-line">{t('terminal.greeting')}</div>}
       {lines.map((l, i) => (
         <div key={i} className="term-line">
           {l}
@@ -344,7 +343,7 @@ function TerminalApp() {
         }}
       >
         <span>$&nbsp;</span>
-        <input ref={inputRef} value={input} onChange={(e) => setInput(e.target.value)} spellCheck={false} autoComplete="off" />
+        <input aria-label={t('desktop.terminalInput')} ref={inputRef} value={input} onChange={(e) => setInput(e.target.value)} spellCheck={false} autoComplete="off" />
       </form>
     </div>
   )

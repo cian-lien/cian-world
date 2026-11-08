@@ -6,8 +6,10 @@ import { Room } from './Room'
 import { CameraRig } from './CameraRig'
 import { bakeReference, bakeTrial, hybridRoom } from './bakeTrial'
 import { INTRO_POSITION, type RoomMode } from './layout'
+import { useTranslation } from 'react-i18next'
 
 export function Experience({ mode }: { mode: RoomMode }) {
+  const { t } = useTranslation()
   const isDay = mode === 'day'
 
   return (
@@ -30,7 +32,7 @@ export function Experience({ mode }: { mode: RoomMode }) {
         </Suspense>
         {!bakeReference && <CameraRig />}
       </Canvas>
-      <Loader />
+      <Loader dataInterpolation={progress => t('scene.loading', { progress: progress.toFixed(0) })} />
     </>
   )
 }

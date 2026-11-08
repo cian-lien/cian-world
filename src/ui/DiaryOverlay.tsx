@@ -3,18 +3,23 @@ import { navigate, postHref, useRoute } from '../route'
 import { posts } from '../content/posts'
 import { site } from '../content/site'
 import { playRoomSound } from '../sound'
+import { useTranslation } from 'react-i18next'
+import { useLocale } from '../i18n'
+import { LanguageSwitcher } from './LanguageSwitcher'
 
 /**
  * 点击日记本后出现的 2D 阅读层：左页是目录，右页是正文。
  * 正文用普通 DOM 渲染（而不是贴在 3D 里），阅读体验和可访问性都更好。
  */
 export function DiaryOverlay() {
+  const { t } = useTranslation()
+  const locale = useLocale()
   const { view, slug } = useRoute()
   const post = slug ? posts.find((p) => p.slug === slug) : undefined
 
   useEffect(() => {
-    if (view === 'diary') document.title = post ? `${post.title} · ${site.title}` : `日记本 · ${site.title}`
-  }, [view, post])
+    if (view === 'diary') document.title = post ? `${post.title} · ${site.title}` : `${t('diary.title')} · ${site.title}`
+  }, [view, post, t])
 
   if (view !== 'diary') return null
 
@@ -28,14 +33,18 @@ export function DiaryOverlay() {
     <div className="diary-backdrop" onClick={() => navigate('/')}>
       <div className="diary-book" onClick={(e) => e.stopPropagation()}>
         <section className="page page-left">
-          <h2 className="hand">📔 日记本</h2>
-          <p className="muted">共 {posts.length} 篇</p>
+          <div className="diary-heading">
+            <h2 className="hand">📔 {t('diary.title')}</h2>
+            <LanguageSwitcher />
+          </div>
+          <p className="muted">{t('diary.count', { count: posts.length })}</p>
+          {locale === 'en' && <p className="original-language-note">{t('diary.originalLanguage')}</p>}
           <ul className="post-list">
             {posts.map((p) => (
               <li key={p.slug} className={p.slug === slug ? 'active' : ''}>
                 <a href={postHref(p.slug)} onClick={(event) => turnPage(event, p.slug)}>
                   <span className="date">{p.date}</span>
-                  <span className="title">{p.title}</span>
+                  <span className="title" lang="zh-CN">{p.title}</span>
                 </a>
               </li>
             ))}
@@ -44,7 +53,7 @@ export function DiaryOverlay() {
 
         <section className="page page-right" key={slug ?? 'index'}>
           {post ? (
-            <article>
+            <article lang="zh-CN">
               <h1 className="hand">{post.title}</h1>
               <div className="meta">
                 {post.date}
@@ -55,21 +64,21 @@ export function DiaryOverlay() {
               <div className="md" dangerouslySetInnerHTML={{ __html: post.html }} />
             </article>
           ) : slug ? (
-            <p className="empty">这一页被撕掉了……找不到「{slug}」。</p>
+            <p className="empty">{t('diary.missing', { slug })}</p>
           ) : (
             <div className="welcome">
-              <h1 className="hand">欢迎翻开我的日记本</h1>
-              <p>左边是目录，点一篇开始读吧。</p>
+              <h1 className="hand">{t('diary.welcome')}</h1>
+              <p>{t('diary.intro')}</p>
               {posts[0] && (
                 <a className="latest" href={postHref(posts[0].slug)} onClick={(event) => turnPage(event, posts[0].slug)}>
-                  最新：{posts[0].title} →
+                  {t('diary.latest', { title: posts[0].title })}
                 </a>
               )}
             </div>
           )}
         </section>
 
-        <button className="diary-close" onClick={() => navigate('/')} aria-label="合上日记本">
+        <button className="diary-close" onClick={() => navigate('/')} aria-label={t('diary.close')}>
           ×
         </button>
       </div>

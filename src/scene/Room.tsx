@@ -9,6 +9,7 @@ import { ComputerScreen } from './ComputerScreen'
 import { BakedTrialLayers } from './BakedTrialLayers'
 import { bakeReference, bakeTrial, bakeTrialUrl, hybridRoom, hybridRoomUrl } from './bakeTrial'
 import type { RoomMode, V3 } from './layout'
+import { useTranslation } from 'react-i18next'
 
 const HybridTrialLayers = lazy(() => import('./HybridTrialLayers'))
 
@@ -31,6 +32,7 @@ function takeInteractive(scene: THREE.Group, name: string) {
 }
 
 export function Room({ mode }: { mode: RoomMode }) {
+  const { t } = useTranslation()
   const modelUrl = hybridRoom ? `${hybridRoomUrl}room.glb`
     : bakeTrial ? `${bakeTrialUrl}room.glb`
       : `${import.meta.env.BASE_URL}models/room-day-warm.glb`
@@ -107,20 +109,20 @@ export function Room({ mode }: { mode: RoomMode }) {
         resolution={256}
         frames={1}
       />}
-      <Interactive label="📔 日记本 · 看看我的博客" labelHeight={0.35} position={diary.position} onSelect={() => {
+      <Interactive label={t('scene.diary')} labelHeight={0.35} position={diary.position} onSelect={() => {
         playRoomSound('diary')
         navigate('/diary')
       }}>
         <primitive object={diary.object} />
       </Interactive>
-      <Interactive label="💻 电脑 · 打开看看" labelHeight={1.15} position={computer.position} onSelect={() => {
+      <Interactive label={t('scene.computer')} labelHeight={1.15} position={computer.position} onSelect={() => {
         playRoomSound('computer')
         navigate('/computer')
       }}>
         <primitive object={computer.object} />
         {!bakeReference && <ComputerScreen />}
       </Interactive>
-      <Interactive label={lampOn ? '💡 关灯' : '💡 开灯'} labelHeight={0.65} position={lamp.position} onSelect={() => {
+      <Interactive label={t(lampOn ? 'scene.lampOff' : 'scene.lampOn')} labelHeight={0.65} position={lamp.position} onSelect={() => {
         playRoomSound('lamp')
         setLampOverride(!lampOn)
       }}>
@@ -140,6 +142,7 @@ export function Room({ mode }: { mode: RoomMode }) {
 }
 
 function Cat({ position, children }: { position: V3; children: ReactNode }) {
+  const { t } = useTranslation()
   const body = useRef<THREE.Group>(null)
   const jumpAt = useRef(-10)
   const wantJump = useRef(false)
@@ -169,11 +172,11 @@ function Cat({ position, children }: { position: V3; children: ReactNode }) {
   }
 
   return (
-    <Interactive label="🐱 摸摸猫" labelHeight={0.45} position={position} onSelect={meow}>
+    <Interactive label={t('scene.cat')} labelHeight={0.45} position={position} onSelect={meow}>
       <group ref={body}>{children}</group>
       {talking && (
         <Html position={[0, 0.6, 0]} center zIndexRange={[30, 20]} style={{ pointerEvents: 'none' }}>
-          <div className="bubble">喵～</div>
+          <div className="bubble">{t('scene.meow')}</div>
         </Html>
       )}
     </Interactive>

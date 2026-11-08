@@ -5,8 +5,11 @@ import type { RoomMode } from './scene/layout'
 import { DiaryOverlay } from './ui/DiaryOverlay'
 import { navigate, useRoute } from './route'
 import { site } from './content/site'
+import { useTranslation } from 'react-i18next'
+import { LanguageSwitcher } from './ui/LanguageSwitcher'
 
 export default function App() {
+  const { t } = useTranslation()
   const { view } = useRoute()
   const [mode, setMode] = useState<RoomMode>(() => bakeReference && new URLSearchParams(window.location.search).get('mode') === 'night' ? 'night' : 'day')
 
@@ -21,8 +24,8 @@ export default function App() {
 
   useEffect(() => {
     if (view === 'room') document.title = site.title
-    if (view === 'computer') document.title = `电脑 · ${site.title}`
-  }, [view])
+    if (view === 'computer') document.title = `${t('hud.computer')} · ${site.title}`
+  }, [view, t])
 
   return (
     <div className="app">
@@ -33,27 +36,30 @@ export default function App() {
           <span className="brand-emoji">🏠</span>
           <b>{site.title}</b>
         </div>
-        {view === 'room' ? (
-          <button
-            className="back room-mode"
-            aria-label="夜景模式"
-            aria-pressed={mode === 'night'}
-            onClick={() => setMode((current) => current === 'day' ? 'night' : 'day')}
-          >
-            {mode === 'day' ? '☀️ 日景' : '🌙 夜景'}
-          </button>
-        ) : (
-          <button className="back" onClick={() => navigate('/')}>
-            ← 返回房间 <kbd>Esc</kbd>
-          </button>
-        )}
+        <div className="hud-actions">
+          <LanguageSwitcher />
+          {view === 'room' ? (
+            <button
+              className="back room-mode"
+              aria-label={t('hud.nightMode')}
+              aria-pressed={mode === 'night'}
+              onClick={() => setMode((current) => current === 'day' ? 'night' : 'day')}
+            >
+              {mode === 'day' ? `☀️ ${t('hud.day')}` : `🌙 ${t('hud.night')}`}
+            </button>
+          ) : (
+            <button className="back" onClick={() => navigate('/')}>
+              ← {t('hud.back')} <kbd>Esc</kbd>
+            </button>
+          )}
+        </div>
       </header>}
 
-      {!bakeReference && view === 'room' && <div className="hint">点点房间里的东西：日记本、电脑、台灯，还有猫 🐾 · 拖动可以转动视角</div>}
+      {!bakeReference && view === 'room' && <div className="hint">{t('hud.hint')}</div>}
 
       <DiaryOverlay />
 
-      {!bakeReference && <div className="mobile-note">移动端适配还在计划中，建议用电脑浏览器访问 🖥️</div>}
+      {!bakeReference && <div className="mobile-note">{t('hud.mobile')}</div>}
     </div>
   )
 }
