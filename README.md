@@ -41,6 +41,7 @@
 | 文章内容 | Markdown、简单 frontmatter、marked |
 | 路由 | 基于 URL hash 的视图切换 |
 | 开发与构建 | Vite、pnpm |
+| 多语言 | i18next、react-i18next，简体中文与英文 |
 
 文章与个人信息随前端构建，模型、贴图和音效作为静态资源加载。
 
@@ -59,6 +60,7 @@ pnpm dev
 | --- | --- |
 | `pnpm dev` | 启动开发服务器 |
 | `pnpm typecheck` | 执行 TypeScript 类型检查 |
+| `pnpm test` | 验证语言选择、词典及资料一致性 |
 | `pnpm build` | 构建静态站点，输出到 `dist/` |
 | `pnpm preview` | 在本地预览构建产物 |
 
@@ -101,6 +103,17 @@ draft: false
 - 图片可放在 `public/images/`，站点部署在域名根目录时可使用 `/images/文件名` 引用。
 
 新增或修改文章后，重新构建即可更新部署内容。
+
+### 多语言
+
+房间、RoomOS、日记本界面、个人资料和项目介绍支持简体中文与英文，可通过顶部或日记本内的语言选择器切换。文章继续显示原文，英文阅读界面会提示文章当前为中文。
+
+- 语言优先读取 URL，再读取保存的手动选择、浏览器语言，最后回退到简体中文。
+- 分享英文界面可使用 `?lang=en#/computer` 或 `?lang=en#/diary/hello-room`；旧 Hash 链接和烘焙参数继续有效。
+- 界面词典位于 `src/i18n/resources.ts`；双语个人资料、项目和书签在 `src/content/site.ts` 按稳定 ID 维护，共用链接和技术名称。
+- 切换语言保留房间与窗口状态，终端历史保留执行时的内容。文章内容与 `Post` / `posts` 接口保持不变。
+
+完整选型、接口和维护规则见 [多语言实现文档](docs/i18n.md)。
 
 ## 页面地址
 
