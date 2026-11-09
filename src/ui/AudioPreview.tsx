@@ -1,0 +1,3 @@
+import { useTranslation } from 'react-i18next'
+import { getBrowserEnvironment } from '../env/browser'
+export default function AudioPreview(){const {t}=useTranslation();return <nav className="audio-preview" aria-label={t('environment.preview')}>{(['dawn','day','dusk','night','clear','rain','thunderstorm','gale'] as const).map((name,i)=><button className="paper-button" key={name} onClick={()=>getBrowserEnvironment().setManual(i<4?{time:['06:10','12:00','18:10','23:00'][i]}:name==='gale'?{wind:20}:{weather:name as 'clear'|'rain'|'thunderstorm',wind:2})}>{t(`environment.${name}`)}</button>)}</nav>}

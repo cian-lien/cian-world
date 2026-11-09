@@ -22,7 +22,7 @@ export function ComputerScreen() {
       zIndexRange={[10, 0]}
       // 不在电脑视图时，让点击穿透到 3D 场景（点屏幕 = 点电脑）
       pointerEvents={active ? 'auto' : 'none'}
-      style={{ backfaceVisibility: 'hidden' }}
+      style={{ backfaceVisibility: 'hidden', display: view === 'world' ? 'none' : undefined }}
     >
       <Desktop active={active} />
     </Html>

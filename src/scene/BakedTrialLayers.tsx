@@ -40,9 +40,10 @@ function approach(value: number, target: number, step: number) {
   return value < target ? Math.min(target, value + step) : Math.max(target, value - step)
 }
 
-export function BakedTrialLayers({ roots, mode, lampOn }: {
+export function BakedTrialLayers({ roots, mode, lampOn, active=true }: {
   roots: Object3D[]
   mode: RoomMode
+  active?: boolean
   lampOn: boolean
 }) {
   const manifestText = useLoader(FileLoader, `${bakeTrialUrl}manifest.json`)
@@ -131,6 +132,7 @@ export function BakedTrialLayers({ roots, mode, lampOn }: {
   }, [camera, manifest, size.width, size.height])
 
   useFrame((_, delta) => {
+    if(!active)return
     night.current = approach(night.current, mode === 'night' ? 1 : 0, delta / 1.2)
     lamp.current = approach(lamp.current, lampOn ? 1 : 0, delta / 0.25)
     for (const material of Object.values(materials)) {

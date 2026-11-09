@@ -713,3 +713,43 @@ a {
 .room-mode[aria-pressed='true']:focus-visible {
   outline-color: var(--ui-night-line);
 }
+
+/* Environment controls use the same paper, ink and hard shadows as the room. */
+.hud-brand{display:flex;flex-direction:column;align-items:flex-start;gap:10px;min-width:0;max-width:48vw}
+.paper-button{font:inherit;font-size:14px;color:#3b2f2f;background:#fffaf0;border:2px solid #3b2f2f;border-radius:9999px;box-shadow:0 4px 0 #3b2f2f;padding:8px 14px;min-height:44px;cursor:pointer;transition:transform .12s,box-shadow .12s}
+.paper-button:hover,.paper-button:active{transform:translateY(2px);box-shadow:0 2px 0 #3b2f2f}
+.environment-capsule{font-size:12px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-height:36px}
+.sound-button{width:44px;padding:8px}
+.environment-backdrop{position:fixed;inset:0;background:rgba(59,47,47,.25);z-index:120;display:flex;justify-content:flex-end;align-items:flex-start;padding:90px 24px 24px}
+.environment-panel{background:#fffaf0;color:#3b2f2f;border:2px solid #3b2f2f;box-shadow:0 6px 0 #3b2f2f;border-radius:18px;width:min(390px,100%);max-height:calc(100dvh - 118px);overflow:auto;padding:22px;font-size:14px}
+.environment-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:20px}
+.environment-heading h2{margin:0;font:700 20px/1.4 var(--font-ui,system-ui)}
+.environment-panel label{display:block;margin:12px 0;line-height:1.7}
+.environment-panel input[type=range]{display:block;width:100%;min-height:30px;accent-color:#8a7155}
+.environment-panel select,.environment-panel input[type=number]{width:100%;min-height:44px;border:1.5px solid #3b2f2f;border-radius:8px;padding:8px;background:#fffdf8;color:#3b2f2f;font:inherit}
+.environment-panel output{float:right;font-variant-numeric:tabular-nums}
+.environment-panel .environment-toggle{display:flex;align-items:center;gap:10px;min-height:32px}
+.environment-toggle input{width:20px;height:20px;accent-color:#8a7155}
+.environment-fields{display:grid;grid-template-columns:1.3fr 1fr;gap:14px}
+.environment-panel hr{border:0;border-top:1px solid #ecdcc4;margin:20px 0}
+.environment-privacy,.audio-credits{font-size:12px;line-height:1.75;color:#8a7a6d}
+.solar-term-card{position:fixed;left:24px;bottom:74px;max-width:280px;z-index:40;background:#fffaf0;color:#3b2f2f;border:2px solid #3b2f2f;border-radius:12px;box-shadow:0 4px 0 #3b2f2f;padding:14px 18px;pointer-events:none;animation:environment-in .25s ease-out}
+.solar-term-card b{font-size:15px}.solar-term-card p{font-size:12px;line-height:1.7;margin:5px 0 0}
+.scene-transition{position:fixed;inset:0;z-index:110;pointer-events:none;background:#e4dbcc;animation:scene-exchange .6s both}
+.scene-error{position:fixed;z-index:80;left:50%;top:50%;transform:translate(-50%,-50%);background:#fffaf0;border:2px solid #3b2f2f;border-radius:18px;padding:24px;max-width:90vw}
+.audio-preview{position:fixed;left:24px;right:24px;bottom:80px;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;z-index:50}.audio-preview button{font-size:12px}
+@keyframes scene-exchange{0%,100%{opacity:0}30%,60%{opacity:1}}
+@keyframes environment-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(max-width:767px){.hud{gap:12px;flex-wrap:wrap}.hud-brand{max-width:100%;width:100%}.hud-actions{justify-content:flex-start;flex-wrap:wrap;gap:8px}.hud-actions button{font-size:12px}.environment-capsule{min-height:44px;max-width:calc(100vw - 40px)}.environment-backdrop{padding:20px 12px;align-items:center}.environment-panel{max-height:calc(100dvh - 40px)}.solar-term-card{left:16px;bottom:85px;max-width:220px}.mobile-note{display:none}}
+@media(prefers-reduced-motion:reduce){.scene-transition{animation-duration:.2s}.solar-term-card{animation:none}.paper-button{transition:none}}
+.paper-button{pointer-events:auto}
+.paper-button:focus-visible,.environment-panel input:focus-visible,.environment-panel select:focus-visible{outline:2px solid #3b2f2f;outline-offset:3px}
+
+.rooftop-menu{position:absolute;left:24px;bottom:64px;z-index:35;max-width:calc(100vw - 48px);font-size:13px;color:var(--ink,#4f3b2d)}
+.rooftop-menu summary{cursor:pointer;background:#f7ecd9;border:1px solid #d6bea2;padding:10px 14px;border-radius:8px;box-shadow:2px 3px 0 #7a4e3320;list-style:none}
+.rooftop-menu nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;background:#fbf2e4;padding:12px;border-radius:8px;margin-top:8px}
+.rooftop-info{line-height:1.8;min-width:min(300px,75vw)}
+.rooftop-info dl{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}.rooftop-info dt{color:#8a7a6d}.rooftop-info dd{margin:0;font-variant-numeric:tabular-nums}
+@media(max-width:600px){.rooftop-menu{left:12px;bottom:58px;max-width:calc(100vw - 24px)}.hint{max-width:90vw;text-align:center}.mobile-note{display:none}}
+
+.performance-probe{pointer-events:none}

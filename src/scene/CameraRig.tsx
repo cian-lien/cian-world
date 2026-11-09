@@ -31,13 +31,14 @@ function lockRoom(c: Controls, position: V3) {
   c.maxDistance = s.radius * 1.3
 }
 
-export function CameraRig() {
+export function CameraRig({active=true}:{active?:boolean}) {
   const ref = useRef<Controls>(null)
   const { view } = useRoute()
   const camera = useThree((s) => s.camera) as THREE.PerspectiveCamera
   const size = useThree((s) => s.size)
 
   useFrame((_, delta) => {
+    if (!active) return
     const controls = ref.current
     // Keep camera transitions running while Drei disables pointer input.
     if (controls && !controls.enabled) controls.update(delta)
@@ -71,6 +72,8 @@ export function CameraRig() {
         lockRoom(c, position)
         c.enabled = true
       })
+    } else if (view === 'world') {
+      fly([1.55,3.4,1.4],[1.55,2.3,-2.285])
     } else if (view === 'diary') {
       fly(DIARY_VIEW.position, DIARY_VIEW.target)
     } else if (view === 'computer') {

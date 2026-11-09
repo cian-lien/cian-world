@@ -1,0 +1,212 @@
+{
+  "roofMeters": [
+    9.45,
+    7.1
+  ],
+  "visitorHeightMeters": 0.9,
+  "finiteMeshes": 3174,
+  "gridMeters": 0.25,
+  "visitorRadiusMeters": 0.14,
+  "reachableAnchors": [
+    "Cat_Interact",
+    "Door_Interact",
+    "Garden_Interact",
+    "Laundry_Interact",
+    "Radio_Interact",
+    "Tea_Interact",
+    "Telescope_Interact",
+    "VisitorSpawn"
+  ],
+  "reachableCells": 395,
+  "groundedBuildings": 87,
+  "streetLevelMeters": -13.8,
+  "coordinateSystem": "glTF Y-up; Blender (x,y,z) becomes (x,z,-y)",
+  "walkBoundsXZ": [
+    -3.6,
+    3.6,
+    -3.1,
+    3.1
+  ],
+  "outlineXZ": [
+    [
+      -4.0,
+      3.5
+    ],
+    [
+      4.0,
+      3.5
+    ],
+    [
+      4.45,
+      -0.35
+    ],
+    [
+      0.42,
+      -3.6
+    ],
+    [
+      -5.0,
+      -3.6
+    ]
+  ],
+  "edgeClearanceMeters": 0.22,
+  "anchors": {
+    "Door_Interact": [
+      -2.45,
+      0,
+      -0.52
+    ],
+    "Tea_Interact": [
+      -0.3,
+      0,
+      0.7
+    ],
+    "Garden_Interact": [
+      2.45,
+      0,
+      0.39
+    ],
+    "Radio_Interact": [
+      0.76,
+      0,
+      0.7
+    ],
+    "Laundry_Interact": [
+      -2.35,
+      0,
+      0.71
+    ],
+    "Telescope_Interact": [
+      1.47,
+      0,
+      -1.07
+    ],
+    "Cat_Interact": [
+      -1.75,
+      0,
+      -0.52
+    ],
+    "VisitorSpawn": [
+      -1.65,
+      0,
+      0.22
+    ]
+  },
+  "obstacles": [
+    {
+      "name": "stairwell",
+      "rectXZ": [
+        -4.68,
+        -2.202,
+        -3.365,
+        -0.89
+      ]
+    },
+    {
+      "name": "tank",
+      "rectXZ": [
+        -2.028,
+        -1.214,
+        -2.982,
+        -1.74
+      ]
+    },
+    {
+      "name": "heater",
+      "rectXZ": [
+        -0.803,
+        1.034,
+        -3.664,
+        -2.158
+      ]
+    },
+    {
+      "name": "AC",
+      "rectXZ": [
+        -0.82,
+        -0.1,
+        -2.585,
+        -2.135
+      ]
+    },
+    {
+      "name": "telescope",
+      "rectXZ": [
+        1.638,
+        2.359,
+        -2.139,
+        -1.3
+      ]
+    },
+    {
+      "name": "tea table",
+      "rectXZ": [
+        -0.894,
+        1.334,
+        1.024,
+        2.256
+      ]
+    },
+    {
+      "name": "left stool",
+      "rectXZ": [
+        -1.618,
+        -0.902,
+        1.698,
+        2.302
+      ]
+    },
+    {
+      "name": "right stool",
+      "rectXZ": [
+        0.696,
+        1.404,
+        2.138,
+        2.742
+      ]
+    },
+    {
+      "name": "planter1",
+      "rectXZ": [
+        2.444,
+        3.076,
+        -1.252,
+        -0.348
+      ]
+    },
+    {
+      "name": "planter2",
+      "rectXZ": [
+        2.944,
+        3.576,
+        -0.322,
+        0.582
+      ]
+    },
+    {
+      "name": "planter3",
+      "rectXZ": [
+        3.324,
+        3.956,
+        0.388,
+        1.292
+      ]
+    },
+    {
+      "name": "lotus crock",
+      "circleXZ": [
+        3.46,
+        2.379,
+        0.73
+      ]
+    },
+    {
+      "name": "lamp",
+      "circleXZ": [
+        -3.86,
+        0.79,
+        0.04
+      ]
+    }
+  ]
+}

@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import { lazy, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { ContactShadows, Html, useGLTF } from '@react-three/drei'
-import { navigate } from '../route'
+import { navigate, useRoute } from '../route'
 import { playRoomSound } from '../sound'
 import { Interactive } from './Interactive'
 import { ComputerScreen } from './ComputerScreen'
@@ -31,7 +31,7 @@ function takeInteractive(scene: THREE.Group, name: string) {
   return { object, position: position.toArray() }
 }
 
-export function Room({ mode }: { mode: RoomMode }) {
+export function Room({ mode, active = true }: { mode: RoomMode; active?: boolean }) {
   const { t } = useTranslation()
   const modelUrl = hybridRoom ? `${hybridRoomUrl}room.glb`
     : bakeTrial ? `${bakeTrialUrl}room.glb`
@@ -96,8 +96,8 @@ export function Room({ mode }: { mode: RoomMode }) {
     <>
       <primitive object={model} />
       {hybridRoom && <HybridTrialLayers roots={bakedRoots} mode={mode} lampOn={lampOn}
-        lampPosition={lampPosition ?? lamp.position} />}
-      {bakeTrial && <BakedTrialLayers roots={bakedRoots} mode={mode} lampOn={lampOn} />}
+        lampPosition={lampPosition ?? lamp.position} active={active} />}
+      {bakeTrial && <BakedTrialLayers active={active} roots={bakedRoots} mode={mode} lampOn={lampOn} />}
       {!bakeTrial && !hybridRoom && <ContactShadows
         position={[0, 0.004, 0]}
         width={4.8}
@@ -142,6 +142,7 @@ export function Room({ mode }: { mode: RoomMode }) {
 }
 
 function Cat({ position, children }: { position: V3; children: ReactNode }) {
+  const { view } = useRoute()
   const { t } = useTranslation()
   const body = useRef<THREE.Group>(null)
   const jumpAt = useRef(-10)
@@ -152,6 +153,7 @@ function Cat({ position, children }: { position: V3; children: ReactNode }) {
   useEffect(() => () => window.clearTimeout(timer.current), [])
 
   useFrame(({ clock }) => {
+    if (view === 'world') return
     const g = body.current
     if (!g) return
     if (wantJump.current) {
@@ -174,7 +176,7 @@ function Cat({ position, children }: { position: V3; children: ReactNode }) {
   return (
     <Interactive label={t('scene.cat')} labelHeight={0.45} position={position} onSelect={meow}>
       <group ref={body}>{children}</group>
-      {talking && (
+      {talking && view !== 'world' && (
         <Html position={[0, 0.6, 0]} center zIndexRange={[30, 20]} style={{ pointerEvents: 'none' }}>
           <div className="bubble">{t('scene.meow')}</div>
         </Html>

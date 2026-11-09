@@ -66,7 +66,9 @@ export function Desktop({ active }: { active: boolean }) {
   const move = (id: AppId, x: number, y: number) => setWins((ws) => ws.map((w) => (w.id === id ? { ...w, x, y } : w)))
 
   return (
-    <div ref={rootRef} className={`desktop ${active ? 'is-active' : ''}`}>
+    <div ref={rootRef} className={`desktop ${active ? 'is-active' : ''}`} onClickCapture={(event) => {
+      if (active && event.detail > 0) playRoomSound('computer')
+    }}>
       <div className="wallpaper" />
 
       <div className="icons">

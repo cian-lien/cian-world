@@ -3,3 +3,8 @@ dist
 .wrangler/
 .DS_Store
 *.blend1
+assets/audio/raw/
+
+# Blender helper bytecode
+__pycache__/
+*.py[cod]

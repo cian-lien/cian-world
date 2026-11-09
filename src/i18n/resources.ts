@@ -1,9 +1,13 @@
+import {zhRooftop,enRooftop} from './rooftop'
+import { zhEnvironment, enEnvironment } from './environment'
 export const zhCN = {
+  environment: zhEnvironment,
+  rooftop:zhRooftop,
   language: { label: '语言' },
   hud: {
     nightMode: '夜景模式', day: '日景', night: '夜景', back: '返回房间', computer: '电脑',
     hint: '点点房间里的东西：日记本、电脑、台灯，还有猫 🐾 · 拖动可以转动视角',
-    mobile: '移动端适配还在计划中，建议用电脑浏览器访问 🖥️',
+    mobile: '点按房间里的物件进行探索', roomLoadError: '房间暂时无法加载。',
   },
   scene: {
     diary: '📔 日记本 · 看看我的博客', computer: '💻 电脑 · 打开看看',
@@ -34,11 +38,13 @@ export const zhCN = {
 type TranslationShape<T> = { [K in keyof T]: T[K] extends string ? string : TranslationShape<T[K]> }
 
 export const en = {
+  environment: enEnvironment,
+  rooftop:enRooftop,
   language: { label: 'Language' },
   hud: {
     nightMode: 'Night mode', day: 'Day', night: 'Night', back: 'Back to room', computer: 'Computer',
     hint: 'Explore the diary, computer, lamp, and cat 🐾 · Drag to look around',
-    mobile: 'Mobile support is still planned. For now, visit on a desktop browser 🖥️',
+    mobile: 'Tap objects to explore the room.', roomLoadError: 'The room could not load.',
   },
   scene: {
     diary: '📔 Diary · Read my blog', computer: '💻 Computer · Take a look',

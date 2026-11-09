@@ -1,0 +1,257 @@
+{
+  "version": 1,
+  "clips": [
+    {
+      "id": "dusk-birds",
+      "file": "dusk-birds.m4a",
+      "role": "loop",
+      "duration": 60,
+      "loopStart": 0,
+      "loopEnd": 60,
+      "defaultGain": 0.3,
+      "sourceId": "dusk-birds",
+      "bytes": 739506,
+      "sourceLufs": -20.93,
+      "targetLufs": -26,
+      "sourceTrim": {
+        "start": 10,
+        "end": 72
+      },
+      "crossfade": 2
+    },
+    {
+      "id": "wind-gale",
+      "file": "wind-gale.m4a",
+      "role": "loop",
+      "duration": 60,
+      "loopStart": 0,
+      "loopEnd": 60,
+      "defaultGain": 0.3,
+      "sourceId": "wind-gale",
+      "bytes": 733803,
+      "sourceLufs": -14.26,
+      "targetLufs": -26,
+      "sourceTrim": {
+        "start": 10,
+        "end": 72
+      },
+      "crossfade": 2
+    },
+    {
+      "id": "summer-day",
+      "file": "summer-day.m4a",
+      "role": "loop",
+      "duration": 60,
+      "loopStart": 0,
+      "loopEnd": 60,
+      "defaultGain": 0.3,
+      "sourceId": "summer-day",
+      "bytes": 733763,
+      "sourceLufs": -25.85,
+      "targetLufs": -26,
+      "sourceTrim": {
+        "start": 10,
+        "end": 72
+      },
+      "crossfade": 2
+    },
+    {
+      "id": "summer-night",
+      "file": "summer-night.m4a",
+      "role": "loop",
+      "duration": 60,
+      "loopStart": 0,
+      "loopEnd": 60,
+      "defaultGain": 0.3,
+      "sourceId": "summer-night",
+      "bytes": 741322,
+      "sourceLufs": -36.76,
+      "targetLufs": -26,
+      "sourceTrim": {
+        "start": 10,
+        "end": 72
+      },
+      "crossfade": 2
+    },
+    {
+      "id": "wind-strong",
+      "file": "wind-strong.m4a",
+      "role": "loop",
+      "duration": 60,
+      "loopStart": 0,
+      "loopEnd": 60,
+      "defaultGain": 0.3,
+      "sourceId": "wind-strong",
+      "bytes": 732989,
+      "sourceLufs": -13.46,
+      "targetLufs": -26,
+      "sourceTrim": {
+        "start": 10,
+        "end": 72
+      },
+      "crossfade": 2
+    },
+    {
+      "id": "rain-spring",
+      "file": "rain-spring.m4a",
+      "role": "loop",
+      "duration": 60,
+      "loopStart": 0,
+      "loopEnd": 60,
+      "defaultGain": 0.3,
+      "sourceId": "rain-spring",
+      "bytes": 733644,
+      "sourceLufs": -40.77,
+      "targetLufs": -26,
+      "sourceTrim": {
+        "start": 10,
+        "end": 72
+      },
+      "crossfade": 2
+    },
+    {
+      "id": "rain-window",
+      "file": "rain-window.m4a",
+      "role": "loop",
+      "duration": 8,
+      "loopStart": 0,
+      "loopEnd": 8,
+      "defaultGain": 0.3,
+      "sourceId": "rain-window",
+      "bytes": 98468,
+      "sourceLufs": -16.33,
+      "targetLufs": -26,
+      "sourceTrim": {
+        "start": 0,
+        "end": 10
+      },
+      "crossfade": 2
+    },
+    {
+      "id": "wind-indoor",
+      "file": "wind-indoor.m4a",
+      "role": "loop",
+      "duration": 60,
+      "loopStart": 0,
+      "loopEnd": 60,
+      "defaultGain": 0.3,
+      "sourceId": "wind-indoor",
+      "bytes": 733104,
+      "sourceLufs": -20.41,
+      "targetLufs": -26,
+      "sourceTrim": {
+        "start": 10,
+        "end": 72
+      },
+      "crossfade": 2
+    },
+    {
+      "id": "rain-gentle",
+      "file": "rain-gentle.m4a",
+      "role": "loop",
+      "duration": 60,
+      "loopStart": 0,
+      "loopEnd": 60,
+      "defaultGain": 0.3,
+      "sourceId": "rain-gentle",
+      "bytes": 742772,
+      "sourceLufs": -31.45,
+      "targetLufs": -26,
+      "sourceTrim": {
+        "start": 10,
+        "end": 72
+      },
+      "crossfade": 2
+    },
+    {
+      "id": "thunder-01",
+      "file": "thunder-01.m4a",
+      "role": "one-shot",
+      "duration": 18,
+      "loopStart": 0,
+      "loopEnd": 18,
+      "defaultGain": 0.5,
+      "sourceId": "thunder-01",
+      "bytes": 220441,
+      "sourceLufs": -18.62,
+      "targetLufs": -20,
+      "sourceTrim": {
+        "start": 18,
+        "end": 36
+      },
+      "crossfade": 0
+    },
+    {
+      "id": "dawn-birds",
+      "file": "dawn-birds.m4a",
+      "role": "loop",
+      "duration": 60,
+      "loopStart": 0,
+      "loopEnd": 60,
+      "defaultGain": 0.3,
+      "sourceId": "dawn-birds",
+      "bytes": 736581,
+      "sourceLufs": -17.15,
+      "targetLufs": -26,
+      "sourceTrim": {
+        "start": 10,
+        "end": 72
+      },
+      "crossfade": 2
+    },
+    {
+      "id": "city-birds",
+      "file": "city-birds.m4a",
+      "role": "loop",
+      "duration": 60,
+      "loopStart": 0,
+      "loopEnd": 60,
+      "defaultGain": 0.25,
+      "sourceId": "city-birds",
+      "bytes": 740890,
+      "sourceLufs": -17.77,
+      "targetLufs": -26,
+      "sourceTrim": {
+        "start": 10,
+        "end": 72
+      },
+      "crossfade": 2
+    },
+    {
+      "id": "city-night",
+      "file": "city-night.m4a",
+      "role": "loop",
+      "duration": 60,
+      "loopStart": 0,
+      "loopEnd": 60,
+      "defaultGain": 0.25,
+      "sourceId": "city-night",
+      "bytes": 733903,
+      "sourceLufs": -29.19,
+      "targetLufs": -26,
+      "sourceTrim": {
+        "start": 10,
+        "end": 72
+      },
+      "crossfade": 2
+    },
+    {
+      "id": "rain-roof",
+      "file": "rain-roof.m4a",
+      "role": "loop",
+      "duration": 60,
+      "loopStart": 0,
+      "loopEnd": 60,
+      "defaultGain": 0.25,
+      "sourceId": "rain-roof",
+      "bytes": 733555,
+      "sourceLufs": -33.2,
+      "targetLufs": -26,
+      "sourceTrim": {
+        "start": 10,
+        "end": 72
+      },
+      "crossfade": 2
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-import { Suspense, useMemo } from 'react'
+import { Suspense, lazy, useMemo } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { Loader } from '@react-three/drei'
 import { AgXToneMapping, DoubleSide, Object3D, Path, Shape } from 'three'
@@ -6,32 +6,37 @@ import { Room } from './Room'
 import { CameraRig } from './CameraRig'
 import { bakeReference, bakeTrial, hybridRoom } from './bakeTrial'
 import { INTRO_POSITION, type RoomMode } from './layout'
+import type { EnvironmentStore } from '../env/store'
 import { useTranslation } from 'react-i18next'
 
-export function Experience({ mode }: { mode: RoomMode }) {
+import {SceneBoundary} from '../ui/SceneBoundary'
+const WorldScene = import.meta.env.DEV ? lazy(() => import('../world/WorldScene')) : null
+
+export function Experience({ mode, referenceStore, onError }: { mode: RoomMode; referenceStore?: EnvironmentStore; onError?(): void }) {
   const { t } = useTranslation()
   const isDay = mode === 'day'
+  const reference = WorldScene ? referenceStore : undefined
 
   return (
     <>
-      <Canvas
-        shadows={!bakeTrial}
-        gl={{ toneMapping: AgXToneMapping, preserveDrawingBuffer: hybridRoom && bakeReference }}
-        dpr={[1, 2]}
+      <SceneBoundary onError={onError}><Canvas
+        shadows={!!reference || !bakeTrial}
+        gl={{ toneMapping: AgXToneMapping, preserveDrawingBuffer: !!reference || (hybridRoom && bakeReference) || new URLSearchParams(location.search).has('capture') }}
+        dpr={reference ? 1 : [1, 2]}
         camera={{ position: INTRO_POSITION, fov: 35, near: 0.1, far: 100 }}
         className="canvas"
       >
-        {!bakeTrial && !hybridRoom && (
+        {!reference && !bakeTrial && !hybridRoom && (
           <>
             <color attach="background" args={[isDay ? '#efddc8' : '#242635']} />
             {isDay ? <DayLights /> : <NightLights />}
           </>
         )}
         <Suspense fallback={null}>
-          <Room mode={mode} />
+          {WorldScene && reference ? <WorldScene referenceStore={reference} /> : <Room mode={mode} />}
         </Suspense>
-        {!bakeReference && <CameraRig />}
-      </Canvas>
+        {!bakeReference && !reference && <CameraRig />}
+      </Canvas></SceneBoundary>
       <Loader dataInterpolation={progress => t('scene.loading', { progress: progress.toFixed(0) })} />
     </>
   )

@@ -1,0 +1,1 @@
+{ "extends": "./tsconfig.json", "compilerOptions": { "allowImportingTsExtensions": true }, "include": ["vite.config.ts", "dev/**/*.ts", "shared/**/*.ts"] }

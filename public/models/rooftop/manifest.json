@@ -1,0 +1,139 @@
+{
+  "version": 1,
+  "units": "meters",
+  "up": "Y",
+  "forward": "+Z",
+  "rooftopBounds": {
+    "x": [
+      -5,
+      4.45
+    ],
+    "z": [
+      -3.6,
+      3.5
+    ]
+  },
+  "defaultSeason": "xiazhi",
+  "rooftopIncludesSummerDecor": true,
+  "visitorHeight": 0.9,
+  "files": [
+    {
+      "file": "rooftop.glb",
+      "bytes": 1253960,
+      "triangles": 90110,
+      "meshNodes": 54,
+      "materials": 8,
+      "nodes": 116,
+      "uncompressedBytes": 5475368
+    },
+    {
+      "file": "skyline.glb",
+      "bytes": 1063272,
+      "triangles": 116810,
+      "meshNodes": 10,
+      "materials": 5,
+      "nodes": 15,
+      "uncompressedBytes": 10894268
+    },
+    {
+      "file": "visitor.glb",
+      "bytes": 81584,
+      "triangles": 7600,
+      "meshNodes": 12,
+      "materials": 1,
+      "nodes": 24,
+      "uncompressedBytes": 333908
+    },
+    {
+      "file": "visitor-umbrella.glb",
+      "bytes": 95256,
+      "triangles": 8680,
+      "meshNodes": 13,
+      "materials": 1,
+      "nodes": 27,
+      "uncompressedBytes": 381732
+    },
+    {
+      "file": "visitor-raincoat.glb",
+      "bytes": 99424,
+      "triangles": 9172,
+      "meshNodes": 14,
+      "materials": 1,
+      "nodes": 27,
+      "uncompressedBytes": 408976
+    },
+    {
+      "file": "visitor-scarf.glb",
+      "bytes": 90444,
+      "triangles": 8076,
+      "meshNodes": 13,
+      "materials": 1,
+      "nodes": 26,
+      "uncompressedBytes": 359900
+    },
+    {
+      "file": "visitor-fan.glb",
+      "bytes": 89012,
+      "triangles": 7988,
+      "meshNodes": 13,
+      "materials": 1,
+      "nodes": 26,
+      "uncompressedBytes": 358272
+    },
+    {
+      "file": "season-lichun.glb",
+      "bytes": 51836,
+      "triangles": 2148,
+      "meshNodes": 1,
+      "materials": 1,
+      "nodes": 2,
+      "uncompressedBytes": 189360
+    },
+    {
+      "file": "season-qingming.glb",
+      "bytes": 4212,
+      "triangles": 114,
+      "meshNodes": 1,
+      "materials": 1,
+      "nodes": 2,
+      "uncompressedBytes": 6688
+    },
+    {
+      "file": "season-xiazhi.glb",
+      "bytes": 40004,
+      "triangles": 2376,
+      "meshNodes": 1,
+      "materials": 1,
+      "nodes": 2,
+      "uncompressedBytes": 163352
+    },
+    {
+      "file": "season-liqiu.glb",
+      "bytes": 3492,
+      "triangles": 80,
+      "meshNodes": 1,
+      "materials": 1,
+      "nodes": 2,
+      "uncompressedBytes": 4812
+    },
+    {
+      "file": "season-dongzhi.glb",
+      "bytes": 24920,
+      "triangles": 2444,
+      "meshNodes": 1,
+      "materials": 1,
+      "nodes": 3,
+      "uncompressedBytes": 115640
+    }
+  ],
+  "notes": [
+    "Every file is visible in a standard glTF viewer.",
+    "Hide embedded Season_xiazhi before attaching another season asset.",
+    "Keep named pivots for procedural animation; no skeletal rig.",
+    "CityWindows UV.x stores one random seed per face; replace its material for runtime night dimming.",
+    "GLB Y-up converts Blender -Y forward to +Z.",
+    "Presentation rain streaks, puddles, sky clouds and lamps are not exported.",
+    "Requires MeshoptDecoder; Drei useGLTF supplies the existing decoder. Positions/UVs quantized to16bits; named nodes and extras retained."
+  ],
+  "compression": "EXT_meshopt_compression"
+}

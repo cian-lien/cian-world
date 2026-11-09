@@ -1,0 +1,44 @@
+.reference-view {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: #17191e;
+}
+.reference-frame {
+  position: relative;
+  width: min(100vw, calc(100dvh * var(--reference-ratio)));
+  aspect-ratio: var(--reference-ratio);
+  overflow: hidden;
+}
+.reference-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.reference-controls {
+  position: fixed;
+  z-index: 40;
+  inset: auto 0.5rem 0.5rem;
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  background: #17191ef2;
+  color: #fffaf0;
+  font-size: 0.875rem;
+}
+.reference-controls label {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.reference-controls input { width: clamp(5rem, 20vw, 11rem); }
+.reference-controls output { min-width: 3em; text-align: right; }
+.reference-controls button[aria-pressed='true'] { background: #ffd36e; }

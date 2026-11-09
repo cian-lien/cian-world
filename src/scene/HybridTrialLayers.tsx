@@ -73,11 +73,12 @@ function recordStats(gl: WebGLRenderer) {
   return { ...render, textures: memory.textures, geometries: memory.geometries, programs: programs?.length ?? 0 }
 }
 
-export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition }: {
+export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition, active = true }: {
   roots: Object3D[]
   mode: RoomMode
   lampOn: boolean
   lampPosition: V3
+  active?: boolean
 }) {
   const manifestText = useLoader(FileLoader, `${hybridRoomUrl}manifest.json`)
   const manifest = useMemo(() => JSON.parse(manifestText as string) as Manifest, [manifestText])
@@ -250,6 +251,7 @@ export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition }:
   }, [camera, manifest, size.width, size.height])
 
   useLayoutEffect(() => {
+    if (!active) return
     const previous = { background: scene.background, environment: scene.environment,
       environmentIntensity: scene.environmentIntensity, exposure: gl.toneMappingExposure, autoReset: gl.info.autoReset }
     const environment = new RoomEnvironment()
@@ -272,8 +274,8 @@ export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition }:
     pipeline.addPass(output)
     composer.current = pipeline
     gl.info.autoReset = false
-    if (import.meta.env.DEV || bakeReference) {
-      Object.assign(window, { __room: { stats: () => recordStats(gl) } })
+    if (import.meta.env.DEV || bakeReference || new URLSearchParams(location.search).has('perf')) {
+      Object.assign(window, { __room: { stats: () => ({...recordStats(gl),dpr:gl.getPixelRatio(),hasEnvironment:!!scene.environment}) } })
     }
     return () => {
       composer.current = undefined
@@ -288,7 +290,7 @@ export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition }:
       probe.dispose()
       Reflect.deleteProperty(window, '__room')
     }
-  }, [background, camera, gl, scene])
+  }, [active, background, camera, gl, scene])
 
   useLayoutEffect(() => {
     composer.current?.setPixelRatio(viewport.dpr)
@@ -296,6 +298,7 @@ export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition }:
   }, [size.width, size.height, viewport.dpr])
 
   useFrame((_, delta) => {
+    if (!active) return
     const state = blend.current
     const layers = available.current
     if (layers[mode]) state.night = step(state.night, Number(mode === 'night'), delta / 1.2)
@@ -331,7 +334,7 @@ export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition }:
     if (desk.current) desk.current.intensity = 1.45 * lamp
     gl.info.reset()
     composer.current?.render(delta)
-  }, 1)
+  }, active ? 1 : 0)
 
   return (
     <>
