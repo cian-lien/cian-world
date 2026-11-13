@@ -6,7 +6,8 @@ import { Room } from './Room'
 import { CameraRig } from './CameraRig'
 import { bakeReference, bakeTrial, hybridRoom } from './bakeTrial'
 import { INTRO_POSITION, type RoomMode } from './layout'
-import { RoomSunScene, RoomWindowSky, SunSkyPreview } from './RoomSunScene'
+import { RoomSunScene, RoomWindowHotspot, SunSkyPreview } from './RoomSunScene'
+import { RoomSky } from './RoomSky'
 import type { SunPosition } from './roomSun'
 import { RoomInteractions } from './Interactive'
 import type { EnvironmentStore } from '../env/store'
@@ -15,9 +16,10 @@ import { useTranslation } from 'react-i18next'
 import {SceneBoundary} from '../ui/SceneBoundary'
 const WorldScene = import.meta.env.DEV ? lazy(() => import('../world/WorldScene')) : null
 
-export function Experience({ mode, sun, skyPreview = false, sunPreviewing = false, referenceStore, onError }: {
+export function Experience({ mode, sun, skyTime = 43200, skyPreview = false, sunPreviewing = false, referenceStore, onError }: {
   mode: RoomMode
   sun?: SunPosition
+  skyTime?: number
   skyPreview?: boolean
   sunPreviewing?: boolean
   referenceStore?: EnvironmentStore
@@ -45,15 +47,16 @@ export function Experience({ mode, sun, skyPreview = false, sunPreviewing = fals
         <Suspense fallback={null}>
           {WorldScene && reference ? <WorldScene referenceStore={reference} /> : sun ? (
             <RoomSunScene sun={sun} scrubbing={sunPreviewing}>
+              <RoomSky localSeconds={skyTime} previewing={sunPreviewing} />
               <RoomInteractions.Provider value={!skyPreview}>
                 <Room mode={mode} skyPreview={skyPreview} />
-                <RoomWindowSky />
+                <RoomWindowHotspot />
               </RoomInteractions.Provider>
               {skyPreview && <SunSkyPreview />}
             </RoomSunScene>
           ) : <Room mode={mode} />}
         </Suspense>
-        {!bakeReference && !reference && <CameraRig />}
+        {!bakeReference && !reference && <CameraRig liveSun={!!sun} />}
       </Canvas></SceneBoundary>
       <Loader dataInterpolation={progress => t('scene.loading', { progress: progress.toFixed(0) })} />
     </>

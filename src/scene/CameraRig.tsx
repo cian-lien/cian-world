@@ -8,75 +8,62 @@ import { roomWindow } from './windowAnchors'
 
 type Controls = ElementRef<typeof CameraControls>
 
-/** 解除所有限制，好让镜头可以自由飞到聚焦位置 */
-function unlock(c: Controls) {
-  c.minAzimuthAngle = -Infinity
-  c.maxAzimuthAngle = Infinity
-  c.minPolarAngle = 0
-  c.maxPolarAngle = Math.PI
-  c.minDistance = 0.1
-  c.maxDistance = Infinity
+function setOrbitLimits(controls: Controls, position: V3) {
+  const offset = new THREE.Vector3(...position).sub(new THREE.Vector3(...ROOM_VIEW.target))
+  const orbit = new THREE.Spherical().setFromVector3(offset)
+  controls.minAzimuthAngle = orbit.theta - 0.55
+  controls.maxAzimuthAngle = orbit.theta + 0.45
+  controls.minPolarAngle = Math.max(0.35, orbit.phi - 0.45)
+  controls.maxPolarAngle = Math.min(1.35, orbit.phi + 0.2)
 }
 
-/** 房间总览时：只允许小幅旋转和缩放，避免用户把镜头转到墙后面去 */
-function lockRoom(c: Controls, position: V3) {
-  const [px, py, pz] = position
-  const [tx, ty, tz] = ROOM_VIEW.target
-  const offset = new THREE.Vector3(px - tx, py - ty, pz - tz)
-  const s = new THREE.Spherical().setFromVector3(offset)
-  c.minAzimuthAngle = s.theta - 0.55
-  c.maxAzimuthAngle = s.theta + 0.45
-  c.minPolarAngle = Math.max(0.35, s.phi - 0.45)
-  c.maxPolarAngle = Math.min(1.35, s.phi + 0.2)
-  c.minDistance = s.radius * 0.6
-  c.maxDistance = s.radius * 1.3
-}
-
-export function CameraRig({active=true}:{active?:boolean}) {
+export function CameraRig({ liveSun = false }: { liveSun?: boolean }) {
   const ref = useRef<Controls>(null)
   const { view } = useRoute()
   const camera = useThree((s) => s.camera) as THREE.PerspectiveCamera
-  const size = useThree((s) => s.size)
+  const { width, height } = useThree((s) => s.size)
 
   useFrame((_, delta) => {
-    if (!active) return
+    // Drei skips updates while input is disabled. Advance route transitions here.
     const controls = ref.current
-    // Keep camera transitions running while Drei disables pointer input.
     if (controls && !controls.enabled) controls.update(delta)
   }, -1)
 
-  // 关掉右键平移，只保留左键旋转 + 滚轮缩放
   useEffect(() => {
-    const c = ref.current
-    if (!c) return
-    ;(c.mouseButtons as { right: number }).right = 0
-    c.smoothTime = 0.55
+    const controls = ref.current
+    if (!controls) return
+    Object.assign(controls.mouseButtons, { middle: 0, right: 0, wheel: 0 })
+    Object.assign(controls.touches, { two: 0, three: 0 })
   }, [])
 
   useEffect(() => {
     const c = ref.current
-    if (!c) return
+    if (!c || width <= 0 || height <= 0) return
     let cancelled = false
-    unlock(c)
     c.enabled = false
+    c.minAzimuthAngle = -Infinity
+    c.maxAzimuthAngle = Infinity
+    c.minPolarAngle = 0
+    c.maxPolarAngle = Math.PI
 
     const fly = (pos: V3, target: V3) => c.setLookAt(pos[0], pos[1], pos[2], target[0], target[1], target[2], true)
 
     if (view === 'room') {
-      const aspect = size.width / size.height
-      const distanceScale = Math.max(1.34, 1.25 / aspect)
+      const aspect = width / height
+      const distanceScale = Math.max(liveSun ? 1.13 : 1.34, 1.25 / aspect)
       const position = new THREE.Vector3(...ROOM_VIEW.target)
         .lerp(new THREE.Vector3(...ROOM_VIEW.position), distanceScale)
         .toArray()
-      fly(position, ROOM_VIEW.target).then(() => {
+      void fly(position, ROOM_VIEW.target).then(() => {
         if (cancelled) return
-        lockRoom(c, position)
+        setOrbitLimits(c, position)
         c.enabled = true
       })
     } else if (view === 'window') {
       const [x, y, z] = roomWindow.center
-      // Look from just inside the glass, slightly upward, so the sky is in view.
-      fly([x + .19, y - .19, z + .49], [x + .10, y + .88, z - 1])
+      // Keep enough distance to read the mullions and a portion of the sky together.
+      const distance = Math.max(1.35, 0.96 / (width / height))
+      fly([x + .12, y - .28, z + distance], [x + .02, y + .18, z - .45])
     } else if (view === 'world') {
       fly([1.55,3.4,1.4],[1.55,2.3,-2.285])
     } else if (view === 'diary') {
@@ -84,17 +71,14 @@ export function CameraRig({active=true}:{active?:boolean}) {
     } else if (view === 'computer') {
       // 根据窗口宽高比算出镜头距离，让屏幕刚好占满约 88% 的视野
       const tanV = Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2)
-      const tanH = tanV * (size.width / size.height)
+      const tanH = tanV * (width / height)
       const fill = 0.88
       const d = Math.max(SCREEN.width / (2 * tanH * fill), SCREEN.height / (2 * tanV * fill))
       const [x, y, z] = SCREEN_CENTER
       fly([x, y, z + d], SCREEN_CENTER)
     }
+    return () => { cancelled = true }
+  }, [view, width, height, camera, liveSun])
 
-    return () => {
-      cancelled = true
-    }
-  }, [view, size.width, size.height, camera])
-
-  return <CameraControls ref={ref} makeDefault />
+  return <CameraControls ref={ref} enabled={false} smoothTime={0.55} makeDefault />
 }

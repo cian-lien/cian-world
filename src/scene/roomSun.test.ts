@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest'
 import { getSky } from '../env/astronomy'
 import { fromWallClock } from '../env/clock'
-import { debugSunTime, roomSunDirection, sunlightThroughWindow } from './roomSun'
+import { debugSunTime, roomSunDirection, sunlightThroughWindow, windowGlassExit } from './roomSun'
+import { windowGlass } from './windowAnchors'
 
 describe('room sunlight', () => {
   it.each([
@@ -28,6 +29,18 @@ describe('room sunlight', () => {
     expect(sunlightThroughWindow([1.55, 2, 0], roomSunDirection({ altitude: -1, azimuth: 180 }))).toBe(false)
     expect(sunlightThroughWindow([1.55, 1.75, -2.5], roomSunDirection({ altitude: 35, azimuth: 180 }))).toBe(false)
     expect(sunlightThroughWindow([-.19, 0, 0], roomSunDirection({ altitude: 27, azimuth: 225 }))).toBe(false)
+  })
+
+  it('bends an oblique ray toward the normal inside glass and preserves normal incidence', () => {
+    const entry = [1.55, 1.75, windowGlass.inside] as const
+    expect(windowGlassExit(entry, [0, 0, -1])).toEqual([1.55, 1.75, windowGlass.outside])
+    const ray = roomSunDirection({ altitude: 35, azimuth: 220 })
+    const exit = windowGlassExit(entry, ray)
+    const distance = (windowGlass.outside - windowGlass.inside) / ray[2]
+    expect(exit[0]).toBeGreaterThan(entry[0])
+    expect(exit[0]).toBeLessThan(entry[0] + distance * ray[0])
+    expect(exit[1]).toBeGreaterThan(entry[1])
+    expect(exit[1]).toBeLessThan(entry[1] + distance * ray[1])
   })
 })
 
