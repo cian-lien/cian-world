@@ -4,6 +4,7 @@ import { useFrame, useThree } from '@react-three/fiber'
 import { CameraControls } from '@react-three/drei'
 import { useRoute } from '../route'
 import { DIARY_VIEW, ROOM_VIEW, SCREEN, SCREEN_CENTER, type V3 } from './layout'
+import { roomWindow } from './windowAnchors'
 
 type Controls = ElementRef<typeof CameraControls>
 
@@ -72,6 +73,10 @@ export function CameraRig({active=true}:{active?:boolean}) {
         lockRoom(c, position)
         c.enabled = true
       })
+    } else if (view === 'window') {
+      const [x, y, z] = roomWindow.center
+      // Look from just inside the glass, slightly upward, so the sky is in view.
+      fly([x + .19, y - .19, z + .49], [x + .10, y + .88, z - 1])
     } else if (view === 'world') {
       fly([1.55,3.4,1.4],[1.55,2.3,-2.285])
     } else if (view === 'diary') {

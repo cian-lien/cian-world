@@ -30,6 +30,7 @@ def args():
     parser.add_argument('--samples', type=int, default=2048)
     parser.add_argument('--scale', type=float, default=6)
     parser.add_argument('--hdr', action='store_true', help='Preserve highlights using a reversible shoulder')
+    parser.add_argument('--day-ambient-only', action='store_true', help='Bake only the day layer without the fixed window key')
     parser.add_argument('--device', choices=('metal', 'cpu'), default='metal')
     return parser.parse_args(sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else [])
 
@@ -200,7 +201,8 @@ def main():
     output.mkdir(parents=True, exist_ok=True)
     copy = output / 'room-bake.blend'
     assert copy != Path(bpy.data.filepath).resolve()
-    bpy.ops.wm.save_as_mainfile(filepath=str(copy))
+    if not config.day_ambient_only:
+        bpy.ops.wm.save_as_mainfile(filepath=str(copy))
     day = bpy.data.scenes['RoomBlog | Day']
     night = bpy.data.scenes['RoomBlog V2 | Realism Review']
     scene = build_scene(day, night, config.input_glb.resolve())
@@ -244,10 +246,13 @@ def main():
     emitters = no_emission_and_ref_states(scene)
 
     def state(label, lamp_on=False):
-        scene.world = {'day': day.world, 'night': night.world, 'lamp': dark}[label]
+        scene.world = {'day': day.world, 'day-ambient': day.world, 'night': night.world, 'lamp': dark}[label]
         for name, lights in [('day', day_lights), ('night', night_lights), ('lamp', [desk])]:
             for light in lights:
-                light.hide_render = name != label and not (name == 'lamp' and lamp_on)
+                enabled = name == label or (name == 'lamp' and lamp_on)
+                if label == 'day-ambient':
+                    enabled = name == 'day' and light != day.objects['Day | Window Key']
+                light.hide_render = not enabled
         bpy.context.view_layer.update()
 
     capture = bpy.data.scenes.new('Shell OIDN')
@@ -269,7 +274,10 @@ def main():
     if knee is not None:
         manifest['highlightKnee'] = knee
         manifest['version'] = 2
-    for label in ('day', 'night', 'lamp'):
+    labels = ('day-ambient',) if config.day_ambient_only else (
+        ('day', 'night', 'lamp', 'day-ambient') if config.hdr else ('day', 'night', 'lamp')
+    )
+    for label in labels:
         state(label)
         noisy = bake(scene, shell, 'light-' + label, 'DIFFUSE', {'DIRECT', 'INDIRECT'}, config.res, config.samples)
         result = denoise(capture, 'light-' + label, noisy, albedo, normal, output)
@@ -293,6 +301,9 @@ def main():
         'offset': [(min(x)+max(x))/(2*(max(x)-min(x))), -(min(y)+max(y))/(2*(max(y)-min(y)))],
         'resolution': [day.render.resolution_x, day.render.resolution_y]}
     (output/'manifest.json').write_text(json.dumps(manifest, indent=2)+'\n')
+    if config.day_ambient_only:
+        return
+
     print('Shell bake complete. Rendering references.', flush=True)
 
     scene.render.resolution_x, scene.render.resolution_y = manifest['camera']['resolution']

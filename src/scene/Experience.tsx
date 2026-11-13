@@ -6,13 +6,23 @@ import { Room } from './Room'
 import { CameraRig } from './CameraRig'
 import { bakeReference, bakeTrial, hybridRoom } from './bakeTrial'
 import { INTRO_POSITION, type RoomMode } from './layout'
+import { RoomSunScene, RoomWindowSky, SunSkyPreview } from './RoomSunScene'
+import type { SunPosition } from './roomSun'
+import { RoomInteractions } from './Interactive'
 import type { EnvironmentStore } from '../env/store'
 import { useTranslation } from 'react-i18next'
 
 import {SceneBoundary} from '../ui/SceneBoundary'
 const WorldScene = import.meta.env.DEV ? lazy(() => import('../world/WorldScene')) : null
 
-export function Experience({ mode, referenceStore, onError }: { mode: RoomMode; referenceStore?: EnvironmentStore; onError?(): void }) {
+export function Experience({ mode, sun, skyPreview = false, sunPreviewing = false, referenceStore, onError }: {
+  mode: RoomMode
+  sun?: SunPosition
+  skyPreview?: boolean
+  sunPreviewing?: boolean
+  referenceStore?: EnvironmentStore
+  onError?(): void
+}) {
   const { t } = useTranslation()
   const isDay = mode === 'day'
   const reference = WorldScene ? referenceStore : undefined
@@ -24,7 +34,7 @@ export function Experience({ mode, referenceStore, onError }: { mode: RoomMode; 
         gl={{ toneMapping: AgXToneMapping, preserveDrawingBuffer: !!reference || (hybridRoom && bakeReference) || new URLSearchParams(location.search).has('capture') }}
         dpr={reference ? 1 : [1, 2]}
         camera={{ position: INTRO_POSITION, fov: 35, near: 0.1, far: 100 }}
-        className="canvas"
+        className={skyPreview ? 'canvas sky-preview' : 'canvas'}
       >
         {!reference && !bakeTrial && !hybridRoom && (
           <>
@@ -33,7 +43,15 @@ export function Experience({ mode, referenceStore, onError }: { mode: RoomMode; 
           </>
         )}
         <Suspense fallback={null}>
-          {WorldScene && reference ? <WorldScene referenceStore={reference} /> : <Room mode={mode} />}
+          {WorldScene && reference ? <WorldScene referenceStore={reference} /> : sun ? (
+            <RoomSunScene sun={sun} scrubbing={sunPreviewing}>
+              <RoomInteractions.Provider value={!skyPreview}>
+                <Room mode={mode} skyPreview={skyPreview} />
+                <RoomWindowSky />
+              </RoomInteractions.Provider>
+              {skyPreview && <SunSkyPreview />}
+            </RoomSunScene>
+          ) : <Room mode={mode} />}
         </Suspense>
         {!bakeReference && !reference && <CameraRig />}
       </Canvas></SceneBoundary>

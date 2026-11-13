@@ -177,7 +177,7 @@ if (manifest.resolution === 2048) {
 }
 await io.write(output, doc)
 manifest.maps = {}
-for (const layer of ['day', 'night', 'lamp']) {
+for (const layer of ['day', 'night', 'lamp', ...(manifest.highlightKnee === undefined ? [] : ['day-ambient'])]) {
   const png = `light-${layer}.png`
   const webp = `light-${layer}.webp`
   await sharp(pathJoin(dirname(shell), png)).webp({ lossless: true, effort: 6 })

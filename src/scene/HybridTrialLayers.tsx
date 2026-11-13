@@ -3,7 +3,7 @@ import { useFrame, useLoader, useThree } from '@react-three/fiber'
 import { N8AOPass } from 'n8ao'
 import {
   Color, FileLoader, Mesh, MeshBasicMaterial, MeshStandardMaterial, Object3D,
-  PerspectiveCamera, PMREMGenerator, SRGBColorSpace, TextureLoader, type DirectionalLight, type HemisphereLight,
+  PerspectiveCamera, PMREMGenerator, SRGBColorSpace, TextureLoader, Vector3, type DirectionalLight, type HemisphereLight,
   type PointLight, type SpotLight, type Texture, type WebGLRenderer,
 } from 'three'
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js'
@@ -12,11 +12,13 @@ import { OutputPass } from 'three/addons/postprocessing/OutputPass.js'
 import { bakeReference, hybridProduction, hybridRoomUrl } from './bakeTrial'
 import { bakedAccentMaterial } from './bakedMaterial'
 import type { RoomMode, V3 } from './layout'
+import { useSunFrame } from './RoomSunScene'
+import { installWindowSun } from './windowSunMaterial'
 
 type LightLayer = RoomMode | 'lamp'
 
 type Manifest = {
-  maps: Record<LightLayer, string>
+  maps: Record<LightLayer, string> & { 'day-ambient'?: string }
   scale: number
   highlightKnee?: number
   exposure: Record<RoomMode, number>
@@ -73,17 +75,20 @@ function recordStats(gl: WebGLRenderer) {
   return { ...render, textures: memory.textures, geometries: memory.geometries, programs: programs?.length ?? 0 }
 }
 
-export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition, active = true }: {
+export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition, active = true, skyPreview = false }: {
   roots: Object3D[]
   mode: RoomMode
   lampOn: boolean
   lampPosition: V3
   active?: boolean
+  skyPreview?: boolean
 }) {
+  const sun = useSunFrame()
   const manifestText = useLoader(FileLoader, `${hybridRoomUrl}manifest.json`)
   const manifest = useMemo(() => JSON.parse(manifestText as string) as Manifest, [manifestText])
+  const dayMap = sun ? manifest.maps['day-ambient'] ?? manifest.maps.day : manifest.maps.day
   const initialMode = useRef(mode).current
-  const initialTexture = useLoader(TextureLoader, hybridRoomUrl + manifest.maps[initialMode])
+  const initialTexture = useLoader(TextureLoader, hybridRoomUrl + (initialMode === 'day' ? dayMap : manifest.maps.night))
   const available = useRef<Partial<Record<LightLayer, Texture>>>({})
   const { gl, scene, camera, size, viewport } = useThree()
   const blend = useRef({ night: Number(initialMode === 'night'), lamp: 0 })
@@ -97,6 +102,9 @@ export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition, a
   const nightTints = useRef<{ material: MeshStandardMaterial; base: Color; factor: number }[]>([])
   const hemisphere = useRef<HemisphereLight>(null)
   const key = useRef<DirectionalLight>(null)
+  const sunlight = useRef<DirectionalLight>(null)
+  const previousSunDirection = useMemo(() => new Vector3(), [])
+  const previousShadowSize = useRef(0)
   const windowLight = useRef<SpotLight>(null)
   const bedside = useRef<PointLight>(null)
   const strip = useRef<PointLight>(null)
@@ -104,6 +112,11 @@ export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition, a
   const target = useMemo(() => {
     const object = new Object3D()
     object.position.set(0.1, 0.45, 0.65)
+    return object
+  }, [])
+  const sunTarget = useMemo(() => {
+    const object = new Object3D()
+    object.position.set(0, 1.2, 0)
     return object
   }, [])
 
@@ -119,7 +132,7 @@ export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition, a
     const preload = () => {
       for (const layer of LIGHT_LAYERS) {
         if (loaded[layer]) continue
-        loader.load(hybridRoomUrl + manifest.maps[layer], texture => {
+        loader.load(hybridRoomUrl + (layer === 'day' ? dayMap : manifest.maps[layer]), texture => {
           if (!active) {
             texture.dispose()
             return
@@ -142,11 +155,23 @@ export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition, a
         if (layer !== initialMode) loaded[layer]?.dispose()
       }
     }
-  }, [initialMode, manifest])
+  }, [dayMap, initialMode, manifest])
 
   useLayoutEffect(() => {
     const accent = bakedAccentMaterial(false)
     const replacements = new Map<MeshStandardMaterial, MeshBasicMaterial>()
+    const sunMaterials = new Map<MeshStandardMaterial, MeshStandardMaterial>()
+    const shellMaterials = new Map<MeshStandardMaterial, MeshStandardMaterial>()
+    function sunMaterial(original: MeshStandardMaterial, direction: NonNullable<typeof sun>['direction'], shell: boolean) {
+      const materials = shell ? shellMaterials : sunMaterials
+      let material = materials.get(original)
+      if (!material) {
+        material = original.clone()
+        installWindowSun(material, direction, shell ? uniforms : undefined)
+        materials.set(original, material)
+      }
+      return material
+    }
     const tints = { shelf: new Map<MeshStandardMaterial, MeshStandardMaterial>(), rug: new Map<MeshStandardMaterial, MeshStandardMaterial>() }
     const bookshelfMeshes = new Set<Object3D>()
     if (hybridProduction) {
@@ -160,13 +185,17 @@ export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition, a
       if (!(object instanceof Mesh)) return
       const original = object.material
       const beforeRender = object.onBeforeRender
-      const { castShadow, receiveShadow } = object
+      const { castShadow, receiveShadow, visible } = object
       const shadowOnly = Boolean(object.userData.shadowOnly)
       object.castShadow = shadowOnly
       object.receiveShadow = !shadowOnly
       const shell = object.userData.bakeShell || object.parent?.userData.bakeShell
       const name = object.userData.bakeAccent ?? object.parent?.userData.bakeAccent
-      if (shell && original instanceof MeshStandardMaterial) {
+      if (sun && name === 'glass') {
+        object.visible = false
+      } else if (sun && shell && original instanceof MeshStandardMaterial) {
+        object.material = sunMaterial(original, sun.direction, true)
+      } else if (shell && original instanceof MeshStandardMaterial) {
         let material = replacements.get(original)
         if (!material) {
           material = new MeshBasicMaterial({ color: original.color, map: original.map, side: original.side })
@@ -209,17 +238,22 @@ export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition, a
           uniforms.uLamp.value = blend.current.lamp
           accent.uniformsNeedUpdate = true
         }
-      } else if (hybridProduction && original instanceof MeshStandardMaterial) {
+      } else if ((hybridProduction || sun) && original instanceof MeshStandardMaterial) {
         const kind = bookshelfMeshes.has(object) ? 'shelf' : original.name === 'RBN_DetailedRug' ? 'rug' : undefined
         if (kind) {
           let material = tints[kind].get(original)
           if (!material) {
             material = original.clone()
+            if (sun) installWindowSun(material, sun.direction)
             tints[kind].set(original, material)
             nightTints.current.push({ material, base: original.color, factor: NIGHT_DIFFUSE[kind] })
           }
           object.material = material
-        }
+        } else if (sun) object.material = sunMaterial(original, sun.direction, false)
+      }
+      if (sun && original instanceof MeshStandardMaterial
+        && ['RBN_WindowFrame', 'RBN_DetailedCurtain', 'RBN_WindowCurtain'].includes(original.name)) {
+        object.castShadow = true
       }
       const replacement = object.material
       restore.push(() => {
@@ -227,6 +261,7 @@ export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition, a
         object.onBeforeRender = beforeRender
         object.castShadow = castShadow
         object.receiveShadow = receiveShadow
+        object.visible = visible
         if (shadowOnly && replacement !== original && !Array.isArray(replacement)) {
           replacement.dispose()
         }
@@ -237,9 +272,11 @@ export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition, a
       nightTints.current.forEach(({ material }) => material.dispose())
       nightTints.current = []
       replacements.forEach(material => material.dispose())
+      sunMaterials.forEach(material => material.dispose())
+      shellMaterials.forEach(material => material.dispose())
       accent.dispose()
     }
-  }, [roots, uniforms])
+  }, [roots, sun, uniforms])
 
   useLayoutEffect(() => {
     if (!bakeReference || !(camera instanceof PerspectiveCamera)) return
@@ -298,10 +335,11 @@ export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition, a
   }, [size.width, size.height, viewport.dpr])
 
   useFrame((_, delta) => {
-    if (!active) return
+    if (!active || skyPreview) return
     const state = blend.current
     const layers = available.current
-    if (layers[mode]) state.night = step(state.night, Number(mode === 'night'), delta / 1.2)
+    if (sun && layers.day && layers.night) state.night = sun.night
+    if (!sun && layers[mode]) state.night = step(state.night, Number(mode === 'night'), delta / 1.2)
     if (layers.lamp) state.lamp = step(state.lamp, Number(lampOn), delta / 0.25)
     uniforms.lightDay.value = layers.day ?? initialTexture
     uniforms.lightNight.value = layers.night ?? initialTexture
@@ -326,8 +364,27 @@ export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition, a
       key.current.color.copy(lightColors.key[0]).lerp(lightColors.key[1], night)
     }
     if (windowLight.current) {
-      windowLight.current.intensity = lerp(6.5, 2.2)
+      windowLight.current.intensity = sun ? lerp(0.6, 1.1) : lerp(6.5, 2.2)
       windowLight.current.color.copy(lightColors.window[0]).lerp(lightColors.window[1], night)
+    }
+    if (sun && sunlight.current) {
+      const light = sunlight.current
+      const direction = sun.direction.value
+      const shadowSize = size.width < 768 ? 512 : 1024
+      light.intensity = sun.intensity
+      light.color.copy(sun.warm.value)
+      if (light.intensity > 0 && (!previousSunDirection.equals(direction) || previousShadowSize.current !== shadowSize)) {
+        light.position.copy(sunTarget.position).addScaledVector(direction, 12)
+        if (previousShadowSize.current !== shadowSize) {
+          light.shadow.map?.dispose()
+          light.shadow.map = null
+          light.shadow.mapSize.set(shadowSize, shadowSize)
+          previousShadowSize.current = shadowSize
+        }
+        light.shadow.needsUpdate = true
+        previousSunDirection.copy(direction)
+      }
+      if (light.intensity === 0) previousSunDirection.set(0, 0, 0)
     }
     if (bedside.current) bedside.current.intensity = 0.57 * night
     if (strip.current) strip.current.intensity = 0.42 * night
@@ -340,10 +397,18 @@ export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition, a
     <>
       <primitive object={target} />
       <hemisphereLight ref={hemisphere} />
-      <directionalLight ref={key} position={[3.1, 5.6, 4]} castShadow
+      <directionalLight ref={key} position={[3.1, 5.6, 4]} castShadow={!sun}
         shadow-intensity={0.34} shadow-mapSize={[1024, 1024]} shadow-normalBias={0.024}
         shadow-camera-left={-4} shadow-camera-right={4} shadow-camera-top={4} shadow-camera-bottom={-4}
         shadow-camera-near={0.1} shadow-camera-far={14} />
+      {sun && <>
+        <primitive object={sunTarget} />
+        <directionalLight ref={sunlight} target={sunTarget} intensity={0} castShadow
+          shadow-autoUpdate={false} shadow-bias={-0.00025} shadow-normalBias={0.008}
+          shadow-camera-left={-3.8} shadow-camera-right={3.8}
+          shadow-camera-top={3.8} shadow-camera-bottom={-3.8}
+          shadow-camera-near={7} shadow-camera-far={17} />
+      </>}
       <spotLight ref={windowLight} position={[1.59, 2.16, -2.03]} target={target} angle={0.95}
         distance={6} penumbra={0.94} />
       <pointLight ref={bedside} position={[-0.75, 0.83, -0.25]} color="#ffcb91" distance={2.5} />

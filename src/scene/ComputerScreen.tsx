@@ -10,7 +10,7 @@ import { DESKTOP_PX, SCREEN } from './layout'
  */
 const DISTANCE_FACTOR = (SCREEN.width * 400) / DESKTOP_PX.width
 
-export function ComputerScreen() {
+export function ComputerScreen({ hidden = false }: { hidden?: boolean }) {
   const { view } = useRoute()
   const active = view === 'computer'
 
@@ -22,7 +22,7 @@ export function ComputerScreen() {
       zIndexRange={[10, 0]}
       // 不在电脑视图时，让点击穿透到 3D 场景（点屏幕 = 点电脑）
       pointerEvents={active ? 'auto' : 'none'}
-      style={{ backfaceVisibility: 'hidden', display: view === 'world' ? 'none' : undefined }}
+      style={{ backfaceVisibility: 'hidden', display: hidden || view === 'world' ? 'none' : undefined }}
     >
       <Desktop active={active} />
     </Html>

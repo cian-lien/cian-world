@@ -8,7 +8,7 @@ import { useMemo, useSyncExternalStore } from 'react'
  *   #/computer         -> 电脑桌面
  * 好处：每个视图都有可分享的链接，浏览器的后退键也能用。
  */
-export type View = 'room' | 'diary' | 'computer' | 'world'
+export type View = 'room' | 'diary' | 'computer' | 'window' | 'world'
 
 export interface Route {
   view: View
@@ -23,6 +23,7 @@ export function parseHash(hash: string): Route {
     return { view: 'diary', slug }
   }
   if (parts[0] === 'computer') return { view: 'computer', slug: null }
+  if (parts[0] === 'window') return { view: 'window', slug: null }
   return { view: 'room', slug: null }
 }
 

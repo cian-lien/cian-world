@@ -1,9 +1,11 @@
 import * as THREE from 'three'
-import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from 'react'
 import { useFrame, type ThreeEvent } from '@react-three/fiber'
 import { Html } from '@react-three/drei'
 import { useRoute, type View } from '../route'
 import type { V3 } from './layout'
+
+export const RoomInteractions = createContext(true)
 
 interface Props {
   /** 悬停时显示的提示 */
@@ -26,7 +28,8 @@ interface Props {
  */
 export function Interactive({ label, labelHeight = 0.5, onSelect, position, rotation, children, activeViews = ['room'] }: Props) {
   const { view } = useRoute()
-  const active = activeViews.includes(view)
+  const interactive = useContext(RoomInteractions)
+  const active = interactive && activeViews.includes(view)
   const [hovered, setHovered] = useState(false)
   const inner = useRef<THREE.Group>(null)
 

@@ -4,6 +4,12 @@ export const zhCN = {
   environment: zhEnvironment,
   rooftop:zhRooftop,
   language: { label: '语言' },
+  sun: {
+    debug: '太阳调试', preview: '模拟时间', live: '实时', estimated: '估算',
+    localTime: '当地时间', altitude: '高度角', azimuth: '方位角', view: '预览视角',
+    room: '房间', sky: '天空', restore: '恢复实时', lookOut: '看看窗外',
+    dawn: '清晨', day: '白天', dusk: '黄昏', night: '夜晚',
+  },
   hud: {
     nightMode: '夜景模式', day: '日景', night: '夜景', back: '返回房间', computer: '电脑',
     hint: '点点房间里的东西：日记本、电脑、台灯，还有猫 🐾 · 拖动可以转动视角',
@@ -41,6 +47,12 @@ export const en = {
   environment: enEnvironment,
   rooftop:enRooftop,
   language: { label: 'Language' },
+  sun: {
+    debug: 'Sun preview', preview: 'Simulated time', live: 'Live', estimated: 'Estimated',
+    localTime: 'Local time', altitude: 'Altitude', azimuth: 'Azimuth', view: 'Preview view',
+    room: 'Room', sky: 'Sky', restore: 'Resume live time', lookOut: 'Look outside',
+    dawn: 'Dawn', day: 'Day', dusk: 'Dusk', night: 'Night',
+  },
   hud: {
     nightMode: 'Night mode', day: 'Day', night: 'Night', back: 'Back to room', computer: 'Computer',
     hint: 'Explore the diary, computer, lamp, and cat 🐾 · Drag to look around',

@@ -4,6 +4,7 @@ it('falls back to the room for retired rooftop links and preserves the diary and
   expect(parseHash('#/world')).toEqual({ view: 'room', slug: null })
   expect(parseHash('#/world/')).toEqual({ view: 'room', slug: null })
   expect(parseHash('#/computer').view).toBe('computer')
+  expect(parseHash('#/window').view).toBe('window')
   expect(parseHash('#/diary/hello%20room').slug).toBe('hello room')
   expect(() => parseHash('#/diary/%broken')).not.toThrow()
   expect(parseHash('#/unknown').view).toBe('room')

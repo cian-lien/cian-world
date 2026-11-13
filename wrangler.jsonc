@@ -4,6 +4,7 @@
   "workers_dev": true,
   "main": "worker/index.ts",
   "observability": { "enabled": false },
+  "previews": {},
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",

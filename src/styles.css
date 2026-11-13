@@ -39,6 +39,7 @@ a {
   position: absolute !important;
   inset: 0;
 }
+.canvas.sky-preview { pointer-events: none; }
 .muted {
   color: #8a7a6d;
 }
@@ -699,6 +700,25 @@ a {
   font: inherit;
 }
 
+.room-clock {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 6px 14px;
+  border: 2px solid var(--ui-ink);
+  border-radius: 999px;
+  color: var(--ui-ink);
+  background: var(--ui-paper);
+  box-shadow: 0 4px 0 var(--ui-ink);
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.room-clock time, .sun-debug { font-variant-numeric: tabular-nums; }
+.room-clock small { font-size: 11px; }
+.room-clock[data-phase='dawn'], .room-clock[data-phase='dusk'] { background: var(--ui-accent-soft); }
+.room-clock[data-phase='night'],
 .room-mode[aria-pressed='true'] {
   background: var(--ui-night-surface);
   border-color: var(--ui-night-line);
@@ -713,6 +733,54 @@ a {
 .room-mode[aria-pressed='true']:focus-visible {
   outline-color: var(--ui-night-line);
 }
+
+.sun-debug {
+  position: fixed;
+  z-index: 55;
+  right: 16px;
+  bottom: max(16px, env(safe-area-inset-bottom));
+  width: min(380px, calc(100% - 32px));
+  padding: 14px 16px;
+  border: 2px solid var(--ui-ink);
+  border-radius: 16px;
+  box-shadow: 0 4px 0 var(--ui-ink);
+  color: var(--ui-ink);
+  background: var(--ui-paper);
+  font-size: 14px;
+  line-height: 1.4;
+}
+.sun-debug-heading, .sun-debug-time, .sun-debug-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.sun-debug h2 { margin: 0; font-size: 17px; }
+.sun-debug p { margin: 5px 0; }
+.sun-debug-time { margin-top: 10px; }
+.sun-debug input {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  margin: 0;
+  accent-color: #a35a2b;
+  cursor: pointer;
+}
+.sun-debug-actions { flex-wrap: wrap; }
+.sun-debug-actions [role='group'] { display: flex; gap: 4px; }
+.sun-debug button {
+  min-height: 44px;
+  padding: 4px 10px;
+  border: 1px solid var(--ui-ink);
+  border-radius: 8px;
+  background: var(--ui-paper);
+  color: var(--ui-ink);
+  font: inherit;
+  cursor: pointer;
+}
+.sun-debug button[aria-pressed='true'] { background: var(--ui-accent-soft); font-weight: 700; }
+.sun-debug button:disabled { opacity: .55; cursor: default; }
+.sun-debug :focus-visible { outline: 2px solid var(--ui-ink); outline-offset: 2px; }
 
 /* Environment controls use the same paper, ink and hard shadows as the room. */
 .hud-brand{display:flex;flex-direction:column;align-items:flex-start;gap:10px;min-width:0;max-width:48vw}

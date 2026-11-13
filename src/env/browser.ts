@@ -2,13 +2,13 @@ import { createEnvironmentStore, type EnvironmentDependencies, type EnvironmentS
 import { parseEnvResponse } from '../../shared/env-api'
 
 /** Explicit adapter: importing this module neither starts timers nor makes requests. */
-export function createBrowserEnvironment(target: Window, fetchEnv?: EnvironmentDependencies['fetchEnv']): EnvironmentStore {
+export function createBrowserEnvironment(target: Window, fetchEnv?: EnvironmentDependencies['fetchEnv'], liveOnly = false): EnvironmentStore {
   let storage: Storage | undefined
-  try { storage = target.localStorage } catch { /* SecurityError in restricted frames. */ }
+  try { if (!liveOnly) storage = target.localStorage } catch { /* SecurityError in restricted frames. */ }
   const deviceTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
   return createEnvironmentStore({
     now: () => new Date(), clock: { timeZone: deviceTimeZone, deviceTimeZone },
-    getSearch: () => target.location.search,
+    getSearch: () => liveOnly ? '' : target.location.search,
     replaceSearch(search) { target.history.replaceState(target.history.state, '', `${target.location.pathname}${search}${target.location.hash}`) },
     storage, fetchEnv,
     visibility: {
@@ -24,23 +24,31 @@ export function createBrowserEnvironment(target: Window, fetchEnv?: EnvironmentD
 
 }
 let browserStore: EnvironmentStore | undefined
+let roomStore: EnvironmentStore | undefined
+
+const fetchBrowserEnvironment: NonNullable<EnvironmentDependencies['fetchEnv']> = async (signal, coordinates) => {
+  const params = new URLSearchParams()
+  if (coordinates) { params.set('lat', String(coordinates.latitude)); params.set('lon', String(coordinates.longitude)) }
+  if (import.meta.env.DEV) {
+    const mock = new URLSearchParams(window.location.search).get('mock')
+    if (mock) params.set('mock', mock)
+  }
+  const controller = new AbortController(), timeout = setTimeout(() => controller.abort(), 6000)
+  const abort = () => controller.abort()
+  signal.addEventListener('abort', abort, { once: true })
+  try {
+    const response = await fetch(`${import.meta.env.BASE_URL}api/env?${params}`, { signal: controller.signal, cache: 'no-store' })
+    return response.ok ? parseEnvResponse(await response.json()) : null
+  } finally { clearTimeout(timeout); signal.removeEventListener('abort', abort) }
+}
+
+export function getRoomEnvironment(): EnvironmentStore {
+  return roomStore ??= createBrowserEnvironment(window, fetchBrowserEnvironment, true)
+}
+
 export function getBrowserEnvironment(): EnvironmentStore {
-  if(browserStore)return browserStore
-  browserStore=createBrowserEnvironment(window, async (signal, coordinates) => {
-    const params = new URLSearchParams()
-    if (coordinates) { params.set('lat', String(coordinates.latitude)); params.set('lon', String(coordinates.longitude)) }
-    if (import.meta.env.DEV) {
-      const mock = new URLSearchParams(window.location.search).get('mock')
-      if (mock) params.set('mock', mock)
-    }
-    const controller = new AbortController(), timeout = setTimeout(() => controller.abort(), 6000)
-    const abort = () => controller.abort()
-    signal.addEventListener('abort', abort, { once: true })
-    try {
-      const response = await fetch(`${import.meta.env.BASE_URL}api/env?${params}`, { signal: controller.signal, cache: 'no-store' })
-      return response.ok ? parseEnvResponse(await response.json()) : null
-    } finally { clearTimeout(timeout); signal.removeEventListener('abort', abort) }
-  })
+  if (browserStore) return browserStore
+  browserStore = createBrowserEnvironment(window, fetchBrowserEnvironment)
   if(import.meta.env.DEV||new URLSearchParams(location.search).has('perf')||new URLSearchParams(location.search).has('capture'))Object.assign(window,{__environment:{snapshot:browserStore.getSnapshot,status:browserStore.getStatus}})
   return browserStore
 }

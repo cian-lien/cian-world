@@ -31,7 +31,7 @@ function takeInteractive(scene: THREE.Group, name: string) {
   return { object, position: position.toArray() }
 }
 
-export function Room({ mode, active = true }: { mode: RoomMode; active?: boolean }) {
+export function Room({ mode, active = true, skyPreview = false }: { mode: RoomMode; active?: boolean; skyPreview?: boolean }) {
   const { t } = useTranslation()
   const modelUrl = hybridRoom ? `${hybridRoomUrl}room.glb`
     : bakeTrial ? `${bakeTrialUrl}room.glb`
@@ -96,7 +96,7 @@ export function Room({ mode, active = true }: { mode: RoomMode; active?: boolean
     <>
       <primitive object={model} />
       {hybridRoom && <HybridTrialLayers roots={bakedRoots} mode={mode} lampOn={lampOn}
-        lampPosition={lampPosition ?? lamp.position} active={active} />}
+        lampPosition={lampPosition ?? lamp.position} active={active} skyPreview={skyPreview} />}
       {bakeTrial && <BakedTrialLayers active={active} roots={bakedRoots} mode={mode} lampOn={lampOn} />}
       {!bakeTrial && !hybridRoom && <ContactShadows
         position={[0, 0.004, 0]}
@@ -120,7 +120,7 @@ export function Room({ mode, active = true }: { mode: RoomMode; active?: boolean
         navigate('/computer')
       }}>
         <primitive object={computer.object} />
-        {!bakeReference && <ComputerScreen />}
+        {!bakeReference && <ComputerScreen hidden={skyPreview} />}
       </Interactive>
       <Interactive label={t(lampOn ? 'scene.lampOff' : 'scene.lampOn')} labelHeight={0.65} position={lamp.position} onSelect={() => {
         playRoomSound('lamp')
