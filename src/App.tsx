@@ -49,7 +49,7 @@ export default function App() {
   }, [view])
 
   useEffect(() => {
-    if (view === 'room') document.title = site.title
+    if (view === 'room' || view === 'window') document.title = site.title
     if (view === 'computer') document.title = `${t('hud.computer')} · ${site.title}`
   }, [view, t])
 
