@@ -3,7 +3,7 @@ import { useEffect, useRef, type ElementRef } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import { CameraControls } from '@react-three/drei'
 import { useRoute } from '../route'
-import { DIARY_VIEW, ROOM_VIEW, SCREEN, SCREEN_CENTER, type V3 } from './layout'
+import { DIARY_VIEW, ROOM_FOV, ROOM_VIEW, SCREEN, SCREEN_CENTER, WINDOW_FOV, type V3 } from './layout'
 import { roomWindow } from './windowAnchors'
 
 type Controls = ElementRef<typeof CameraControls>
@@ -27,6 +27,12 @@ export function CameraRig({ liveSun = false }: { liveSun?: boolean }) {
     // Drei skips updates while input is disabled. Advance route transitions here.
     const controls = ref.current
     if (controls && !controls.enabled) controls.update(delta)
+    const fov = view === 'window' && liveSun ? WINDOW_FOV : ROOM_FOV
+    if (camera.fov !== fov) {
+      const next = THREE.MathUtils.damp(camera.fov, fov, 8, delta)
+      camera.fov = Math.abs(next - fov) < 0.01 ? fov : next
+      camera.updateProjectionMatrix()
+    }
   }, -1)
 
   useEffect(() => {
@@ -61,16 +67,14 @@ export function CameraRig({ liveSun = false }: { liveSun?: boolean }) {
       })
     } else if (view === 'window') {
       const [x, y, z] = roomWindow.center
-      // Keep enough distance to read the mullions and a portion of the sky together.
-      const distance = Math.max(1.35, 0.96 / (width / height))
-      fly([x + .12, y - .28, z + distance], [x + .02, y + .18, z - .45])
+      fly([x + 0.12, y - 0.43, z + 0.74], [x + 0.12, y + 0.16, z - 0.63])
     } else if (view === 'world') {
       fly([1.55,3.4,1.4],[1.55,2.3,-2.285])
     } else if (view === 'diary') {
       fly(DIARY_VIEW.position, DIARY_VIEW.target)
     } else if (view === 'computer') {
       // 根据窗口宽高比算出镜头距离，让屏幕刚好占满约 88% 的视野
-      const tanV = Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2)
+      const tanV = Math.tan(THREE.MathUtils.degToRad(ROOM_FOV) / 2)
       const tanH = tanV * (width / height)
       const fill = 0.88
       const d = Math.max(SCREEN.width / (2 * tanH * fill), SCREEN.height / (2 * tanV * fill))

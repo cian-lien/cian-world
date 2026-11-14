@@ -191,7 +191,7 @@ export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition, a
       if (!(object instanceof Mesh)) return
       const original = object.material
       const beforeRender = object.onBeforeRender
-      const { castShadow, receiveShadow } = object
+      const { castShadow, receiveShadow, renderOrder } = object
       const shadowOnly = Boolean(object.userData.shadowOnly)
       object.castShadow = shadowOnly
       object.receiveShadow = !shadowOnly
@@ -200,6 +200,7 @@ export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition, a
       if (glass && name === 'glass') {
         object.material = glass
         object.receiveShadow = false
+        object.renderOrder = 2
       } else if (sun && shell && original instanceof MeshStandardMaterial) {
         object.material = sunMaterial(original, sun.direction, true)
       } else if (shell && original instanceof MeshStandardMaterial) {
@@ -268,6 +269,7 @@ export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition, a
         object.onBeforeRender = beforeRender
         object.castShadow = castShadow
         object.receiveShadow = receiveShadow
+        object.renderOrder = renderOrder
         if (shadowOnly && replacement !== original && !Array.isArray(replacement)) {
           replacement.dispose()
         }

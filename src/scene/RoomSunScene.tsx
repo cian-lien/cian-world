@@ -3,7 +3,7 @@ import type { ReactNode } from 'react'
 import { createPortal, useFrame } from '@react-three/fiber'
 import { Camera, Color, MathUtils, Scene, ShaderMaterial, Vector3 } from 'three'
 import { roomSunDirection, type SunPosition } from './roomSun'
-import { roomWindow, windowGlass } from './windowAnchors'
+import { roomWindow } from './windowAnchors'
 import { Interactive } from './Interactive'
 import { navigate } from '../route'
 import { useTranslation } from 'react-i18next'
@@ -81,21 +81,6 @@ export function RoomSunScene({ sun, scrubbing, children }: {
   return <RoomSunContext.Provider value={current}>{children}</RoomSunContext.Provider>
 }
 
-const skyVertex = /* glsl */ `
-  varying vec2 vScreen;
-  varying vec3 vSkyPosition;
-  void main() {
-    #ifdef SKY_PREVIEW
-      vScreen = position.xy * 2.0;
-      gl_Position = vec4(vScreen, 0.0, 1.0);
-    #else
-      vec4 world = modelMatrix * vec4(position, 1.0);
-      vSkyPosition = world.xyz;
-      gl_Position = projectionMatrix * viewMatrix * world;
-    #endif
-  }
-`
-
 export const skyRadiance = /* glsl */ `
   uniform vec3 uSunDirection;
   uniform float uSunAltitude;
@@ -135,70 +120,68 @@ export const skyRadiance = /* glsl */ `
   }
 `
 
-const skyFragment = /* glsl */ `
+const skyPreviewFragment = /* glsl */ `
   uniform float uAspect;
-  uniform vec3 uGlassSunColor;
   varying vec2 vScreen;
-  varying vec3 vSkyPosition;
   ${skyRadiance}
-  ${windowOptics}
   void main() {
-    #ifdef SKY_PREVIEW
-      vec2 heading = uSunDirection.xz;
-      heading = length(heading) > 0.0001 ? normalize(heading) : vec2(0.0, -1.0);
-      float pitch = radians(18.0 + 32.0 * smoothstep(4.0, 90.0, uSunAltitude));
-      vec3 forward = vec3(heading.x * cos(pitch), sin(pitch), heading.y * cos(pitch));
-      vec3 right = normalize(cross(forward, vec3(0.0, 1.0, 0.0)));
-      vec3 up = cross(right, forward);
-      vec3 ray = normalize(forward + 1.07 * (right * vScreen.x * uAspect + up * vScreen.y));
-      vec3 color = sampleSky(ray, uSunDirection, 0.013);
-    #else
-      vec3 ray = normalize(vSkyPosition - cameraPosition);
-      vec3 normal = vec3(0.0, 0.0, 1.0);
-      vec3 glassRay = refract(ray, normal, 1.0 / ${windowGlass.ior});
-      vec3 exitRay = refract(glassRay, normal, ${windowGlass.ior});
-      if (dot(exitRay, exitRay) < 0.5) exitRay = ray;
-      float fresnel = paneFresnel(-ray.z);
-      vec3 transmitted = sampleSky(exitRay, uSunDirection, 0.01047);
-      vec3 reflection = mix(vec3(0.04, 0.06, 0.11), vec3(0.26, 0.40, 0.62), smoothstep(-6.0, 25.0, uSunAltitude));
-      float facingSun = smoothstep(0.0, 0.24, -uSunDirection.z) * smoothstep(0.0, 2.6, uSunAltitude);
-      vec3 inwardLight = reflect(-uSunDirection, -normal);
-      float specular = pow(max(0.0, dot(-ray, inwardLight)), 18.0);
-      float glare = exp(-9.0 * length(exitRay - uSunDirection));
-      vec2 pane = (vSkyPosition.xy - vec2(${roomWindow.center.slice(0, 2).join(', ')}))
-        / vec2(${roomWindow.size.join(', ')}) + 0.5;
-      vec2 paneEdge = min(pane, 1.0 - pane);
-      float illuminatedEdge = uSunDirection.x < 0.0 ? pane.x : 1.0 - pane.x;
-      float bevel = exp(-paneEdge.y * 73.0) * smoothstep(0.35, 0.85, pane.y)
-        + exp(-illuminatedEdge * 50.0) * smoothstep(0.10, 0.98, pane.y);
-      float streakPosition = 0.45 + 0.42 * uSunDirection.x;
-      float streakDistance = (pane.x - streakPosition - 0.22 * (pane.y - 0.5)) / 0.047;
-      float streak = exp(-streakDistance * streakDistance) * smoothstep(0.18, 0.90, pane.y);
-      vec3 color = mix(transmitted * vec3(0.89, 0.96, 1.0), reflection, fresnel);
-      float lowLight = 1.0 - smoothstep(3.0, 24.0, uSunAltitude);
-      color += facingSun * uGlassSunColor * (glare * 1.9 + specular * 0.12 + bevel * 2.6
-        + streak * 0.40 + lowLight * 0.62 * smoothstep(0.02, 0.72, pane.y));
-    #endif
-    gl_FragColor = vec4(color, 1.0);
+    vec2 heading = uSunDirection.xz;
+    heading = length(heading) > 0.0001 ? normalize(heading) : vec2(0.0, -1.0);
+    float pitch = radians(18.0 + 32.0 * smoothstep(4.0, 90.0, uSunAltitude));
+    vec3 forward = vec3(heading.x * cos(pitch), sin(pitch), heading.y * cos(pitch));
+    vec3 right = normalize(cross(forward, vec3(0.0, 1.0, 0.0)));
+    vec3 up = cross(right, forward);
+    vec3 ray = normalize(forward + 1.07 * (right * vScreen.x * uAspect + up * vScreen.y));
+    gl_FragColor = vec4(sampleSky(ray, uSunDirection, 0.013), 1.0);
     #include <tonemapping_fragment>
     #include <colorspace_fragment>
   }
 `
 
-function skyMaterial(sun: SunFrame, preview: boolean) {
-  return new ShaderMaterial({
-    vertexShader: skyVertex,
-    fragmentShader: skyFragment,
-    defines: preview ? { SKY_PREVIEW: 1 } : {},
-    uniforms: { uSunDirection: sun.direction, uSunAltitude: sun.altitude,
-      uGlassSunColor: sun.warm, uAspect: { value: 1 } },
-    depthTest: !preview,
-    depthWrite: !preview,
-  })
-}
-
 export function createWindowGlass(sun: SunFrame) {
-  return skyMaterial(sun, false)
+  return new ShaderMaterial({
+    uniforms: { uSunDirection: sun.direction, uSunAltitude: sun.altitude,
+      uGlassSunColor: sun.warm },
+    transparent: true,
+    depthWrite: false,
+    vertexShader: /* glsl */ `
+      varying vec3 vGlassPosition;
+      void main() {
+        vec4 world = modelMatrix * vec4(position, 1.0);
+        vGlassPosition = world.xyz;
+        gl_Position = projectionMatrix * viewMatrix * world;
+      }
+    `,
+    fragmentShader: /* glsl */ `
+      uniform vec3 uSunDirection, uGlassSunColor;
+      uniform float uSunAltitude;
+      varying vec3 vGlassPosition;
+      ${windowOptics}
+      void main() {
+        vec3 ray = normalize(vGlassPosition - cameraPosition);
+        vec3 normal = vec3(0.0, 0.0, 1.0);
+        float fresnel = paneFresnel(-ray.z);
+        vec3 reflection = mix(vec3(0.04, 0.06, 0.11), vec3(0.26, 0.40, 0.62), smoothstep(-6.0, 25.0, uSunAltitude));
+        float facingSun = smoothstep(0.0, 0.24, -uSunDirection.z) * smoothstep(0.0, 2.6, uSunAltitude);
+        vec3 inwardLight = reflect(-uSunDirection, normal);
+        float specular = pow(max(0.0, dot(-ray, inwardLight)), 18.0);
+        vec2 pane = (vGlassPosition.xy - vec2(${roomWindow.center.slice(0, 2).join(', ')}))
+          / vec2(${roomWindow.size.join(', ')}) + 0.5;
+        vec2 paneEdge = min(pane, 1.0 - pane);
+        float illuminatedEdge = uSunDirection.x < 0.0 ? pane.x : 1.0 - pane.x;
+        float bevel = exp(-paneEdge.y * 73.0) * smoothstep(0.35, 0.85, pane.y)
+          + exp(-illuminatedEdge * 50.0) * smoothstep(0.10, 0.98, pane.y);
+        float streakPosition = 0.45 + 0.42 * uSunDirection.x;
+        float streakDistance = (pane.x - streakPosition - 0.22 * (pane.y - 0.5)) / 0.047;
+        float streak = exp(-streakDistance * streakDistance) * smoothstep(0.18, 0.90, pane.y);
+        float highlight = facingSun * (specular * 0.12 + bevel * 1.25 + streak * 0.21);
+        float opacity = clamp(fresnel + highlight * 0.25, 0.04, 0.65);
+        gl_FragColor = vec4((fresnel * reflection + uGlassSunColor * highlight) / opacity, opacity);
+        #include <tonemapping_fragment>
+        #include <colorspace_fragment>
+      }
+    `,
+  })
 }
 
 export function RoomWindowHotspot() {
@@ -213,7 +196,13 @@ export function RoomWindowHotspot() {
 
 export function SunSkyPreview() {
   const sun = useSunFrame()
-  const material = useMemo(() => sun && skyMaterial(sun, true), [sun])
+  const material = useMemo(() => sun && new ShaderMaterial({
+    vertexShader: 'varying vec2 vScreen; void main() { vScreen = position.xy * 2.0; gl_Position = vec4(vScreen, 0.0, 1.0); }',
+    fragmentShader: skyPreviewFragment,
+    uniforms: { uSunDirection: sun.direction, uSunAltitude: sun.altitude, uAspect: { value: 1 } },
+    depthTest: false,
+    depthWrite: false,
+  }), [sun])
   const scene = useMemo(() => new Scene(), [])
   const camera = useMemo(() => new Camera(), [])
   useEffect(() => () => material?.dispose(), [material])

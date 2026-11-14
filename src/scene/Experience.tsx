@@ -5,7 +5,7 @@ import { AgXToneMapping, DoubleSide, Object3D, Path, Shape } from 'three'
 import { Room } from './Room'
 import { CameraRig } from './CameraRig'
 import { bakeReference, bakeTrial, hybridRoom } from './bakeTrial'
-import { INTRO_POSITION, type RoomMode } from './layout'
+import { INTRO_POSITION, ROOM_FOV, type RoomMode } from './layout'
 import { RoomSunScene, RoomWindowHotspot, SunSkyPreview } from './RoomSunScene'
 import { RoomSky } from './RoomSky'
 import type { SunPosition } from './roomSun'
@@ -16,10 +16,10 @@ import { useTranslation } from 'react-i18next'
 import {SceneBoundary} from '../ui/SceneBoundary'
 const WorldScene = import.meta.env.DEV ? lazy(() => import('../world/WorldScene')) : null
 
-export function Experience({ mode, sun, skyTime = 43200, skyPreview = false, sunPreviewing = false, referenceStore, onError }: {
+export function Experience({ mode, sun, cloudPreviewTime, skyPreview = false, sunPreviewing = false, referenceStore, onError }: {
   mode: RoomMode
   sun?: SunPosition
-  skyTime?: number
+  cloudPreviewTime?: number
   skyPreview?: boolean
   sunPreviewing?: boolean
   referenceStore?: EnvironmentStore
@@ -35,7 +35,7 @@ export function Experience({ mode, sun, skyTime = 43200, skyPreview = false, sun
         shadows={!!reference || !bakeTrial}
         gl={{ toneMapping: AgXToneMapping, preserveDrawingBuffer: !!reference || (hybridRoom && bakeReference) || new URLSearchParams(location.search).has('capture') }}
         dpr={reference ? 1 : [1, 2]}
-        camera={{ position: INTRO_POSITION, fov: 35, near: 0.1, far: 100 }}
+        camera={{ position: INTRO_POSITION, fov: ROOM_FOV, near: 0.1, far: 100 }}
         className={skyPreview ? 'canvas sky-preview' : 'canvas'}
       >
         {!reference && !bakeTrial && !hybridRoom && (
@@ -47,7 +47,7 @@ export function Experience({ mode, sun, skyTime = 43200, skyPreview = false, sun
         <Suspense fallback={null}>
           {WorldScene && reference ? <WorldScene referenceStore={reference} /> : sun ? (
             <RoomSunScene sun={sun} scrubbing={sunPreviewing}>
-              <RoomSky localSeconds={skyTime} previewing={sunPreviewing} />
+              <RoomSky previewTime={cloudPreviewTime} />
               <RoomInteractions.Provider value={!skyPreview}>
                 <Room mode={mode} skyPreview={skyPreview} />
                 <RoomWindowHotspot />

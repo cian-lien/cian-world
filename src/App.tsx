@@ -64,7 +64,7 @@ export default function App() {
   return (
     <div className="app">
       <Experience mode={mode} sun={liveRoomSun ? clock.sun : undefined} skyPreview={skyPreview}
-        skyTime={clock.minute * 60 + clock.wall.second} sunPreviewing={clock.previewing}
+        cloudPreviewTime={clock.previewing ? clock.time.getTime() : undefined} sunPreviewing={clock.previewing}
         onError={() => setSceneError(true)} />
       {!bakeReference && <>
         <header className="hud">

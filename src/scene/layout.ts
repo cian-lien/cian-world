@@ -8,6 +8,8 @@ export const ROOM_VIEW = {
 }
 
 export const INTRO_POSITION: V3 = [15, 13, 15]
+export const ROOM_FOV = 35
+export const WINDOW_FOV = 68
 
 export const DIARY_VIEW = {
   position: [-0.77, 2, -0.9] as V3,
