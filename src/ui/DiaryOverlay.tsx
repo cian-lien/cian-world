@@ -1,11 +1,11 @@
 import { useEffect, type MouseEvent } from 'react'
-import { navigate, postHref, useRoute } from '../route'
+import { postHref, useRoute } from '../route'
 import { posts } from '../content/posts'
 import { site } from '../content/site'
 import { playRoomSound } from '../sound'
 import { useTranslation } from 'react-i18next'
 import { useLocale } from '../i18n'
-import { LanguageSwitcher } from './LanguageSwitcher'
+import { ContentDialog } from './ContentDialog'
 
 /**
  * 点击日记本后出现的 2D 阅读层：左页是目录，右页是正文。
@@ -30,19 +30,16 @@ export function DiaryOverlay() {
   }
 
   return (
-    <div className="diary-backdrop" onClick={() => navigate('/')}>
-      <div className="diary-book" onClick={(e) => e.stopPropagation()}>
-        <section className="page page-left">
-          <div className="diary-heading">
-            <h2 className="hand">📔 {t('diary.title')}</h2>
-            <LanguageSwitcher />
-          </div>
+    <ContentDialog title={t('diary.title')} pageKey={slug ?? 'index'} wide>
+      <div className="diary-book" data-reading={slug !== null}>
+        <section className="page page-left" aria-label={t('navigation.articles')}>
           <p className="muted">{t('diary.count', { count: posts.length })}</p>
           {locale === 'en' && <p className="original-language-note">{t('diary.originalLanguage')}</p>}
           <ul className="post-list">
             {posts.map((p) => (
               <li key={p.slug} className={p.slug === slug ? 'active' : ''}>
-                <a href={postHref(p.slug)} onClick={(event) => turnPage(event, p.slug)}>
+                <a href={postHref(p.slug)} aria-current={p.slug === slug ? 'page' : undefined}
+                  onClick={(event) => turnPage(event, p.slug)}>
                   <span className="date">{p.date}</span>
                   <span className="title" lang="zh-CN">{p.title}</span>
                 </a>
@@ -52,9 +49,10 @@ export function DiaryOverlay() {
         </section>
 
         <section className="page page-right" key={slug ?? 'index'}>
+          {slug && <a className="diary-back-to-list" href="#/diary">← {t('diary.backToList')}</a>}
           {post ? (
             <article lang="zh-CN">
-              <h1 className="hand">{post.title}</h1>
+              <h2 className="hand article-title" data-reading-heading tabIndex={-1}>{post.title}</h2>
               <div className="meta">
                 {post.date}
                 {post.tags.map((t) => (
@@ -64,10 +62,10 @@ export function DiaryOverlay() {
               <div className="md" dangerouslySetInnerHTML={{ __html: post.html }} />
             </article>
           ) : slug ? (
-            <p className="empty">{t('diary.missing', { slug })}</p>
+            <p className="empty" data-reading-heading tabIndex={-1}>{t('diary.missing', { slug })}</p>
           ) : (
             <div className="welcome">
-              <h1 className="hand">{t('diary.welcome')}</h1>
+              <h2 className="hand">{t('diary.welcome')}</h2>
               <p>{t('diary.intro')}</p>
               {posts[0] && (
                 <a className="latest" href={postHref(posts[0].slug)} onClick={(event) => turnPage(event, posts[0].slug)}>
@@ -78,10 +76,7 @@ export function DiaryOverlay() {
           )}
         </section>
 
-        <button className="diary-close" onClick={() => navigate('/')} aria-label={t('diary.close')}>
-          ×
-        </button>
       </div>
-    </div>
+    </ContentDialog>
   )
 }

@@ -29,6 +29,7 @@ interface ProjectConfig {
   desc: Localized<string>
   tech: string[]
   url: string
+  sample?: boolean
 }
 
 const projects: ProjectConfig[] = [
@@ -40,10 +41,11 @@ const projects: ProjectConfig[] = [
       en: 'A personal world that starts in a 3D room, showcasing my projects, profile, and writing.',
     },
     tech: ['R3F', 'Three.js', 'Blender', 'Markdown'],
-    url: 'https://github.com/',
+    url: 'https://github.com/cian-lien/cian-world',
   },
   {
     id: 'example-b',
+    sample: true,
     name: { 'zh-CN': '示例项目 B', en: 'Example project B' },
     desc: {
       'zh-CN': '在这里写一句话介绍你的项目，比如它解决了什么问题。',
@@ -54,6 +56,7 @@ const projects: ProjectConfig[] = [
   },
   {
     id: 'example-c',
+    sample: true,
     name: { 'zh-CN': '示例项目 C', en: 'Example project C' },
     desc: {
       'zh-CN': '可以放公司项目的脱敏版介绍，或者自己的练手项目。',

@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react'
 import { navigate, postHref } from '../route'
 import { playRoomSound } from '../sound'
 import { posts } from '../content/posts'
 import { getSite } from '../content/site'
 import { useTranslation } from 'react-i18next'
 import { useLocale } from '../i18n'
+import { AboutProfile, ProjectList } from './SiteContent'
 
 /**
  * 仿桌面系统「RoomOS」：显示在电脑屏幕里的一个普通 React 组件。
@@ -45,6 +46,10 @@ export function Desktop({ active }: { active: boolean }) {
   const [wins, setWins] = useState<Win[]>([{ id: 'about', x: 300, y: 70, z: 1 }])
   const zTop = useRef(1)
   const rootRef = useRef<HTMLDivElement>(null)
+
+  useLayoutEffect(() => {
+    if (rootRef.current) rootRef.current.inert = !active
+  }, [active])
 
   const focus = (id: AppId) => setWins((ws) => ws.map((w) => (w.id === id ? { ...w, z: ++zTop.current } : w)))
 
@@ -91,8 +96,8 @@ export function Desktop({ active }: { active: boolean }) {
           onClose={() => close(w.id)}
           onMove={(x, y) => move(w.id, x, y)}
         >
-          {w.id === 'about' && <AboutApp />}
-          {w.id === 'projects' && <ProjectsApp />}
+          {w.id === 'about' && <AboutProfile />}
+          {w.id === 'projects' && <ProjectList showSamples />}
           {w.id === 'browser' && <BrowserApp />}
           {w.id === 'terminal' && <TerminalApp />}
         </Window>
@@ -194,56 +199,6 @@ function Taskbar({ wins, onPick }: { wins: Win[]; onPick: (id: AppId) => void })
 }
 
 /* ---------------- 应用 ---------------- */
-
-function AboutApp() {
-  const site = getSite(useLocale())
-  return (
-    <div className="about">
-      <div className="avatar">{site.avatar}</div>
-      <h3>{site.name}</h3>
-      <p className="muted">
-        {site.role} · {site.location}
-      </p>
-      <p>{site.bio}</p>
-      <div className="chips">
-        {site.skills.map((s) => (
-          <span key={s} className="chip">
-            {s}
-          </span>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-function ProjectsApp() {
-  const { t } = useTranslation()
-  const site = getSite(useLocale())
-  return (
-    <div className="projects">
-      {site.projects.map((p) => (
-        <div key={p.id} className="card">
-          <div className="card-head">
-            <b>📦 {p.name}</b>
-            {p.url && (
-              <a href={p.url} target="_blank" rel="noreferrer">
-                {t('desktop.view')}
-              </a>
-            )}
-          </div>
-          <p>{p.desc}</p>
-          <div className="chips">
-            {p.tech.map((t) => (
-              <span key={t} className="chip">
-                {t}
-              </span>
-            ))}
-          </div>
-        </div>
-      ))}
-    </div>
-  )
-}
 
 function BrowserApp() {
   const { t } = useTranslation()

@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { installAudio, setAudioRoomMode } from './audio/browser'
 import { site } from './content/site'
 import { navigate, useRoute } from './route'
-import { Experience } from './scene/Experience'
 import { bakeReference, debugRoomSun, liveRoomSun } from './scene/bakeTrial'
 import type { RoomMode } from './scene/layout'
 import { useRoomSun } from './scene/useRoomSun'
@@ -11,8 +10,14 @@ import { DiaryOverlay } from './ui/DiaryOverlay'
 import { LanguageSwitcher } from './ui/LanguageSwitcher'
 import { SoundButton } from './ui/SoundButton'
 import { SunDebugPanel } from './ui/SunDebugPanel'
+import { SceneBoundary } from './ui/SceneBoundary'
+import { SiteContent } from './ui/SiteContent'
 
 const modeStorageKey = 'room-blog.mode.v1'
+const Experience = lazy(() => import('./scene/Experience').then(module => ({ default: module.Experience })))
+const contentLinks = { diary: 'articles', projects: 'projects', about: 'about' } as const
+const isContentView = (view: string): view is keyof typeof contentLinks =>
+  view === 'diary' || view === 'projects' || view === 'about'
 
 function initialMode(): RoomMode {
   if (liveRoomSun) return 'day'
@@ -26,6 +31,10 @@ function initialMode(): RoomMode {
 export default function App() {
   const { t } = useTranslation()
   const { view } = useRoute()
+  const contentOpen = isContentView(view)
+  const [visitedRoom, setVisitedRoom] = useState(!contentOpen)
+  const previousView = useRef(view)
+  const contentNav = useRef<HTMLElement>(null)
   const [legacyMode, setMode] = useState(initialMode)
   const [sceneError, setSceneError] = useState(false)
   const [sky, setSky] = useState(false)
@@ -39,6 +48,15 @@ export default function App() {
   useEffect(() => {
     if (!bakeReference) setAudioRoomMode(mode)
   }, [mode])
+
+  useEffect(() => {
+    const previous = previousView.current
+    previousView.current = view
+    if (!contentOpen) setVisitedRoom(true)
+    if (view === 'room' && isContentView(previous) && document.activeElement === document.body) {
+      contentNav.current?.querySelector<HTMLElement>(`a[href="#/${previous}"]`)?.focus()
+    }
+  }, [view, contentOpen])
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
@@ -62,10 +80,14 @@ export default function App() {
   const time = [clock.wall.hour, clock.wall.minute].map(part => String(part).padStart(2, '0')).join(':')
 
   return (
-    <div className="app">
-      <Experience mode={mode} sun={liveRoomSun ? clock.sun : undefined} skyPreview={skyPreview}
-        cloudPreviewTime={clock.previewing ? clock.time.getTime() : undefined} sunPreviewing={clock.previewing}
-        onError={() => setSceneError(true)} />
+    <div className={contentOpen ? 'app content-open' : 'app'}>
+      {(visitedRoom || !contentOpen || bakeReference) && <SceneBoundary onError={() => setSceneError(true)}>
+        <Suspense fallback={null}>
+          <Experience mode={mode} sun={liveRoomSun ? clock.sun : undefined} skyPreview={skyPreview}
+            cloudPreviewTime={clock.previewing ? clock.time.getTime() : undefined} sunPreviewing={clock.previewing}
+            onError={() => setSceneError(true)} />
+        </Suspense>
+      </SceneBoundary>}
       {!bakeReference && <>
         <header className="hud">
           <div className="brand"><span className="brand-emoji">🏠</span><b>{site.title}</b></div>
@@ -90,16 +112,25 @@ export default function App() {
             )}
           </div>
         </header>
-        {view === 'room' && !debugRoomSun && <div className="hint">{t('hud.hint')}</div>}
+        {(view === 'room' || (contentOpen && visitedRoom)) && <div className={`room-entry${debugRoomSun ? ' room-entry-debug' : ''}`}>
+          <nav className="room-nav" ref={contentNav} aria-label={t('navigation.label')}>
+            {Object.entries(contentLinks).map(([path, label]) =>
+              <a key={path} href={`#/${path}`}>{t(`navigation.${label}`)}</a>)}
+          </nav>
+          {!debugRoomSun && !sceneError && <>
+            <p className="hint">{t('hud.hint')}</p>
+            <p className="mobile-note">{t('hud.mobile')}</p>
+          </>}
+        </div>}
         {(view === 'room' || view === 'window') && debugRoomSun && <SunDebugPanel clock={clock} sky={skyPreview}
           onView={next => { if (view === 'window') navigate('/'); setSky(next) }} />}
         {sceneError && <div className="scene-error" role="alert">
           <p>{t('hud.roomLoadError')}</p>
           <button className="paper-button" onClick={() => location.reload()}>{t('environment.retry')}</button>
         </div>}
-        <div className="mobile-note">{t('hud.mobile')}</div>
       </>}
       <DiaryOverlay />
+      {(view === 'projects' || view === 'about') && <SiteContent view={view} />}
     </div>
   )
 }

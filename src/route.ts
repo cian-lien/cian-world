@@ -6,9 +6,11 @@ import { useMemo, useSyncExternalStore } from 'react'
  *   #/diary            -> 日记本（文章列表）
  *   #/diary/<slug>     -> 某篇文章
  *   #/computer         -> 电脑桌面
+ *   #/projects         -> 项目
+ *   #/about            -> 关于
  * 好处：每个视图都有可分享的链接，浏览器的后退键也能用。
  */
-export type View = 'room' | 'diary' | 'computer' | 'window' | 'world'
+export type View = 'room' | 'diary' | 'projects' | 'about' | 'computer' | 'window' | 'world'
 
 export interface Route {
   view: View
@@ -24,6 +26,7 @@ export function parseHash(hash: string): Route {
   }
   if (parts[0] === 'computer') return { view: 'computer', slug: null }
   if (parts[0] === 'window') return { view: 'window', slug: null }
+  if (parts[0] === 'projects' || parts[0] === 'about') return { view: parts[0], slug: null }
   return { view: 'room', slug: null }
 }
 

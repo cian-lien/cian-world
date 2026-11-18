@@ -4,6 +4,7 @@ export const zhCN = {
   environment: zhEnvironment,
   rooftop:zhRooftop,
   language: { label: '语言' },
+  navigation: { label: '内容导航', articles: '文章', projects: '项目', about: '关于' },
   sun: {
     debug: '太阳调试', preview: '模拟时间', live: '实时', estimated: '估算',
     localTime: '当地时间', altitude: '高度角', azimuth: '方位角', view: '预览视角',
@@ -25,6 +26,7 @@ export const zhCN = {
     missing: '这一页被撕掉了……找不到「{{slug}}」。', welcome: '欢迎翻开我的日记本',
     intro: '左边是目录，点一篇开始读吧。', latest: '最新：{{title}} →', close: '合上日记本',
     originalLanguage: '文章原文为中文。',
+    backToList: '返回目录',
   },
   desktop: {
     about: '关于我.txt', projects: '我的项目', browser: '浏览器', terminal: '终端', blog: '日记本',
@@ -47,6 +49,7 @@ export const en = {
   environment: enEnvironment,
   rooftop:enRooftop,
   language: { label: 'Language' },
+  navigation: { label: 'Site content', articles: 'Articles', projects: 'Projects', about: 'About' },
   sun: {
     debug: 'Sun preview', preview: 'Simulated time', live: 'Live', estimated: 'Estimated',
     localTime: 'Local time', altitude: 'Altitude', azimuth: 'Azimuth', view: 'Preview view',
@@ -68,6 +71,7 @@ export const en = {
     missing: 'This page seems to be missing… Could not find “{{slug}}”.', welcome: 'Welcome to my diary',
     intro: 'Pick an entry on the left to start reading.', latest: 'Latest: {{title}} →', close: 'Close the diary',
     originalLanguage: 'Articles are currently available in Chinese.',
+    backToList: 'Back to articles',
   },
   desktop: {
     about: 'About me.txt', projects: 'My projects', browser: 'Browser', terminal: 'Terminal', blog: 'Diary',
