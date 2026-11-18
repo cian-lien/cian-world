@@ -15,7 +15,6 @@ import type { RoomMode, V3 } from './layout'
 import { createWindowGlass, useSunFrame } from './RoomSunScene'
 import { installWindowSun } from './windowSunMaterial'
 import { createRoomSunAtmosphere } from './RoomSunAtmosphere'
-import { useRoute } from '../route'
 
 type LightLayer = RoomMode | 'lamp'
 
@@ -87,14 +86,13 @@ export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition, a
   skyPreview?: boolean
 }) {
   const sun = useSunFrame()
-  const { view } = useRoute()
   const manifestText = useLoader(FileLoader, `${hybridRoomUrl}manifest.json`)
   const manifest = useMemo(() => JSON.parse(manifestText as string) as Manifest, [manifestText])
   const dayMap = sun ? manifest.maps['day-ambient'] ?? manifest.maps.day : manifest.maps.day
   const initialMode = useRef(mode).current
   const initialTexture = useLoader(TextureLoader, hybridRoomUrl + (initialMode === 'day' ? dayMap : manifest.maps.night))
   const available = useRef<Partial<Record<LightLayer, Texture>>>({})
-  const { gl, scene, camera, size, viewport } = useThree()
+  const { gl, scene, camera, size, viewport, get } = useThree()
   const blend = useRef({ night: Number(initialMode === 'night'), lamp: 0 })
   const uniforms = useMemo(() => ({
     lightDay: { value: initialTexture }, lightNight: { value: initialTexture }, lightLamp: { value: initialTexture },
@@ -103,7 +101,6 @@ export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition, a
   }), [initialTexture, manifest])
   const background = useMemo(() => new Color(), [])
   const composer = useRef<EffectComposer>()
-  const atmosphereView = useRef({ room: false, narrow: false })
   const nightTints = useRef<{ material: MeshStandardMaterial; base: Color; factor: number }[]>([])
   const hemisphere = useRef<HemisphereLight>(null)
   const key = useRef<DirectionalLight>(null)
@@ -324,8 +321,7 @@ export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition, a
       const render = air.pass.render.bind(air.pass)
       air.pass.render = (...args) => {
         if (camera instanceof PerspectiveCamera) {
-          const view = atmosphereView.current
-          air.update(camera, sunlight.current, view.narrow, view.room)
+          air.update(camera, sunlight.current, get().size.width < 768)
         }
         render(...args)
       }
@@ -351,7 +347,7 @@ export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition, a
       probe.dispose()
       Reflect.deleteProperty(window, '__room')
     }
-  }, [active, background, camera, gl, scene, sun])
+  }, [active, background, camera, get, gl, scene, sun])
 
   useLayoutEffect(() => {
     composer.current?.setPixelRatio(viewport.dpr)
@@ -360,8 +356,6 @@ export default function HybridTrialLayers({ roots, mode, lampOn, lampPosition, a
 
   useFrame((_, delta) => {
     if (!active || skyPreview) return
-    atmosphereView.current.room = view === 'room'
-    atmosphereView.current.narrow = size.width < 768
     const state = blend.current
     const layers = available.current
     if (sun && layers.day && layers.night) state.night = sun.night

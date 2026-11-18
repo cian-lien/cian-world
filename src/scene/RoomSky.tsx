@@ -34,18 +34,13 @@ const fragment = /* glsl */ `
     vec2 heading = normalize(worldRay.xz);
     vec3 ray = normalize(vec3(heading.x, 1.6 * backdropElevation, heading.y));
     ray = normalize(mix(ray, worldRay, uWindowView));
-    vec3 sky = sampleSky(ray, uSunDirection, 0.0);
+    vec3 sky = sampleSky(ray);
     float day = smoothstep(-6.0, 25.0, uSunAltitude);
     vec3 horizonLight = mix(vec3(0.048, 0.053, 0.102), vec3(0.34, 0.52, 0.75), day);
     sky = mix(sky, horizonLight, 0.24 * exp(-abs(elevation) * 27.0));
     vec3 lowerSky = sky * mix(vec3(0.66, 0.74, 0.89), vec3(0.72, 0.81, 0.94), day);
     sky = mix(lowerSky, sky, smoothstep(-0.0025, 0.0015, elevation));
-    // The window sees the sun along the same world direction as the incident light.
-    if (uWindowView > 0.0 && uSunAltitude > 0.0 && dot(worldRay, uSunDirection) > 0.0) {
-      float aboveHorizon = smoothstep(-0.004, 0.001, worldRay.y);
-      sky += uWindowView * aboveHorizon * smoothstep(0.0, 0.65, uSunAltitude)
-        * solarRadiance(length(cross(worldRay, uSunDirection)) / 0.01047);
-    }
+    sky += sampleSun(worldRay);
     gl_FragColor = vec4(sky, 1.0);
     #include <tonemapping_fragment>
     #include <colorspace_fragment>
@@ -143,7 +138,7 @@ export function RoomSky({ previewTime }: { previewTime?: number }) {
   const sky = useMemo(() => {
     if (!sun) return null
     const windowView = { value: 0 }
-    const uniforms = { uSunDirection: sun.direction, uSunAltitude: sun.altitude, uHorizon: sun.horizon, uWindowView: windowView }
+    const uniforms = { uSunDirection: sun.direction, uSunAltitude: sun.altitude, uHorizon: { value: 0.62 }, uWindowView: windowView }
     const material = new ShaderMaterial({
       vertexShader: vertex,
       fragmentShader: fragment,
@@ -190,7 +185,7 @@ export function RoomSky({ previewTime }: { previewTime?: number }) {
   useFrame(({ camera }, delta) => {
     if (!sun || !sky) return
     camera.getWorldDirection(direction)
-    sun.horizon.value = 0.62 + (roomDirection.y - direction.y) * 0.7
+    sky.material.uniforms.uHorizon.value = 0.62 + (roomDirection.y - direction.y) * 0.7
     const windowView = sky.windowView
     const target = Number(view === 'window')
     const next = MathUtils.damp(windowView.value, target, 8, delta)

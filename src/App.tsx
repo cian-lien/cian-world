@@ -6,6 +6,7 @@ import { navigate, useRoute } from './route'
 import { bakeReference, debugRoomSun, liveRoomSun } from './scene/bakeTrial'
 import type { RoomMode } from './scene/layout'
 import { useRoomSun } from './scene/useRoomSun'
+import { playRoomSound } from './sound'
 import { DiaryOverlay } from './ui/DiaryOverlay'
 import { LanguageSwitcher } from './ui/LanguageSwitcher'
 import { SoundButton } from './ui/SoundButton'
@@ -35,6 +36,7 @@ export default function App() {
   const [visitedRoom, setVisitedRoom] = useState(!contentOpen)
   const previousView = useRef(view)
   const contentNav = useRef<HTMLElement>(null)
+  const [pointerEntry, setPointerEntry] = useState<{ path: string; waitingForMove: boolean } | null>(null)
   const [legacyMode, setMode] = useState(initialMode)
   const [sceneError, setSceneError] = useState(false)
   const [sky, setSky] = useState(false)
@@ -113,9 +115,28 @@ export default function App() {
           </div>
         </header>
         {(view === 'room' || (contentOpen && visitedRoom)) && <div className={`room-entry${debugRoomSun ? ' room-entry-debug' : ''}`}>
-          <nav className="room-nav" ref={contentNav} aria-label={t('navigation.label')}>
-            {Object.entries(contentLinks).map(([path, label]) =>
-              <a key={path} href={`#/${path}`}>{t(`navigation.${label}`)}</a>)}
+          <nav className="room-nav" ref={contentNav} aria-label={t('navigation.label')}
+            onBlur={() => { if (!contentOpen) setPointerEntry(null) }}
+            onKeyDown={event => { if (event.key !== 'Escape') setPointerEntry(null) }}>
+            {Object.entries(contentLinks).map(([path, label]) => (
+              <a key={path} href={`#/${path}`}
+                data-pointer-entry={pointerEntry?.path === path ? '' : undefined}
+                data-waiting-for-move={pointerEntry?.path === path && pointerEntry.waitingForMove ? '' : undefined}
+                onPointerMove={() => {
+                  if (!contentOpen && pointerEntry?.path === path && pointerEntry.waitingForMove) {
+                    setPointerEntry({ path, waitingForMove: false })
+                  }
+                }}
+                onClick={event => {
+                  if (event.defaultPrevented || event.button !== 0 || event.ctrlKey ||
+                    event.metaKey || event.shiftKey || event.altKey) return
+                  // Escape can reveal the restored focus ring even when the modal was opened by a click.
+                  setPointerEntry(event.detail > 0 ? { path, waitingForMove: true } : null)
+                  if (path === 'diary') playRoomSound('diary')
+                }}>
+                <span>{t(`navigation.${label}`)}</span>
+              </a>
+            ))}
           </nav>
           {!debugRoomSun && !sceneError && <>
             <p className="hint">{t('hud.hint')}</p>

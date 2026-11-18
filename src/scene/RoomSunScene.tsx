@@ -15,7 +15,6 @@ function createSunFrame(sun: SunPosition) {
     direction: { value: direction },
     warm: { value: new Color('#ffd4a6') },
     altitude: { value: sun.altitude },
-    horizon: { value: 0.62 },
     ambient: { value: new Color() },
     lowAngle: 0,
     night: 0,
@@ -95,7 +94,15 @@ export const skyRadiance = /* glsl */ `
     return tint * (disc * core * (0.70 + 0.30 * limb) + glow);
   }
 
-  vec3 sampleSky(vec3 ray, vec3 direction, float radius) {
+  // The disc subtends 1.2 degrees in every view. Only its world-space bearing matters.
+  vec3 sampleSun(vec3 ray) {
+    if (uSunAltitude <= 0.0 || dot(ray, uSunDirection) <= 0.0) return vec3(0.0);
+    float radius = sin(radians(0.6));
+    return solarRadiance(length(cross(ray, uSunDirection)) / radius)
+      * smoothstep(-0.004, 0.001, ray.y) * smoothstep(0.0, 0.65, uSunAltitude);
+  }
+
+  vec3 sampleSky(vec3 ray) {
     float day = smoothstep(-5.0, 34.0, uSunAltitude);
     float twilight = smoothstep(-8.0, 1.0, uSunAltitude) * (1.0 - smoothstep(3.0, 31.0, uSunAltitude));
     float elevation = max(ray.y, 0.0);
@@ -103,7 +110,7 @@ export const skyRadiance = /* glsl */ `
     vec3 horizon = mix(vec3(0.075, 0.069, 0.14), vec3(0.21, 0.49, 1.05), day);
     vec3 zenith = mix(vec3(0.013, 0.016, 0.071), vec3(0.034, 0.16, 0.55), day);
     vec3 sky = mix(horizon, zenith, skyGradient);
-    float alignment = clamp(dot(ray, direction), -1.0, 1.0);
+    float alignment = clamp(dot(ray, uSunDirection), -1.0, 1.0);
     float nearSun = max(0.0, alignment);
     sky += vec3(1.39, 0.27, 0.028) * twilight * exp(-elevation * 8.0)
       * (0.12 + 0.85 * pow(nearSun, 10.0));
@@ -111,11 +118,6 @@ export const skyRadiance = /* glsl */ `
     vec3 ground = mix(vec3(0.022, 0.024, 0.061), vec3(0.17, 0.37, 0.76), day);
     sky = mix(sky, ground, below * 0.9);
 
-    if (radius > 0.0 && alignment > 0.0 && uSunAltitude > 0.0) {
-      float skyVisible = smoothstep(-0.004, 0.001, ray.y);
-      sky += solarRadiance(length(cross(ray, direction)) / radius) * skyVisible
-        * smoothstep(0.0, 0.65, uSunAltitude);
-    }
     return sky;
   }
 `
@@ -132,7 +134,7 @@ const skyPreviewFragment = /* glsl */ `
     vec3 right = normalize(cross(forward, vec3(0.0, 1.0, 0.0)));
     vec3 up = cross(right, forward);
     vec3 ray = normalize(forward + 1.07 * (right * vScreen.x * uAspect + up * vScreen.y));
-    gl_FragColor = vec4(sampleSky(ray, uSunDirection, 0.013), 1.0);
+    gl_FragColor = vec4(sampleSky(ray) + sampleSun(ray), 1.0);
     #include <tonemapping_fragment>
     #include <colorspace_fragment>
   }

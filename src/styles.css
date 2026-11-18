@@ -230,9 +230,10 @@ a {
 .content-open .hud,
 .content-open .room-entry { opacity: 0; }
 .room-nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+  width: min(288px, 100%);
   padding: 4px;
   background: var(--ui-paper);
   border: 2px solid var(--ui-ink);
@@ -243,15 +244,33 @@ a {
 .room-nav a {
   display: grid;
   place-items: center;
-  min-width: 88px;
   min-height: 44px;
-  padding: 6px 14px;
+  padding: 6px 8px;
   border-radius: 999px;
   font-weight: 600;
+  text-align: center;
   text-decoration: none;
+  touch-action: manipulation;
+  user-select: none;
 }
-.room-nav a:hover { background: var(--ui-accent-soft); }
-.room-nav a:focus-visible,
+@media (hover: hover) {
+  .room-nav a:hover:not(:active, [data-waiting-for-move]) { background: var(--ui-accent-soft); }
+}
+.room-nav a:active { background: var(--ui-primary); }
+.room-nav a:focus-visible {
+  outline: 2px solid var(--ui-ink);
+  outline-offset: -4px;
+}
+.room-nav a[data-pointer-entry]:focus-visible { outline-style: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .room-nav a { transition: background-color 120ms ease-out; }
+  .room-nav a span { transition: transform 120ms ease-out; }
+  .room-nav a:active { transition-duration: 0s; }
+  .room-nav a:active span {
+    transform: translateY(1px);
+    transition-duration: 0s;
+  }
+}
 .content-dialog :is(a, button, [tabindex='-1']):focus-visible {
   outline: 2px solid var(--ui-ink);
   outline-offset: 2px;
